@@ -1,0 +1,113 @@
+body {
+    background-color: #094293;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: auto;
+    height: 900px;
+}
+
+nav {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.logo {
+    max-width: 70px;
+    margin-left: 5px;
+    border-radius: 90%;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.footer {
+    position: unset; 
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    z-index: 999;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+}
+
+.separator {
+    width: 100%;
+    height: 5px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.separator h2 {
+    font-size: 27px;
+    font-weight: bold;
+    color: #094293;
+    text-transform: uppercase;
+}
+
+.separator h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #094293;
+    text-transform: uppercase;
+    display: none;
+}
+
+/* Estilos para las tarjetas */
+.card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    margin-bottom: 20px; /* Reducido desde 100px */
+    width: 300px; /* Ancho fijo para todas las tarjetas */
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    transform: scale(1.1);
+}
+
+.card button {
+    background-color: gold;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.card button:hover {
+    background-color: #efb810;
+}
+
+.image-container {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px; /* Espaciado entre las imágenes */
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+    margin-top: 30px; /* Espaciado desde 30 px */
+}
+
+.image-container:hover img {
+    transform: scale(1.1);
+}

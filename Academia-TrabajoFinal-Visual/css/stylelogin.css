@@ -1,0 +1,46 @@
+.hero {
+    padding: 50px 0; /* Ajusta el relleno superior e inferior según sea necesario */
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.5)
+    
+}
+
+.btn {
+    margin-top: 20px; /* Ajusta el margen superior de los botones */
+    
+}
+nav{
+ background-color: rgba(255, 255, 255, 0.5);;  
+
+}
+.logo {
+        max-width: 70px; 
+        margin-left: 5px;
+       border-radius: 90%;
+}
+    
+.navbar-brand {
+        display: flex; /* Make navbar brand a flex container */
+        align-items: center; /* Align logo and text vertically */
+        
+} 
+body{
+    background-image:url(../fotoshtml/loginfoto.jpg) ;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: auto;
+    height:900px;
+}
+/* Estilo del footer */
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    margin-top: 600px;
+    position: unset;
+    position: absolute; 
+    bottom: 0;
+     width: 100%;
+}
+

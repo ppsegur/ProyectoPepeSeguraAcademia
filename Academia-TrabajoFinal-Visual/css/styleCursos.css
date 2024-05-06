@@ -1,0 +1,127 @@
+/* styleCursos.css */
+
+/* Estilos para los botones */
+
+
+.card button:hover {
+    background-color: #0056b3;
+}
+
+.contenedor{ 
+  display: flex; 
+  justify-content:center; 
+  flex-wrap:wrap; 
+  gap: 16px; 
+} 
+.tarjeta{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  width: auto;
+  border: 1px solid lightgray;
+  box-shadow: 2px 2px 8px 4px #d3d3d3d1;
+  border-radius:15px;
+  font-family: sans-serif;
+}
+.titulo{
+  font-size: 24px;
+  padding: 10px 10px 0 10px;;
+}
+.cuerpo{
+  padding: 10px;
+  flex: 1 1 100%;
+}
+.pie{
+  background: #6699ff;
+  border-radius:0 0 15px 15px;
+  padding: 10px;
+  text-align:center;
+}
+.pie a{
+  text-decoration: none;
+  color: white;
+}
+.pie a:after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  content: ""
+} 
+
+/* Estilos para el navbar */
+.card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+   
+  }
+  
+  .card:hover {
+    transform: translateY(-10px);
+    transform: scale(1.1);
+  }
+  
+  .card button {
+    background-color: gold;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .card button:hover {
+    background-color: #efb810;
+  }
+  
+  nav{
+    background-color: rgb(77, 77, 198);  
+   
+   }
+   .logo {
+           max-width: 70px; 
+           margin-left: 5px;
+          border-radius: 90%;
+   }
+       
+   .navbar-brand {
+           display: flex;
+           align-items: center;
+           
+   } 
+   body{
+       
+       background-size: cover;
+       background-position: center;
+       background-repeat: no-repeat;
+       width: auto;
+       height:900px;
+   }
+/* Estilo del footer */
+.footer {
+    position: fixed; /* Fija la posición */
+    left: 0;
+    bottom: 0;
+    width: 100%; /* Ancho completo */
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    z-index: 999; /* Asegura que esté sobre otros elementos */
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    margin-top: 20px;
+}
+
+/* Estilos adicionales para las tarjetas de curso */
+
