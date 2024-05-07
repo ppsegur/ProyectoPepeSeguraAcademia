@@ -1,0 +1,77 @@
+
+	<!DOCTYPE html>
+	<html lang="es" xmlns:th="http://www.thymeleaf.org">
+	<head>
+	  <meta charset="UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <title>Tabla de cursos</title>
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	  <style>
+	
+	    body {
+	      font-family: Arial, sans-serif;
+	    }
+	    .container {
+	      max-width: 800px;
+	    }
+	    th, td {
+	      text-align: center;
+	    }
+	    th {
+	      background-color: #343a40;
+	      color: #fff;
+	    }
+	    tbody tr:nth-child(even) {
+	      background-color: #f2f2f2;
+	    }
+	    tbody tr:hover {
+	      background-color: #ddd;
+	    }
+	  </style>
+	</head>
+	<body>
+	
+	<div class="container mt-5">
+	  <h2 class="text-center mb-4">Tabla de Cursos</h2>
+	  <div class="table-responsive">
+	    <table class="table table-striped table-bordered">
+	      <thead>
+	        <tr>
+	          <th>ID</th>
+	          <th>Nombre</th>
+	          <th>Nivel de Dificultad</th>
+	          <th>Duración</th>
+	          <th>Precio</th>
+	          <th>Profesor</th>
+	          <th>Acciones</th>
+	        </tr>
+	      </thead>
+	      <tbody>
+	        <tr th:each="curso:${}">
+	            <td th:text = "${Curso.id}"></td>
+	            <td th:text = "${Curso.nombre}"></td>
+	            <td th:text = "${Curso.nivelDeDificultad}"></td>
+	            <td th:text = "${Curso.duracion}"></td>
+	            <td th:text = "${Curso.precio}"></td>
+	            <td th:text = "${Curso.profesor}"></td>
+	            </td>
+	          </tr>
+	        <tr>
+	          <td>1</td>
+	          <td>Curso de ejemplo</td>
+	          <td>Intermedio</td>
+	          <td>2024-05-07</td>
+	          <td>50.0</td>
+	          <td>Juan Pérez</td>
+	          <td>
+	            <button type="button" class="btn btn-primary btn-sm">Editar</button>
+	            <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
+	          </td>
+	        </tr>
+	      </tbody>
+	    </table>
+	  </div>
+	</div>
+	
+	</body>
+	</html>
