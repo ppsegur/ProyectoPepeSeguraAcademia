@@ -24,9 +24,6 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class Profesor extends Usuario {
 
-
-	
-	
 	@OneToMany(mappedBy="curso", fetch = FetchType.EAGER)
 	@Builder.Default
 	private List<Curso> cursosImpartidos = new ArrayList<>();
