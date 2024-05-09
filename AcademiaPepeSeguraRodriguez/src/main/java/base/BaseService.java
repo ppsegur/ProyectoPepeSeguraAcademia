@@ -17,4 +17,7 @@ public interface BaseService<T,ID> {
 	    
 	    void deleteById(ID id);
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> bea6ad7cdd1dcd1ecc1ff2f343d38f3b827969f5

@@ -6,7 +6,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+<<<<<<< HEAD
 public class BaseServiceImpl <T, ID, R extends JpaRepository<T, ID>> 
+=======
+public class BaseServiceImpl<T, ID, R extends JpaRepository<T, ID>> 
+>>>>>>> bea6ad7cdd1dcd1ecc1ff2f343d38f3b827969f5
 	implements BaseService<T, ID>{
     @Autowired
     protected R repository;
@@ -42,4 +46,8 @@ public class BaseServiceImpl <T, ID, R extends JpaRepository<T, ID>>
     public void deleteById(ID id) {
         repository.deleteById(id);        
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> bea6ad7cdd1dcd1ecc1ff2f343d38f3b827969f5
 }

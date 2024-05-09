@@ -26,13 +26,12 @@ public class Estudiante extends Usuario {
 		this.telefono = telefono;
 	}
 	
+
 	@OneToMany(mappedBy = "estudiante")
-	@Builder.Default
 	private List<Certificado> Certificado;
 
 	
 	@OneToMany(mappedBy = "estudiante")
-	@Builder.Default
 	private List<Pedido> pedidos;
 	
 	

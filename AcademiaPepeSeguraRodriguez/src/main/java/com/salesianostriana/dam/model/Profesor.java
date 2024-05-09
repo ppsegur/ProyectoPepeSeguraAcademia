@@ -1,8 +1,7 @@
 package com.salesianostriana.dam.model;
 
-import java.util.List;
 import java.util.ArrayList;
-
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -24,8 +23,8 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @AllArgsConstructor
 public class Profesor extends Usuario {
-	//Atributos
-	private String dni;
+
+
 	
 	
 	@OneToMany(mappedBy="curso", fetch = FetchType.EAGER)
@@ -36,7 +35,6 @@ public class Profesor extends Usuario {
 	public Profesor(String contraseña, String nombre, String apellidos, String correo, String dni, String dni2,
 			List<Estudiante> estudiante) {
 		super(contraseña, nombre, apellidos, correo, dni);
-		dni = dni2;
 		this.cursosImpartidos = cursosImpartidos;
 	}
 	

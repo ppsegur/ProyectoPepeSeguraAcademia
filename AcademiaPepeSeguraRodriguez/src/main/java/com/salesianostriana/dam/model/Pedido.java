@@ -23,4 +23,5 @@ public class Pedido {
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_estudiante_pedido"))
 	private Estudiante estudiante;
+	// 
 }

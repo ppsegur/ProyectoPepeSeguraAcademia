@@ -16,7 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/admin/curso")
 public class CursoController {
 	@Autowired
+<<<<<<< HEAD
 	private CursoService cursoService;
+=======
+	 CursoService cursoService;
+>>>>>>> bea6ad7cdd1dcd1ecc1ff2f343d38f3b827969f5
 	
 	public CursoController(CursoService cursoService) {
 		this.cursoService = cursoService;
