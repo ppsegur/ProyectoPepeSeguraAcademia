@@ -18,16 +18,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
-@RequestMapping("admin/estudiante")
+@RequestMapping("/admin/estudiante")
 public class EstudianteController {
-
+	
 	@Autowired
 	EstudianteService estudianteService;
 	public EstudianteController(EstudianteService servicio) {
 		this.estudianteService = servicio;
 	}
 	
-	@GetMapping({"/", "listaEstudiante"})
+	@GetMapping({"/", "/listaEstudiante"})
 	public String listarTodos(Model model) {
 		model.addAttribute("lista",estudianteService.findAll() );
 		return "listaDeEstudiantes";//No colocada
