@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.poryectopepeseguraaca.model;
+package com.salesianostriana.dam.proyectopepeseguraaca.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

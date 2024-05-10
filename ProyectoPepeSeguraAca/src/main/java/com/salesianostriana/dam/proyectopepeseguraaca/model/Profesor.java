@@ -1,7 +1,8 @@
-package com.salesianostriana.dam.poryectopepeseguraaca.model;
+package com.salesianostriana.dam.proyectopepeseguraaca.model;
 
 import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
+
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
