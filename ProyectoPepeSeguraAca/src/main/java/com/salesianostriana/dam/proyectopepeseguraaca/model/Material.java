@@ -18,8 +18,10 @@ public class Material {
 	private long idMaterial;
 	private String nombre;
 	private String tipo;
-	private String pdf; //o url si realizamos un video
+	private String url; 
 	/*@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_curso_material"))
 	private Curso curso;*/
+
+
 }
