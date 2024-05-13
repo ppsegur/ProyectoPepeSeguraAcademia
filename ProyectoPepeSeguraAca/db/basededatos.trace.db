@@ -1681,6 +1681,7 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/segura.
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 133 more
+<<<<<<< HEAD
 2024-05-14 00:49:11.345097+02:00 database: flush
 org.h2.message.DbException: Error General : "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/pepes/Desktop/repositorioProyecto/ProyectoPepeSeguraAca/db/basededatos.mv.db [2.2.224/7]"
 General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/pepes/Desktop/repositorioProyecto/ProyectoPepeSeguraAca/db/basededatos.mv.db [2.2.224/7]" [50000-224]
@@ -1870,3 +1871,5 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/pepes/D
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 55 more
+=======
+>>>>>>> main
