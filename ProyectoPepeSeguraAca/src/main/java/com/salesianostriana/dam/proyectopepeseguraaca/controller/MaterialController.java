@@ -36,15 +36,19 @@ public class MaterialController {
 		materialServicio.save(m);		
 		return "redirect:/adminMaterial";
 	}
-	/*
+	
 	//borrar
 	@GetMapping("/borrarMaterial/{id}")
 	public String borrarMaterial(@PathVariable("idMaterial") long idMaterial) {
 		Optional<Material> material = materialServicio.deleteById(idMaterial);
 		if(material.isPresent())
+				materialServicio.delete(material.get());	
+		return "redirect:/adminMaterial";
+	}else {
+		
 		return "redirect:/adminMaterial";
 	}
-	*/
+	
 	
 	
 	
