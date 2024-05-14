@@ -23,16 +23,16 @@ public class Usuario {
 	private long id;
 	//lob
 	private String username;
-	private String contraseña;
+	private String contrasena;
 	private String nombre;
 	private String apellidos;
 	private String correo;
 	private String dni;
 	
-	public Usuario(String username, String contraseña, String nombre, String apellidos, String correo, String dni) {
+	public Usuario(String username, String contrasena, String nombre, String apellidos, String correo, String dni) {
 		super();
 		this.username= username;
-		this.contraseña = contraseña;
+		this.contrasena = contrasena;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.correo = correo;

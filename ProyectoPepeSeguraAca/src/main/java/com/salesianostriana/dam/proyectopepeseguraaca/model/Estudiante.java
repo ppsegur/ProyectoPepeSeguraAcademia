@@ -12,14 +12,14 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @SuperBuilder
-public class Estudiante  extends Usuario{
+public class Estudiante extends Usuario{
 	
 	private String telefono;
 
-	/*public Estudiante(String contraseña, String nombre, String apellidos, String correo, String dni, String telefono) {
-		super(contraseña, nombre, apellidos, correo, dni);
+	public Estudiante(String username,String contrasena, String nombre, String apellidos, String correo, String dni, String telefono) {
+		super(username,contrasena, nombre, apellidos, correo, dni);
 		this.telefono = telefono;
-	}*/
+	}
 	
 
 	/*@OneToMany(mappedBy = "estudiante")
