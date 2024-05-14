@@ -21,8 +21,16 @@ public class Curso {
 	private String nombre;
 	private String nivelDificultad;
 	//Lob
-	private LocalDate duracion;
+	private String duracion;
 	private double precio;
+
+public String getNivelDificultad() {
+    return nivelDificultad;
+}
+
+public void setNivelDificultad(String nivelDificultad) {
+    this.nivelDificultad = nivelDificultad;
+}
 	
 	/*@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name="fk_curso_profesor"))
