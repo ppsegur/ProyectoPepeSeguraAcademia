@@ -18,34 +18,58 @@ import com.salesianostriana.dam.proyectopepeseguraaca.servicios.MaterialServicio
 public class MaterialController {
 
 	@Autowired
-	MaterialServicio materialServicio;
+	public MaterialServicio materialServicio;
 	
+	//Tablas
 	@GetMapping("/adminMaterial")
 	public String listarMateriales(Model model) {
 		model.addAttribute("listaMateriales", materialServicio.findAll());
 		return "admin/listaMaterial";
 	}
 	//Mostrar el formulario de añadir material
-	@GetMapping("/admin/formularioMaterial")
+	@GetMapping("/adminformularioMaterial")
 	public String mostrarFormularioMaterial(Model model) {
 		model.addAttribute("material", new Material());
 		return "admin/formularioMaterial";
 	}
+	//
 	@PostMapping("/nuevoMaterial/submit")
 	public String procesarFormularioMaterial(@ModelAttribute("material") Material m) {
 		materialServicio.save(m);		
 		return "redirect:/adminMaterial";
 	}
-	/*
-	//borrar
-	@GetMapping("/borrarMaterial/{id}")
+	//Borrar
+	@GetMapping("/borrarMaterial/{idMaterial}")
 	public String borrarMaterial(@PathVariable("idMaterial") long idMaterial) {
-		Optional<Material> material = materialServicio.deleteById(idMaterial);
-		if(material.isPresent())
+	    Optional<Material> material = materialServicio.findById(idMaterial);
+	    if(material.isPresent()) {
+	        materialServicio.delete(material.get());
+	    }
+	    return "redirect:/adminMaterial";
+	}
+	//Editar
+	@GetMapping("/editarMaterial/{idMaterial}")
+	public String mostrarFormularioEdicionMaterial(@PathVariable("idMaterial") long idMaterial , Model model) {
+		Optional<Material> materialEditar = materialServicio.findById(idMaterial);
+		if(materialEditar.isPresent()) {
+			model.addAttribute("material",materialEditar.get());
+		
+			return "admin/editarFormularioMaterial";	
+		}else {
+			//
+			return "redirect:/adminMaterial";
+		}
+	}
+	
+	@PostMapping("/editarMaterial/submit")
+	public String editarMaterialSubmit(@ModelAttribute("material") Material material) {
+	    materialServicio.save(material);
 		return "redirect:/adminMaterial";
 	}
-	*/
-	
-	
-	
+
+
+   
 }
+	
+	
+

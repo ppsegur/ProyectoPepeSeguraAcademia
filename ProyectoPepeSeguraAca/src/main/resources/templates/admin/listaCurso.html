@@ -3,36 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lista de Materiales</title>
+  <title>Lista de Cursos</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
 <div class="container">
-  <h2>Tabla de Materiales</h2>
+  <h2>Tabla de Cursos</h2>
   <hr>
-  <a class="btn btn-primary btn-sm" href="/admin/" th:href="@{/adminformularioMaterial}">Añadir</a>
+  <a class="btn btn-primary btn-sm" href="/admin/" th:href="@{/adminformularioCurso}">Añadir</a>
 
   <table class="table">
     <thead>
       <tr>
         <th>ID</th>
         <th>Nombre</th>
-        <th>Tipo</th>
-        <th>URL</th>
+        <th>NivelDificultad</th>
+        <th>Duración</th>
+		<th>Precio</th>
         <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
       
-      <tr th:each="material : ${listaMateriales}">
-        <td th:text="${material.idMaterial}"></td>
-        <td th:text="${material.nombre}"></td>
-        <td th:text="${material.tipo}"></td>
-        <td th:text="${material.url}"></td>
+      <tr th:each="curso : ${listaCurso}">
+        <td th:text="${curso.idCurso}"></td>
+        <td th:text="${curso.nombre}"></td>
+        <td th:text="${curso.nivelDificultad}"></td>
+        <td th:text="${curso.duracion}"></td>
+		<td th:text="${curso.precio}"></td>
         <td>
-          <a type="button" class="btn btn-primary btn-sm" href="/admin/"  th:href="@{/editarMaterial/{idMaterial}(idMaterial=${material.idMaterial})}">Editar</a>
-          <a type="button" class="btn btn-danger btn-sm"  th:href="@{/borrarMaterial/{id}(id=${material.idMaterial})}">Eliminar</a>
+          <a type="button" class="btn btn-primary btn-sm" href="/admin/"  th:href="@{/editarCurso/{idCurso}(idCurso=${curso.idCurso})}">Editar</a>
+          <a type="button" class="btn btn-danger btn-sm"  th:href="@{/borrarCurso/{id}(id=${curso.idCurso})}">Eliminar</a>
         </td>
       </tr>
     </tbody>
