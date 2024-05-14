@@ -1,59 +1,72 @@
 package com.salesianostriana.dam.proyectopepeseguraaca.controller;
 
+import java.util.Optional;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.salesianostriana.dam.proyectopepeseguraaca.model.Estudiante;
 import com.salesianostriana.dam.proyectopepeseguraaca.servicios.EstudianteServicio;
 
 @Controller
 @RequestMapping("/EstudianteAdmin")
 public class EstudianteController {
-	/*
+	
 	@Autowired
-	EstudianteServicio estudianteServicio;
+	 public EstudianteServicio estudianteServicio;
 	
-	/*@GetMapping({"/", "/listaEstudiante"})
-	public String listarTodos(Model model) {
-		model.addAttribute("lista",estudianteService.findAll() );
-		return "inicioUser";
+	@GetMapping("/adminEstudiante")
+	public String listarTodosEstudiante(Model model) {
+		model.addAttribute("listaEstudiante",estudianteServicio.findAll() );
+		return "admin/listaEstudiante";
 	}
-	@GetMapping("/nuevo")
-	public String mostrarFormulario(Model model) {
+	@GetMapping("/adminformularioEstudiante")
+	public String mostrarFormularioEstudiante(Model model) {
 		model.addAttribute("estudiante", new Estudiante());
-		return "Formulario";
+		return "admin/formularioEstudiante";
 	}
 	
-	@PostMapping("/nuevo/submit")
-	public String procesarFormulario(@ModelAttribute("estudiante") Estudiante e) {
-		estudianteService.save(e);
-		return "rediret:/";
+	@PostMapping("/nuevoEstudiante/submit")
+	public String procesarFormularioEstudainte(@ModelAttribute("estudiante") Estudiante e) {
+		estudianteServicio.save(e);
+		return "rediret:/adminEstudiante";
 	}
 	
-	@GetMapping("/editar/{id}")
-	public String mostrarFormularioEdicion(@PathVariable("id") long id, Model model) {
-		
-		if(estudianteService.findById(id).isPresent()) {
-			model.addAttribute("estudiante", estudianteService.findById(id).get());
-			return "Formulario";
+	@GetMapping("/editarEstudiante/{id}")
+	public String mostrarFormularioEdicionEstudiante(@PathVariable("id") long id, Model model) {
+		Optional<Estudiante> estudianteEditar = estudianteServicio.findById(id);
+		if(estudianteEditar.isPresent()) {
+			model.addAttribute("estudiante", estudianteEditar.get());
+			return "admin/editarFormularioEstudiante";
 		}else {
-			return "redirect:/";
+			return "redirect:/adminEstudiante";
 		}
 	}
-	@PostMapping("/editar/submit")
-	public String procesarFormularioEdicion(@ModelAttribute("estudiante") Estudiante e) {
-		estudianteService.edit(e);
-		return "redirect:/";
-	}*/
+	@PostMapping("/editarEstudiante/submit")
+	public String procesarFormularioEdicionEstudiante(@ModelAttribute("estudiante") Estudiante e) {
+		estudianteServicio.save(e);
+		return "redirect:/adminEstudiante";
+	}
 	/**
 	 * Método para borrar 
 	 * @param id
 	 * @return 
 	 */
-	/*@GetMapping("/borrar/{id}")
-	public String borrar(@PathVariable("id") long id) {
-		estudianteService.deleteById(id);
-		return "redirect:/";
+	@GetMapping("/borrarEstudiante/{id}")
+	public String borrarEstudiante(@PathVariable("id") long id) {
+		Optional<Estudiante> estudiantes = estudianteServicio.findById(id);
+		if(estudiantes.isPresent()){
+		estudianteServicio.delete(estudiantes.get());
+		}
+		return "redirect:/adminEstudiante";
+		
 	}
-	*/
+
 }
