@@ -35,7 +35,7 @@ public class EstudianteController {
 	@PostMapping("/nuevoEstudiante/submit")
 	public String procesarFormularioEstudainte(@ModelAttribute("estudiante") Estudiante e) {
 		estudianteServicio.save(e);
-		return "rediret:/adminEstudiante";
+		return "redirect:/adminEstudiante";
 	}
 	
 	@GetMapping("/editarEstudiante/{id}")
