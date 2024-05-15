@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,9 +17,9 @@ import lombok.NoArgsConstructor;
 public class Certificado {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idCertificado;
-	private LocalDate fechaExamen;
+	private String fechaExamen;
 	private int calificacion;
 	
 	/*@OneToOne
