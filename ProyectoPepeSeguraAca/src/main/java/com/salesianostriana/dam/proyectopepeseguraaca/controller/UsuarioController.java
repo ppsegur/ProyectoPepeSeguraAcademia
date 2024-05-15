@@ -18,5 +18,10 @@ public class UsuarioController {
 	public String mostrarIndice() {
 		return "Index";
 	}
+	@GetMapping("/indexAmdmin")
+	public String mostrarIndiceAdmin() {
+		return  "admin/indexAdmin";
+	}
+	
 	
 }

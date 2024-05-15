@@ -16,7 +16,6 @@ import com.salesianostriana.dam.proyectopepeseguraaca.model.Estudiante;
 import com.salesianostriana.dam.proyectopepeseguraaca.servicios.EstudianteServicio;
 
 @Controller
-@RequestMapping("/EstudianteAdmin")
 public class EstudianteController {
 	
 	@Autowired
