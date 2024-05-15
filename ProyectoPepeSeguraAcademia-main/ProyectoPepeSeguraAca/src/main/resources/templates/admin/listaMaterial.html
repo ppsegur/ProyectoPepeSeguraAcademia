@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Materiales</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+  <h2>Tabla de Materiales</h2>
+  <hr>
+  <a class="btn btn-primary btn-sm" href="/admin/" th:href="@{/adminformularioMaterial}">Añadir</a>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Tipo</th>
+        <th>URL</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr th:each="material : ${listaMateriales}">
+        <td th:text="${material.idMaterial}"></td>
+        <td th:text="${material.nombre}"></td>
+        <td th:text="${material.tipo}"></td>
+        <td th:text="${material.url}"></td>
+        <td>
+          <a type="button" class="btn btn-primary btn-sm" href="/admin/"  th:href="@{/editarMaterial/{idMaterial}(idMaterial=${material.idMaterial})}">Editar</a>
+          <a type="button" class="btn btn-danger btn-sm"  th:href="@{/borrarMaterial/{id}(id=${material.idMaterial})}">Eliminar</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

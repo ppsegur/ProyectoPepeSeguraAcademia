@@ -1,0 +1,12 @@
+  body {
+            padding-top: 60px; /* Ajusta el contenido debajo de la barra de navegación fija */
+        }
+        .container {
+            margin-top: 40px; /* Añade espacio entre la barra de navegación y el contenido */
+        }
+        h1 {
+            color: #333; /* Color del título */
+        }
+        p {
+            color: #666; /* Color del texto */
+        }
