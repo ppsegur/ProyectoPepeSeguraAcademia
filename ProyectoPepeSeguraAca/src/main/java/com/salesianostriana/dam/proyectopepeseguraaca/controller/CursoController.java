@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.salesianostriana.dam.proyectopepeseguraaca.model.Curso;
-import com.salesianostriana.dam.proyectopepeseguraaca.model.Material;
 import com.salesianostriana.dam.proyectopepeseguraaca.servicios.CursoServicio;
 
 
@@ -35,7 +33,7 @@ public class CursoController {
 		return "admin/formularioCurso";
 	}
 	@PostMapping("/nuevoCurso/submit")
-	public String procesarFormulario(@ModelAttribute("curso") Curso c) {
+	public String procesarFormularioCurso(@ModelAttribute("curso") Curso c) {
 		cursoServicio.save(c);
 		return "redirect:/adminCurso";
 	}
