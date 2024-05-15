@@ -34,7 +34,7 @@ public class CertificadoController {
 	@PostMapping("/nuevoCertificado/submit")
 	public String procesarFormularioCertificado(@ModelAttribute("certificado") Certificado c) {
 		certificadoServicio.save(c);
-		return "rediret:/adminCertificado";
+		return "redirect:/adminCertificado";
 	}
 	@GetMapping("/editarCertificado/{idCertificado}")
 	public String mostrarFormularioEdicion(@PathVariable("idCertificado") long id, Model model) {
@@ -49,7 +49,7 @@ public class CertificadoController {
 	@PostMapping("/editarCertificado/submit")
 	public String procesarFormularioEdicionCertificado(@ModelAttribute("certificado") Certificado c) {
 		certificadoServicio.edit(c);
-		return "redirect:/adminCeertificado";
+		return "redirect:/adminCertificado";
 	}
 	/**
 	 * Método para borrar 
