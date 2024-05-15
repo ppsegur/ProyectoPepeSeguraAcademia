@@ -11,7 +11,11 @@
 <div class="container">
   <h2>Tabla de Materiales</h2>
   <hr>
+<<<<<<< HEAD
   <a class="btn btn-primary btn-sm" href="/admin/" th:href="@{/adminformularioMaterial}">Añadir</a>
+=======
+  <a class="btn btn-primary btn-sm" href="/admin/" th:href="@{/admin/formularioMaterial}">Añadir</a>
+>>>>>>> main
 
   <table class="table">
     <thead>
@@ -24,15 +28,24 @@
       </tr>
     </thead>
     <tbody>
+<<<<<<< HEAD
       
+=======
+      <!-- Iterar sobre la lista de materiales y mostrar cada uno en una fila -->
+>>>>>>> main
       <tr th:each="material : ${listaMateriales}">
         <td th:text="${material.idMaterial}"></td>
         <td th:text="${material.nombre}"></td>
         <td th:text="${material.tipo}"></td>
         <td th:text="${material.url}"></td>
         <td>
+<<<<<<< HEAD
           <a type="button" class="btn btn-primary btn-sm" href="/admin/"  th:href="@{/editarMaterial/{idMaterial}(idMaterial=${material.idMaterial})}">Editar</a>
           <a type="button" class="btn btn-danger btn-sm"  th:href="@{/borrarMaterial/{id}(id=${material.idMaterial})}">Eliminar</a>
+=======
+          <button type="button" class="btn btn-primary btn-sm">Editar</button>
+          <button type="button" class="btn btn-danger btn-sm" th:href="@{/borrarMaterial/{id}(id=${material.idMaterial})}">Eliminar</button>
+>>>>>>> main
         </td>
       </tr>
     </tbody>
