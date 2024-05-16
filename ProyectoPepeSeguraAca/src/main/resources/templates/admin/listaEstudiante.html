@@ -22,6 +22,7 @@
         <th>Apellidos</th>
 		<th>Correo</th>
 		<th>DNI</th>
+		<th>Telefono</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -34,6 +35,7 @@
         <td th:text="${estudiante.apellidos}"></td>
 		<td th:text="${estudiante.correo}"></td>
 		<td th:text="${estudiante.dni}"></td>
+		<td th:text="${estudiante.telefono}"></td>
         <td>
           <a type="button" class="btn btn-primary btn-sm" href="/admin/"  th:href="@{/editarEstudiante/{id}(id=${estudiante.id})}">Editar</a>
           <a type="button" class="btn btn-danger btn-sm"  th:href="@{/borrarEstudiante/{id}(id = ${estudiante.id})}">Eliminar</a>

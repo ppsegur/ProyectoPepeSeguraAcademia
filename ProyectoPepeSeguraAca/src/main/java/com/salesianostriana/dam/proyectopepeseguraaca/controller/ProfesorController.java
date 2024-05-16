@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 
 import com.salesianostriana.dam.proyectopepeseguraaca.model.Profesor;
 import com.salesianostriana.dam.proyectopepeseguraaca.servicios.ProfesorServicio;
 
 @Controller
-@RequestMapping("/ProfesorAdmin")
+
 public class ProfesorController {
 
 	@Autowired
@@ -24,12 +24,12 @@ public class ProfesorController {
 	@GetMapping("/adminProfesor")
 	public String listarProfesor(Model model) {
 		model.addAttribute("listaProfesor",profesorServicio.findAll() );
-		return "admin/listaDeProfesores";
+		return "admin/listaProfesor";
 	}
 	@GetMapping("/adminformularioProfesor")
 	public String mostrarFormularioProfesor(Model model) {
 		model.addAttribute("profesor", new Profesor());
-		return "FormularioProfesor";
+		return "admin/formularioProfesor";
 	}
 	
 	@PostMapping("/nuevoProfesor/submit")
@@ -38,12 +38,12 @@ public class ProfesorController {
 		return "redirect:/adminProfesor";
 	}
 	
-	@GetMapping("/editar/{id}")
+	@GetMapping("/editarProfesor/{id}")
 	public String mostrarFormularioEdicion(@PathVariable("id") long id, Model model) {
 		Optional<Profesor> profesorEditar = profesorServicio.findById(id);
 		if(profesorEditar.isPresent()) {
 			model.addAttribute("profesor", profesorEditar.get());
-			return "admin/editarFormularioProfesor";
+			return "admin/editarformularioProfesor";
 		}else {
 			return "redirect:/adminProfesor";
 		}

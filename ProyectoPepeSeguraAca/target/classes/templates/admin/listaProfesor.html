@@ -11,7 +11,7 @@
 <div class="container">
   <h2>Tabla de Estudiantes</h2>
   <hr>
-  <a class="btn btn-primary btn-sm" href="/admin/" th:href="@{/adminformularioEstudiante}">Añadir</a>
+  <a class="btn btn-primary btn-sm" href="/admin/" th:href="@{/adminformularioProfesor}">Añadir</a>
 
   <table class="table">
     <thead>
@@ -22,23 +22,23 @@
         <th>Apellidos</th>
 		<th>Correo</th>
 		<th>DNI</th>
-		<th>Telefono</th>
+
         <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
       
-      <tr th:each="estudiante : ${listaEstudiante}">
-        <td th:text="${estudiante.id}"></td>
-        <td th:text="${estudiante.username}"></td>
-        <td th:text="${estudiante.nombre}"></td>
-        <td th:text="${estudiante.apellidos}"></td>
-		<td th:text="${estudiante.correo}"></td>
-		<td th:text="${estudiante.dni}"></td>
-		<td th:text="${estudiante.telefono}"></td>
+      <tr th:each="profesor : ${listaProfesor}">
+        <td th:text="${profesor.id}"></td>
+        <td th:text="${profesor.username}"></td>
+        <td th:text="${profesor.nombre}"></td>
+        <td th:text="${profesor.apellidos}"></td>
+		<td th:text="${profesor.correo}"></td>
+		<td th:text="${profesor.dni}"></td>
+
         <td>
-          <a type="button" class="btn btn-primary btn-sm" href="/admin/"  th:href="@{/editarEstudiante/{id}(id=${estudiante.id})}">Editar</a>
-          <a type="button" class="btn btn-danger btn-sm"  th:href="@{/borrarEstudiante/{id}(id = ${estudiante.id})}">Eliminar</a>
+          <a type="button" class="btn btn-primary btn-sm" href="/admin/"  th:href="@{/editarProfesor/{id}(id=${profesor.id})}">Editar</a>
+          <a type="button" class="btn btn-danger btn-sm"  th:href="@{/borrarProfesor/{id}(id = ${profesor.id})}">Eliminar</a>
         </td>
       </tr>
     </tbody>
