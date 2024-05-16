@@ -1,6 +1,7 @@
-package com.salesianostriana.dam.proyectopepeseguraaca;
+package src.main.java.com.salesianostriana.dam.proyectopepeseguraaca;
 
 import org.springframework.boot.SpringApplication;
+
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication

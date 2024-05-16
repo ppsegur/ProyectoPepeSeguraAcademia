@@ -19,14 +19,47 @@ import lombok.experimental.SuperBuilder;
 @Entity
 public class Profesor extends Usuario {
 	
+	
+	
+	
+	public Profesor(String username, String contrasena, 
+			String nombre, String apellidos, String correo, String dni) {
+		super(username, contrasena, nombre, apellidos, correo, dni);
+	}
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
 	/*@OneToMany(mappedBy="curso", fetch = FetchType.EAGER)
 	@Builder.Default
 	private List<Curso> cursosImpartidos = new ArrayList<>();*/
 
-	//Constructor
-	/*public Profesor(String contraseña, String nombre, String apellidos, String correo, String dni, String dni2,
-			List<Estudiante> estudiante) {
-		super(contraseña, nombre, apellidos, correo, dni);
-		this.cursosImpartidos = cursosImpartidos;
-	}*/
+	
 }
