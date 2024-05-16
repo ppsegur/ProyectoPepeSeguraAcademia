@@ -1,54 +1,65 @@
 package com.salesianostriana.dam.proyectopepeseguraaca.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.salesianostriana.dam.proyectopepeseguraaca.model.Profesor;
 import com.salesianostriana.dam.proyectopepeseguraaca.servicios.ProfesorServicio;
 
 @Controller
 @RequestMapping("/ProfesorAdmin")
 public class ProfesorController {
-/*
+
 	@Autowired
 	ProfesorServicio profesorServicio;
 	
-	/*@GetMapping({"/", "/listaProfesor"})
-	public String listarTodos(Model model) {
-		model.addAttribute("lista",profesorServicio.findAll() );
-		return "listaDeProfesores";//No colocada
+	@GetMapping("/adminProfesor")
+	public String listarProfesor(Model model) {
+		model.addAttribute("listaProfesor",profesorServicio.findAll() );
+		return "admin/listaDeProfesores";
 	}
-	@GetMapping("/nuevo")
-	public String mostrarFormulario(Model model) {
+	@GetMapping("/adminformularioProfesor")
+	public String mostrarFormularioProfesor(Model model) {
 		model.addAttribute("profesor", new Profesor());
 		return "FormularioProfesor";
 	}
 	
-	@PostMapping("/nuevo/submit")
+	@PostMapping("/nuevoProfesor/submit")
 	public String procesarFormulario(@ModelAttribute("profesor")Profesor p) {
 		profesorServicio.save(p);
-		return "rediret:/";
+		return "redirect:/adminProfesor";
 	}
 	
 	@GetMapping("/editar/{id}")
 	public String mostrarFormularioEdicion(@PathVariable("id") long id, Model model) {
-		
-		if(profesorServicio.findById(id).isPresent()) {
-			model.addAttribute("estudiante", profesorServicio.findById(id).get());
-			return "FormularioProfesor";
+		Optional<Profesor> profesorEditar = profesorServicio.findById(id);
+		if(profesorEditar.isPresent()) {
+			model.addAttribute("profesor", profesorEditar.get());
+			return "admin/editarFormularioProfesor";
 		}else {
-			return "redirect:/";
+			return "redirect:/adminProfesor";
 		}
 	}
-	@PostMapping("/editar/submit")
+	@PostMapping("/editarProfesor/submit")
 	public String procesarFormularioEdicion(@ModelAttribute("profesor")  Profesor p) {
 		profesorServicio.edit(p);
-		return "redirect:/";
+		return "redirect:/adminProfesor";
 	}
 	
-	@GetMapping("/borrar/{id}")
+	@GetMapping("/borrarProfesor/{id}")
 	public String borrar(@PathVariable("id") long id) {
-		profesorServicio.deleteById(id);
-		return "redirect:/";
-	}*/
+		Optional<Profesor> profesorb = profesorServicio.findById(id);
+		if(profesorb.isPresent()){
+		profesorServicio.delete(profesorb.get());
+	}
+		return "redirect:/adminProfesor";
+	}
 }
