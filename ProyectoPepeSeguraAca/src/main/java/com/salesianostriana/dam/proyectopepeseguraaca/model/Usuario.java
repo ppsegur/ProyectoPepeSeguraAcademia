@@ -77,5 +77,6 @@ public  class Usuario implements UserDetails {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 	
 }
