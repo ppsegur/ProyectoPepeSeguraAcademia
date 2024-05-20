@@ -1,11 +1,14 @@
 package com.salesianostriana.dam.proyectopepesegura.modelo;
 
 import java.util.Collection;
+
 import java.util.List;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -52,10 +55,6 @@ public class Estudiante implements UserDetails{
 		return List.of(new SimpleGrantedAuthority(role));
 	}	
 
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
 
 	@Override
 	public boolean isAccountNonLocked() {
@@ -76,6 +75,12 @@ public class Estudiante implements UserDetails{
 	
 		return contrasena;
 	}
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
 	/*@OneToMany(mappedBy = "estudiante")
 	private List<Certificado> Certificado;*/
 
