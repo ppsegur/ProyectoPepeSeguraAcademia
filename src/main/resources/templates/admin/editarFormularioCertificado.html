@@ -10,7 +10,7 @@
 
 <div class="container">
     <h2>Editar Curso</h2>
-    <form action="#" th:action="@{/editarCertificado/submit}" th:object="${certificado}" method="post">
+    <form action="#" th:action="@{/admin/editarCertificado/submit}" th:object="${certificado}" method="post">
 		<input th:if="${certificado.idCertificado != 0}" type="hidden" name="id" th:field="*{idCertificado}">
         <div class="mb-3">
             <label for="nombre" class="form-label">fechaExamen:</label>

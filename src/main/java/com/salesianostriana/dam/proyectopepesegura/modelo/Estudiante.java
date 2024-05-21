@@ -1,14 +1,11 @@
 package com.salesianostriana.dam.proyectopepesegura.modelo;
 
 import java.util.Collection;
-
 import java.util.List;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,24 +21,29 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Estudiante implements UserDetails{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
 	private Long id;
 	
 	private String username;
-	private String contrasena;
+	private String password;
 	private String nombre;
 	private String apellidos;
 	private String correo;
 	private String dni;
 	private boolean noEstudiante;
 	
-	public Estudiante(Long id, String username, String contrasena, String nombre, String apellidos, String correo,
+	public Estudiante(Long id, String username, String password, String nombre, String apellidos, String correo,
 			String dni, boolean noEstudiante) {
 		super();
 		this.id = id;
 		this.username = username;
-		this.contrasena = contrasena;
+		this.password = password;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.correo = correo;
@@ -54,7 +56,7 @@ public class Estudiante implements UserDetails{
 		role += (noEstudiante) ? "ADMIN" : "USER";
 		return List.of(new SimpleGrantedAuthority(role));
 	}	
-
+	
 
 	@Override
 	public boolean isAccountNonLocked() {
@@ -70,15 +72,10 @@ public class Estudiante implements UserDetails{
 	public boolean isEnabled() {
 		return true;
 	}
-	@Override
-	public String getPassword() {
-	
-		return contrasena;
-	}
+
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	
 	/*@OneToMany(mappedBy = "estudiante")

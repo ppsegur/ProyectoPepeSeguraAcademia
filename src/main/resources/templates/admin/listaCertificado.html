@@ -11,7 +11,7 @@
 <div class="container">
   <h2>Tabla de Certificados</h2>
   <hr>
-  <a class="btn btn-primary btn-sm" href="/admin/" th:href="@{/adminformularioCertificado}">Añadir</a>
+  <a class="btn btn-primary btn-sm" href="/admin/" th:href="@{/admin/adminformularioCertificado}">Añadir</a>
 
   <table class="table">
     <thead>
@@ -29,8 +29,8 @@
         <td th:text="${certificado.fechaExamen}"></td>
         <td th:text="${certificado.Calificacion}"></td>
         <td>
-          <a type="button" class="btn btn-primary btn-sm" href="/admin/"  th:href="@{/editarCertificado/{idCertificado}(idCertificado=${certificado.idCertificado})}">Editar</a>
-          <a type="button" class="btn btn-danger btn-sm"  th:href="@{/borrarCertificado/{idCertificado}(idCertificado=${certificado.idCertificado})}">Eliminar</a>
+          <a type="button" class="btn btn-primary btn-sm" href="/admin/"  th:href="@{/admin/editarCertificado/{idCertificado}(idCertificado=${certificado.idCertificado})}">Editar</a>
+          <a type="button" class="btn btn-danger btn-sm"  th:href="@{/admin/borrarCertificado/{idCertificado}(idCertificado=${certificado.idCertificado})}">Eliminar</a>
         </td>
       </tr>
     </tbody>

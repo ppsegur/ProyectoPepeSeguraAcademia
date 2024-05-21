@@ -53,7 +53,12 @@
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity6</artifactId>
-		</dependency>	
+		</dependency>
+		<dependency>
+			<groupId>com.salesianostriana.dam</groupId>
+			<artifactId>cinejava</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

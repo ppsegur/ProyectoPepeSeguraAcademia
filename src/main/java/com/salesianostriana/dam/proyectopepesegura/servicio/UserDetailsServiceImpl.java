@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.proyectopepesegura.security;
+package com.salesianostriana.dam.proyectopepesegura.servicio;
 
 
 import org.springframework.security.core.userdetails.UserDetails;

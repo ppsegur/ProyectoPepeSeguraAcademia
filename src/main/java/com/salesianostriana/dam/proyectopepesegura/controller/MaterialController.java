@@ -2,6 +2,7 @@ package com.salesianostriana.dam.proyectopepesegura.controller;
 
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.salesianostriana.dam.proyectopepesegura.modelo.Material;
 import com.salesianostriana.dam.proyectopepesegura.servicio.MaterialServicio;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+
 
 @Controller
 public class MaterialController {
@@ -20,25 +24,25 @@ public class MaterialController {
 	public MaterialServicio materialServicio;
 	
 	//Tablas
-	@GetMapping("/adminMaterial")
+	@GetMapping("/admin/adminMaterial")
 	public String listarMateriales(Model model) {
 		model.addAttribute("listaMateriales", materialServicio.findAll());
 		return "admin/listaMaterial";
 	}
 	//Mostrar el formulario de añadir material
-	@GetMapping("/adminformularioMaterial")
+	@GetMapping("/admin/adminformularioMaterial")
 	public String mostrarFormularioMaterial(Model model) {
 		model.addAttribute("material", new Material());
 		return "admin/formularioMaterial";
 	}
 	//
-	@PostMapping("/nuevoMaterial/submit")
+	@PostMapping("/admin/nuevoMaterial/submit")
 	public String procesarFormularioMaterial(@ModelAttribute("material") Material m) {
 		materialServicio.save(m);		
 		return "redirect:/adminMaterial";
 	}
 	//Borrar
-	@GetMapping("/borrarMaterial/{idMaterial}")
+	@GetMapping("/admin/borrarMaterial/{idMaterial}")
 	public String borrarMaterial(@PathVariable("idMaterial") long idMaterial) {
 	    Optional<Material> material = materialServicio.findById(idMaterial);
 	    if(material.isPresent()) {
@@ -47,7 +51,7 @@ public class MaterialController {
 	    return "redirect:/adminMaterial";
 	}
 	//Editar
-	@GetMapping("/editarMaterial/{idMaterial}")
+	@GetMapping("/admin/editarMaterial/{idMaterial}")
 	public String mostrarFormularioEdicionMaterial(@PathVariable("idMaterial") long idMaterial , Model model) {
 		Optional<Material> materialEditar = materialServicio.findById(idMaterial);
 		if(materialEditar.isPresent()) {
@@ -60,7 +64,7 @@ public class MaterialController {
 		}
 	}
 	
-	@PostMapping("/editarMaterial/submit")
+	@PostMapping("/admin/editarMaterial/submit")
 	public String editarMaterialSubmit(@ModelAttribute("material") Material material) {
 	    materialServicio.save(material);
 		return "redirect:/adminMaterial";

@@ -2,13 +2,17 @@ package com.salesianostriana.dam.proyectopepesegura.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import ch.qos.logback.core.model.Model;
 
 
 @Controller
 public class MainController {
-
+	
+	@GetMapping("/logout")
+    public String logOut() {
+        return "index";
+    }
 	@GetMapping("/index")
 	public String mostrarIndice() {
 		return "index";
@@ -18,7 +22,7 @@ public class MainController {
 		return  "admin/indexAdmin";
 	}
 	@GetMapping("/login")
-	public String mostrarLogin() {
+	public String mostrarLogin(Model model) {
 		return "login";
 	}
 

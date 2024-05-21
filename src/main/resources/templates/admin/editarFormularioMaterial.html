@@ -10,7 +10,7 @@
 
 <div class="container">
     <h2>Editar Material</h2>
-    <form action="#" th:action="@{/editarMaterial/submit}" th:object="${material}" method="post">
+    <form action="#" th:action="@{/admin/editarMaterial/submit}" th:object="${material}" method="post">
 		<input th:if="${material.idMaterial != 0}" type="hidden" name="id" th:field="*{idMaterial}">
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre:</label>

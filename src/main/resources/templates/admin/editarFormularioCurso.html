@@ -10,7 +10,7 @@
 
 <div class="container">
     <h2>Editar Curso</h2>
-    <form action="#" th:action="@{/editarCurso/submit}" th:object="${curso}" method="post">
+    <form action="#" th:action="@{/admin/editarCurso/submit}" th:object="${curso}" method="post">
 		<input th:if="${curso.idCurso != 0}" type="hidden" name="id" th:field="*{idCurso}">
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre:</label>

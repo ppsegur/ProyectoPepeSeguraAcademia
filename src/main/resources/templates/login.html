@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +7,8 @@
 </head>
 <body>
     <form method="POST" action="" th:action="@{/login}">
-        <input type="text" id="username" name="username" placeholder="Username" required  > 
-        <input type="password" name="password" id="contrasena" placeholder="Password" required >
+        <input type="text" id="username" name="username" placeholder="Username" required  aria-autocomplete="username" > 
+        <input type="password" name="password" id="password" placeholder="Password" required autocomplete="current-password" >
         <input type="submit" name="enviar" value="Enviar" />
     </form>
 </body>

@@ -10,7 +10,7 @@
 
 <div class="container">
   <h2>Añadir Estudiante Manual</h2>
-  <form action="" th:action="@{/nuevoEstudiante/submit}" th:object="${estudiante}" method="POST">
+  <form action="" th:action="@{/admin/nuevoEstudiante/submit}" th:object="${estudiante}" method="POST">
 	<div class="form-group">
 	      <label for="username">UserName:</label>
 	      <input type="text" class="form-control" id="username" th:field="*{username}" placeholder="Ingrese el username del estudiante">

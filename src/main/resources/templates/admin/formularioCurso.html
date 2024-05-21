@@ -10,7 +10,7 @@
 
 <div class="container">
   <h2>Añadir Curso</h2>
-  <form action="" th:action="@{/nuevoCurso/submit}" th:object="${curso}" method="POST">
+  <form action="" th:action="@{/admin/nuevoCurso/submit}" th:object="${curso}" method="POST">
     <div class="form-group">
       <label for="nombre">Nombre:</label>
       <input type="text" class="form-control" id="nombre" th:field="*{nombre}" placeholder="Ingrese el nombre del curso">
