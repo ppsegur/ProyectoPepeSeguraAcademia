@@ -11,13 +11,13 @@ public class MainController {
 	
 	@GetMapping("/logout")
     public String logOut() {
-        return "index";
+        return "login";
     }
-	@GetMapping("/index")
+	@GetMapping("/")
 	public String mostrarIndice() {
 		return "index";
 	}
-	@GetMapping("/adminIndex")
+	@GetMapping("/admin/Index")
 	public String mostrarIndiceAdmin() {
 		return  "admin/indexAdmin";
 	}

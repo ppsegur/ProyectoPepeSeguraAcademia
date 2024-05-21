@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.salesianostriana.dam.proyectopepesegura.modelo.Material;
 import com.salesianostriana.dam.proyectopepesegura.servicio.MaterialServicio;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 
 
@@ -24,13 +23,13 @@ public class MaterialController {
 	public MaterialServicio materialServicio;
 	
 	//Tablas
-	@GetMapping("/admin/adminMaterial")
+	@GetMapping("/admin/Material")
 	public String listarMateriales(Model model) {
 		model.addAttribute("listaMateriales", materialServicio.findAll());
 		return "admin/listaMaterial";
 	}
 	//Mostrar el formulario de añadir material
-	@GetMapping("/admin/adminformularioMaterial")
+	@GetMapping("/admin/formularioMaterial")
 	public String mostrarFormularioMaterial(Model model) {
 		model.addAttribute("material", new Material());
 		return "admin/formularioMaterial";
@@ -39,7 +38,7 @@ public class MaterialController {
 	@PostMapping("/admin/nuevoMaterial/submit")
 	public String procesarFormularioMaterial(@ModelAttribute("material") Material m) {
 		materialServicio.save(m);		
-		return "redirect:/adminMaterial";
+		return "redirect:/admin/Material";
 	}
 	//Borrar
 	@GetMapping("/admin/borrarMaterial/{idMaterial}")
@@ -48,7 +47,7 @@ public class MaterialController {
 	    if(material.isPresent()) {
 	        materialServicio.delete(material.get());
 	    }
-	    return "redirect:/adminMaterial";
+	    return "redirect:/admin/Material";
 	}
 	//Editar
 	@GetMapping("/admin/editarMaterial/{idMaterial}")
@@ -60,14 +59,14 @@ public class MaterialController {
 			return "admin/editarFormularioMaterial";	
 		}else {
 			//
-			return "redirect:/adminMaterial";
+			return "redirect:/admin/Material";
 		}
 	}
 	
 	@PostMapping("/admin/editarMaterial/submit")
 	public String editarMaterialSubmit(@ModelAttribute("material") Material material) {
 	    materialServicio.save(material);
-		return "redirect:/adminMaterial";
+		return "redirect:/admin/Material";
 	}
 
 }

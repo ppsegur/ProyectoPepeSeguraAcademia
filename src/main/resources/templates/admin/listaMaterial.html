@@ -11,7 +11,7 @@
 <div class="container">
   <h2>Tabla de Materiales</h2>
   <hr>
-  <a class="btn btn-primary btn-sm" href="/admin/" th:href="@{/admin/adminformularioMaterial}">Añadir</a>
+  <a class="btn btn-primary btn-sm" href="/admin/" th:href="@{/admin/formularioMaterial}">Añadir</a>
 
   <table class="table">
     <thead>
@@ -32,7 +32,7 @@
         <td th:text="${material.url}"></td>
         <td>
           <a type="button" class="btn btn-primary btn-sm" href="/admin/"  th:href="@{/admin/editarMaterial/{idMaterial}(idMaterial=${material.idMaterial})}">Editar</a>
-          <a type="button" class="btn btn-danger btn-sm"  th:href="@/admin/borrarMaterial/{id}(id=${material.idMaterial})}">Eliminar</a>
+          <a type="button" class="btn btn-danger btn-sm"  th:href="@{/admin/borrarMaterial/{id}(id=${material.idMaterial})}">Eliminar</a>
         </td>
       </tr>
     </tbody>

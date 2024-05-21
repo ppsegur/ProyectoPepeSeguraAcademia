@@ -11,10 +11,12 @@
     <nav  class="menuChulo "th:fragment="navbar">
         <ul>
             <li><a href="#">GLOBA<span style="color: #4CAF50;">LINGO</span></a></li>
-            <li><a href="#">Curso</a></li>
-            <li><a href="#">Material</a></li>
-            <li><a href="#">Certificado</a></li>
-            <li><a href="#" th:action ="${/Logout}">Salir</a></li>
+            <li><a href="/admin/" th:href="@{/admin/Curso}">Curso</a></li>
+            <li><a href="/admin/" th:href="@{/admin/Material}">Material</a></li>
+            <li><a href="/admin/" th:href="@{/admin/Certificado}">Certificado</a></li>
+			<li><a href="/admin/" th:href="@{/admin/Estudiante}">Estudiante</a></li>
+
+            <li><a href="/admkn/" th:href ="@{/logout}">Salir</a></li>
         </ul>
     </nav>
  

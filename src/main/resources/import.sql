@@ -9,6 +9,8 @@ INSERT INTO Curso (id_curso,nombre,nivel_dificultad, precio) VALUES(1,'Ingles a1
 INSERT INTO Estudiante(id,username,password,nombre,apellidos,correo,dni,no_estudiante) VALUES (1,'pepe321', '{bcrypt}$2a$12$958YgJdm4acEfwUiIwNANuxFHl0CHeuZh0KBkbhuYtm.RGIa54YvG', 'Pepe', 'González Pérez', 'pepe@example.com', '12345678A',true);
 
 INSERT INTO   Estudiante (id,username,password,nombre,apellidos,correo,dni,no_estudiante) VALUES (2, 'marialoma', '{bcrypt}$2a$12$958YgJdm4acEfwUiIwNANuxFHl0CHeuZh0KBkbhuYtm.RGIa54YvG', 'María', 'López Martínez', 'maria@example.com', '87654321B',false);
+INSERT INTO   Estudiante (id,username,password,nombre,apellidos,correo,dni,no_estudiante) VALUES (3, 'user', '{bcrypt}$2a$12$958YgJdm4acEfwUiIwNANuxFHl0CHeuZh0KBkbhuYtm.RGIa54YvG', 'María', 'López Martínez', 'maria@example.com', '87654321B',false);
+INSERT INTO   Estudiante (id,username,password,nombre,apellidos,correo,dni,no_estudiante) VALUES (4, 'admin', '{bcrypt}$2a$12$yyJmcpUq.jrMOtPgRVrUVOnuIgUya/VWdQyS9KGUKGFs6sAGoiF2q', 'María', 'López Martínez', 'maria@example.com', '87654321B',true);
 
 
 

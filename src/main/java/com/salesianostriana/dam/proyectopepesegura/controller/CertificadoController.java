@@ -15,55 +15,54 @@ import com.salesianostriana.dam.proyectopepesegura.modelo.Certificado;
 import com.salesianostriana.dam.proyectopepesegura.servicio.CertificadoServicio;
 
 @Controller
-@RequestMapping("/admin")
 public class CertificadoController {
 	@Autowired
 	CertificadoServicio certificadoServicio;
 
 
-	@GetMapping("/adminCertificado")
+	@GetMapping("/admin/Certificado")
 	public String listarCertificados(Model model) {
 		model.addAttribute("listaCertificado",certificadoServicio.findAll() );
 		return "admin/listaCertificado";
 	}
 	//mostrar formulario para añadir un nuevo certificado
-	@GetMapping("/adminformularioCertificado")
+	@GetMapping("/admin/formularioCertificado")
 	public String mostrarFormularioCertificado(Model model) {
 		model.addAttribute("certificado", new Certificado());
 		return "admin/formularioCertificado";
 	}
-	@PostMapping("/nuevoCertificado/submit")
+	@PostMapping("/admin/nuevoCertificado/submit")
 	public String procesarFormularioCertificado(@ModelAttribute("certificado") Certificado c) {
 		certificadoServicio.save(c);
-		return "redirect:/adminCertificado";
+		return "redirect:/admin/Certificado";
 	}
-	@GetMapping("/editarCertificado/{idCertificado}")
+	@GetMapping("/admin/editarCertificado/{idCertificado}")
 	public String mostrarFormularioEdicion(@PathVariable("idCertificado") long id, Model model) {
 		Optional<Certificado> certificadoEditar = certificadoServicio.findById(id);
 		if(certificadoEditar.isPresent()) {
 			model.addAttribute("certificado", certificadoEditar.get());
 			return "admin/editarFormularioCertificado";
 		}else {
-			return "redirect:/adminCertificado";
+			return "redirect:/admin/Certificado";
 		}
 	}
-	@PostMapping("/editarCertificado/submit")
+	@PostMapping("/admin/editarCertificado/submit")
 	public String procesarFormularioEdicionCertificado(@ModelAttribute("certificado") Certificado c) {
 		certificadoServicio.edit(c);
-		return "redirect:/adminCertificado";
+		return "redirect:/admin/Certificado";
 	}
 	/**
 	 * Método para borrar 
 	 * @param id
 	 * @return 
 	 */
-	@GetMapping("/borrarCertificado/{idCertificado}")
+	@GetMapping("/admin/borrarCertificado/{idCertificado}")
 	public String borrar(@PathVariable("idCertificado") long id) {
 	Optional<Certificado> certificado = certificadoServicio.findById(id);
 		if(certificado.isPresent()){
 		certificadoServicio.delete(certificado.get());
 		}
-		return "redirect:/adminCertificado";
+		return "redirect:/admin/Certificado";
 		
 	}
 }

@@ -15,50 +15,49 @@ import com.salesianostriana.dam.proyectopepesegura.modelo.Curso;
 import com.salesianostriana.dam.proyectopepesegura.servicio.CursoServicio;
 
 @Controller
-@RequestMapping("/admin")
 public class CursoController {
 
 	@Autowired
 	CursoServicio cursoServicio;
 	
-	@GetMapping("/adminCurso")
+	@GetMapping("/admin/Curso")
 	public String listarCursos(Model model) {
 		model.addAttribute("listaCurso", cursoServicio.findAll() );
 		return "admin/listaCurso";
 	}//mostrar formulario
-	@GetMapping("/adminformularioCurso")
+	@GetMapping("/admin/formularioCurso")
 	public String mostrarFormularioCurso(Model model) {
 		model.addAttribute("curso", new Curso());
 		return "admin/formularioCurso";
 	}
-	@PostMapping("/nuevoCurso/submit")
+	@PostMapping("/admin/nuevoCurso/submit")
 	public String procesarFormularioCurso(@ModelAttribute("curso") Curso c) {
 		cursoServicio.save(c);
-		return "redirect:/adminCurso";
+		return "redirect:/admin/Curso";
 	}
-	@GetMapping("/editarCurso/{idCurso}")
+	@GetMapping("/admin/editarCurso/{idCurso}")
 	public String mostrarFormularioEdicionCurso(@PathVariable("idCurso") long idCurso, Model model) {
 		Optional<Curso> cursoEditar = cursoServicio.findById(idCurso);
 		if(cursoEditar.isPresent()) {
 			model.addAttribute("curso", cursoEditar.get());
 			return "admin/editarFormularioCurso";
 		}else {
-			return "redirect:/adminCurso";
+			return "redirect:/admin/Curso";
 		}
 	}
 
-	@PostMapping("/editarCurso/submit")
+	@PostMapping("/admin/editarCurso/submit")
 	public String procesarFormularioEdicion(@ModelAttribute("curso") Curso c) {
 		cursoServicio.save(c);
-		return "redirect:/adminCurso";
+		return "redirect:/admin/Curso";
 	}
 	//Borrar curso
-	@GetMapping("/borrarCurso/{idCurso}")
+	@GetMapping("/admin/borrarCurso/{idCurso}")
 	public String borrar(@PathVariable("idCurso") long idCurso) {
 	Optional<Curso> curso = cursoServicio.findById(idCurso);
 	    if(curso.isPresent()) {
 	        cursoServicio.delete(curso.get());
 	    }
-	    return "redirect:/adminCurso";
+	    return "redirect:/admin/Curso";
 	}
 }

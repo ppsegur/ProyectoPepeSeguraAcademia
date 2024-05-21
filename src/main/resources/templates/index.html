@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+	
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,9 +13,12 @@
 <body>
 	<form th:action="@{/logout}" method="POST" id="logoutForm"></form>
     <!-- Navbar -->
-    <nav th:replace="~{/fragmentos/menu::navbar}"></nav>
-
+	<nav sec:authorize="hasRole('ROLE_USER')" th:replace="~{/fragmentos/menu::navbar}"></nav>
+	 <nav sec:authorize="hasRole('ROLE_ADMIN')" th:replace="~{/fragmentos/menuAdmin::navbar}"></nav>
     <!-- Carrusel -->
+	<form th:href="@{/logout}" method="post">
+	        <button type="submit" class="btn btn-danger">Cerrar sesión</button>
+	 </form>
     <div id="demo" class="carousel slide" data-bs-ride="carousel">
         <!-- Indicators/dots -->
         <div class="carousel-indicators">

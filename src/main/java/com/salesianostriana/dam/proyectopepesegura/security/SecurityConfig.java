@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import com.salesianostriana.dam.proyectopepesegura.modelo.Estudiante;
 
 import lombok.RequiredArgsConstructor;
 
@@ -48,12 +47,12 @@ public class SecurityConfig {
 	@Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(
-                        (authz) -> authz.requestMatchers("/css/**", "/js/**","/img/**", "/h2-console/**","/index/**").permitAll()
-                                .requestMatchers("/admin/**").hasRole("NO_ESTUIDANTE")
+                        (authz) -> authz.requestMatchers("/css/**", "/js/**","/img/**", "/h2-console/**").permitAll()
+                                .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .anyRequest().authenticated())
   
                 .formLogin((loginz) -> loginz
-                        .loginPage("/login").defaultSuccessUrl("/index",true).permitAll())
+                        .loginPage("/login").defaultSuccessUrl("/").permitAll())
                 .logout((logoutz) -> logoutz
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login")
