@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Añadir Curso</title>
+ <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+  <h2>Añadir Curso</h2>
+  <form action="" th:action="@{/admin/nuevoCurso/submit}" th:object="${curso}" method="POST">
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input type="text" class="form-control" id="nombre" th:field="*{nombre}" placeholder="Ingrese el nombre del curso">
+    </div>
+    <div class="form-group">
+      <label for="nivelDificultad">nivel de dificultad:</label>
+      <input type="text" class="form-control" id="nivelDificultad" th:field="*{nivelDificultad}" placeholder="Ingrese el nivel de dificultad del curso">
+    </div>
+    <div class="form-group">
+      <label for="duracion">Duración:</label>
+      <input type="text" class="form-control" id="duracion" th:field="*{duracion}" placeholder="Ingrese la duración del curso">
+    </div>
+	<div class="form-group">
+	      <label for="precio">Precio:</label>
+	      <input type="number" class="form-control" id="precio" th:field="*{precio}" placeholder="Ingrese el precio del curso">
+	    </div>
+    <button type="submit" class="btn btn-primary">Agregar Curso</button>
+  </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

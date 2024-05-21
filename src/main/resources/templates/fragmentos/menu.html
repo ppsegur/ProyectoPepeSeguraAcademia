@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar de GlobalLingo</title>
+
+    
+</head>
+<body>
+    <nav  class="menuChulo "th:fragment="navbar">
+        <ul>
+            <li><a href="#">GLOBA<span style="color: #4CAF50;">LINGO</span></a></li>
+            <li><a href="#">inglés</a></li>
+            <li><a href="#">español</a></li>
+            <li><a href="#">francés</a></li>
+            <li><a href="#">sobre nosotros</a></li>
+			<li><a href="/admkn/" th:href ="@{/logout}">Salir</a></li>
+
+        </ul>
+    </nav>
+ 
+</body>
+</html>
