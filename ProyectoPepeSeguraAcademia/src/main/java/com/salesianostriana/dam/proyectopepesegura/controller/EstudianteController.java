@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.salesianostriana.dam.proyectopepesegura.modelo.Estudiante;
 import com.salesianostriana.dam.proyectopepesegura.servicio.EstudianteServicio;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class EstudianteController {
@@ -63,7 +65,18 @@ public class EstudianteController {
 		if(estudiantes.isPresent()){
 		estudianteServicio.delete(estudiantes.get());
 		}
-		return "redirect:/adminEstudiante";
+		return "redirect:/index";
 		
 	}
+	 @GetMapping("/user/nuevoEstudiante")
+	    public String mostrarFormulario(Model model) {
+	        model.addAttribute("estudiante", new Estudiante());
+	        return "register"; // Nombre de la plantilla HTML
+	    }
+
+	    @PostMapping("/user/nuevoEstudiante/submit")
+	    public String register(@ModelAttribute Estudiante estudiante) {
+	        estudianteServicio.save(estudiante);
+	        return "redirect:/index";
+	    }
 }
