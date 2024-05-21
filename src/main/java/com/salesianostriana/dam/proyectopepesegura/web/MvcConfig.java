@@ -1,4 +1,4 @@
-package com.salesinanostriana.dam.proyectopepesegura.web;
+package com.salesianostriana.dam.proyectopepesegura.web;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
