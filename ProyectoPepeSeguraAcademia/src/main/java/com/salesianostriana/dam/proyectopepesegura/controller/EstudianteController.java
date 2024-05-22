@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Estudiante;
 import com.salesianostriana.dam.proyectopepesegura.servicio.EstudianteServicio;
 
+
 @Controller
 public class EstudianteController {
 
@@ -63,7 +64,18 @@ public class EstudianteController {
 		if(estudiantes.isPresent()){
 		estudianteServicio.delete(estudiantes.get());
 		}
-		return "redirect:/adminEstudiante";
+		return "redirect:/index";
 		
 	}
+	 @GetMapping("/user/nuevoEstudiante")
+	    public String guardarEstudiante(Model model) {
+	        model.addAttribute("estudiante", new Estudiante());
+	        return "register"; 
+	    }
+
+	    @PostMapping("/user/nuevoEstudiante/submit")
+	    public String register(@ModelAttribute("estudiante") Estudiante estudiante) {
+	    	estudianteServicio.save(estudiante);
+	        return "redirect:/index";
+	    }
 }

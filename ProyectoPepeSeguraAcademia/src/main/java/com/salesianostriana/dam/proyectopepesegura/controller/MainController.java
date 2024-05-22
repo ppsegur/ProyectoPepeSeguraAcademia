@@ -13,7 +13,7 @@ public class MainController {
     public String logOut() {
         return "login";
     }
-	@GetMapping("/")
+	@GetMapping({"/","/index"})
 	public String mostrarIndice() {
 		return "index";
 	}
@@ -25,6 +25,9 @@ public class MainController {
 	public String mostrarLogin(Model model) {
 		return "login";
 	}
-
+	@GetMapping("/register")
+	public String register(Model model) {
+	return "register";
+	}
 	
 }
