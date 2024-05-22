@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.salesianostriana.dam.proyectopepesegura.modelo.Estudiante;
 import com.salesianostriana.dam.proyectopepesegura.servicio.EstudianteServicio;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -69,14 +68,14 @@ public class EstudianteController {
 		
 	}
 	 @GetMapping("/user/nuevoEstudiante")
-	    public String mostrarFormulario(Model model) {
+	    public String guardarEstudiante(Model model) {
 	        model.addAttribute("estudiante", new Estudiante());
-	        return "register"; // Nombre de la plantilla HTML
+	        return "register"; 
 	    }
 
 	    @PostMapping("/user/nuevoEstudiante/submit")
-	    public String register(@ModelAttribute Estudiante estudiante) {
-	        estudianteServicio.save(estudiante);
+	    public String register(@ModelAttribute("estudiante") Estudiante estudiante) {
+	    	estudianteServicio.save(estudiante);
 	        return "redirect:/index";
 	    }
 }

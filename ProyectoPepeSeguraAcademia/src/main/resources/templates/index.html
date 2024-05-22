@@ -11,14 +11,13 @@
 </head>
 
 <body>
-	<form th:action="@{/logout}" method="POST" id="logoutForm"></form>
     <!-- Navbar -->
 	<nav sec:authorize="hasRole('ROLE_USER')" th:replace="~{/fragmentos/menu::navbar}"></nav>
 	 <nav sec:authorize="hasRole('ROLE_ADMIN')" th:replace="~{/fragmentos/menuAdmin::navbar}"></nav>
     <!-- Carrusel -->
-	<form th:href="@{/logout}" method="post">
-	        <button type="submit" class="btn btn-danger">Cerrar sesión</button>
-	 </form>
+	<a th:href="@{/login}" method="post">
+	      Iniciar sesión
+	 </a>
     <div id="demo" class="carousel slide" data-bs-ride="carousel">
         <!-- Indicators/dots -->
         <div class="carousel-indicators">

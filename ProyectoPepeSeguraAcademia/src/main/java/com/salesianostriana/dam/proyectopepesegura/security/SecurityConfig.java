@@ -2,6 +2,7 @@ package com.salesianostriana.dam.proyectopepesegura.security;
 
 import org.springframework.context.annotation.Bean;
 
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -44,11 +45,12 @@ public class SecurityConfig {
 		
 		
 }
+  
 	@Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(
                         (authz) -> authz.requestMatchers("/css/**", "/js/**","/img/**", "/h2-console/**").permitAll()
-                        .requestMatchers("/user/nuevoEstudiante", "/register.html").permitAll()
+                        .requestMatchers("/user/nuevoEstudiante", "/user/nuevoEstudiante/submit","/").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .anyRequest().authenticated())
   
