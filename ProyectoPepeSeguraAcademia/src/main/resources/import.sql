@@ -6,9 +6,9 @@ INSERT INTO Curso (id_curso,nombre,nivel_dificultad, precio) VALUES(1,'Ingles a1
 
 
 INSERT INTO Estudiante(id,username,password,nombre,apellidos,correo,dni,edad,no_estudiante) VALUES(1,'pepe321', '{bcrypt}$2a$12$958YgJdm4acEfwUiIwNANuxFHl0CHeuZh0KBkbhuYtm.RGIa54YvG', 'Pepe', 'González Pérez', 'pepe@example.com', '12345678A',21, true);
-INSERT INTO   Estudiante(id,username,password,nombre,apellidos,correo,dni,edad,no_estudiante) VALUES(2, 'marialoma', '{bcrypt}$2a$12$958YgJdm4acEfwUiIwNANuxFHl0CHeuZh0KBkbhuYtm.RGIa54YvG', 'María', 'López Martínez', 'maria@example.com', '87654321B',23,false);
-INSERT INTO   Estudiante(id,username,password,nombre,apellidos,correo,dni,edad,no_estudiante) VALUES(3, 'user', '{bcrypt}$2a$12$958YgJdm4acEfwUiIwNANuxFHl0CHeuZh0KBkbhuYtm.RGIa54YvG', 'María', 'López Martínez', 'maria@example.com', '87654321B',17,false);
-INSERT INTO   Estudiante(id,username,password,nombre,apellidos,correo,dni,edad,no_estudiante) VALUES(4, 'admin', '{bcrypt}$2a$12$yyJmcpUq.jrMOtPgRVrUVOnuIgUya/VWdQyS9KGUKGFs6sAGoiF2q', 'María', 'López Martínez', 'maria@example.com', '87654321B',19,true);
+INSERT INTO   Estudiante(id,username,password,nombre,apellidos,correo,dni,edad,no_estudiante) VALUES(2, 'marialoma', '{bcrypt}$2a$12$958YgJdm4acEfwUiIwNANuxFHl0CHeuZh0KBkbhuYtm.RGIa54YvG', 'María', 'López Martínez', 'marialLopez@example.com', '87654321B',23,false);
+INSERT INTO   Estudiante(id,username,password,nombre,apellidos,correo,dni,edad,no_estudiante) VALUES(3, 'user', '{bcrypt}$2a$12$958YgJdm4acEfwUiIwNANuxFHl0CHeuZh0KBkbhuYtm.RGIa54YvG', 'Juan jose', 'López Martínez', 'Juanjp2001@example.com', '87654321B',17,false);
+INSERT INTO   Estudiante(id,username,password,nombre,apellidos,correo,dni,edad,no_estudiante) VALUES(4, 'admin', '{bcrypt}$2a$12$yyJmcpUq.jrMOtPgRVrUVOnuIgUya/VWdQyS9KGUKGFs6sAGoiF2q', 'Zacarías', 'López Martínez', 'maria@email.com', '87654321B',19,true);
 
 ALTER SEQUENCE Estudiante_seq RESTART WITH 54;
 

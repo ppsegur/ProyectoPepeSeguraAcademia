@@ -4,22 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
-
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
 <body>
-
-	    <div id="login">
+    <div id="login">
         <h3 class="text-center text-white pt-5">Login form</h3>
         <div class="container">
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" class="col-md-12">
-						<form method="POST" action="" th:action="@{/login}">
+                        <form id="loginForm" method="POST" th:action="@{/login}">
                             <h3 class="text-center text-info">Login</h3>
                             <div class="form-group">
                                 <label for="username" class="text-info">Username:</label><br>
@@ -27,14 +21,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="password" class="text-info">Password:</label><br>
-                                <input type="text" name="password" id="password" class="form-control" required>
+                                <input type="password" name="password" id="password" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+                                <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
                             </div>
                             <div id="register-link" class="text-right">
-                                <a href="/static/" class="text-info" th:href="@{/user/nuevoEstudiante}">Register here</a>
+                                <a th:href="@{/user/nuevoEstudiante}" class="text-info">Register here</a>
                             </div>
                         </form>
                     </div>
@@ -42,4 +36,41 @@
             </div>
         </div>
     </div>
+
+    <!-- Incluir jQuery antes de Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    
+    <script>
+        console.log("Validation script loaded"); // Verificar si el script se carga
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            let form = event.target;
+            let isValid = true;
+
+            let username = document.getElementById('username');
+            let password = document.getElementById('password');
+
+            // Validar el username
+            if (username.value.length < 2) {
+                username.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                username.classList.remove('is-invalid');
+            }
+
+            // Validar el password (aunque es requerido por HTML5, hacemos esta validación extra)
+            if (!password.value.trim()) {
+                password.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                password.classList.remove('is-invalid');
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+        });
+    </script>
 </body>
+</html>

@@ -1,50 +1,112 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register</title>
- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
 <div class="container">
-  <h2>Añadir Estudiante Manual</h2>
-  <form action="" th:action="@{/user/nuevoEstudiante/submit}" th:object="${estudiante}" method="POST">
-	<div class="form-group">
-	      <label for="username">UserName:</label>
-	      <input type="text" class="form-control" id="username" th:field="*{username}" placeholder="Ingrese el username del estudiante">
-	    </div>
-		<div class="form-group">
-		 <label for="contraseña">Contraseña:</label>
-		 <input type="text" class="form-control" id="contrasena" th:field="*{password}" placeholder="Ingrese la nueva contraseña ">
-		</div>
-	<div class="form-group">
-      <label for="nombre">Nombre:</label>
-      <input type="text" class="form-control" id="nombre" th:field="*{nombre}" placeholder="Ingrese el nombre del estudainte">
-    </div>
-    <div class="form-group">
-      <label for="apellidos">Apellidos:</label>
-      <input type="text" class="form-control" id="apellidos" th:field="*{apellidos}" placeholder="Ingrese los apellidos del estudiante">
-    </div>
-    <div class="form-group">
-      <label for="correo">Correo:</label>
-      <input type="text" class="form-control" id="correo" th:field="*{correo}" placeholder="Ingrese la duración del curso">
-    </div>
-	<div class="form-group">
-	      <label for="dni">dni:</label>
-	      <input type="text" class="form-control" id="dni" th:field="*{dni}" placeholder="Ingrese el dni del estudiante">
-	 </div>
-	 <div class="form-group">
-	 	      <label for="edad">Edad:</label>
-	 	      <input type="number" class="form-control" id="edad" th:field="*{edad}" placeholder="Ingrese la edad del estudiante">
-	 	 </div>
-    <button type="submit" class="btn btn-primary">Agregar Estudiante</button>
-  </form>
+    <h2>Register</h2>
+    <form id="studentForm" action="" th:action="@{/user/nuevoEstudiante/submit}" th:object="${estudiante}" method="POST">
+        <div class="form-group">
+            <label for="username">UserName:</label>
+            <input type="text" class="form-control" id="username" th:field="*{username}" required placeholder="Ingrese el username del estudiante">
+            <div id="usernameFeedback" class="invalid-feedback">El username debe tener mínimo dos caracteres.</div>
+        </div>
+        <div class="form-group">
+            <label for="contraseña">Contraseña:</label>
+            <input type="text" class="form-control" id="contrasena" th:field="*{password}" required placeholder="Ingrese la nueva contraseña ">
+        </div>
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required placeholder="Ingrese el nombre del estudiante">
+        </div>
+        <div class="form-group">
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" class="form-control" id="apellidos" th:field="*{apellidos}" required placeholder="Ingrese los apellidos del estudiante">
+        </div>
+        <div class="form-group">
+            <label for="correo">Correo:</label>
+            <input type="text" class="form-control" id="correo" th:field="*{correo}" required placeholder="Ingrese la duración del curso">
+            <div id="emailFeedback" class="invalid-feedback">El correo debe contener un '@'.</div>
+        </div>
+        <div class="form-group">
+            <label for="dni">dni:</label>
+            <input type="text" class="form-control" id="dni" th:field="*{dni}" required placeholder="Ingrese el dni del estudiante">
+        </div>
+        <div class="form-group">
+            <label for="edad">Edad:</label>
+            <input type="number" class="form-control" id="edad" th:field="*{edad}" required placeholder="Ingrese la edad del estudiante">
+            <div id="ageFeedback" class="invalid-feedback">La edad mínima es de 18 años.</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Agregar Estudiante</button>
+    </form>
 </div>
+
+<script>
+    document.getElementById('studentForm').addEventListener('submit', function(event) {
+        let form = event.target;
+        let isValid = true;
+
+        let fields = ['username', 'contrasena', 'nombre', 'apellidos', 'correo', 'dni', 'edad'];
+
+        fields.forEach(function(field) {
+            let input = document.getElementById(field);
+            if (!input.value.trim()) {
+                input.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                input.classList.remove('is-invalid');
+            }
+        });
+
+        // Validar el username
+        let username = document.getElementById('username');
+        if (username.value.length < 2) {
+            username.classList.add('is-invalid');
+            document.getElementById('usernameFeedback').style.display = 'block';
+            isValid = false;
+        } else {
+            username.classList.remove('is-invalid');
+            document.getElementById('usernameFeedback').style.display = 'none';
+        }
+
+        // Validar el correo
+        let correo = document.getElementById('correo');
+		let correoPattern = /@/;
+		        if (!correoPattern.test(correo.value)) {
+            correo.classList.add('is-invalid');
+            document.getElementById('emailFeedback').style.display = 'block';
+            isValid = false;
+        } else {
+            correo.classList.remove('is-invalid');
+            document.getElementById('emailFeedback').style.display = 'none';
+        }
+
+        // Validar la edad
+        let edad = document.getElementById('edad');
+        if (isNaN(edad.value) || parseInt(edad.value) < 18) {
+            edad.classList.add('is-invalid');
+            document.getElementById('ageFeedback').style.display = 'block';
+            isValid = false;
+        } else {
+            edad.classList.remove('is-invalid');
+            document.getElementById('ageFeedback').style.display = 'none';
+        }
+
+        if (!isValid) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+    });
+</script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>
