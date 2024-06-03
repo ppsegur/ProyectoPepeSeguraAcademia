@@ -1,20 +1,28 @@
 
+CREATE SEQUENCE IF NOT EXISTS Material_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE IF NOT EXISTS Curso_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE IF NOT EXISTS Estudiante_seq START WITH 1 INCREMENT BY 1;
 
 INSERT INTO Material (id_material, nombre, tipo, url ) VALUES(1,'material a1 ingles','video','https://youtu.be/Jzc4HDOKTKg?si=XGFRehqwEeqfgv99');
 
-INSERT INTO Curso (id_curso,idioma,nivel_dificultad, precio) VALUES(1,'Ingles a1', 'bajo', 25.00);
-INSERT INTO Curso (id_curso,idioma,nivel_dificultad, precio) VALUES(2,'Ingles b1', 'bajo', 35.00);
-INSERT INTO Curso (id_curso,idioma,nivel_dificultad, precio) VALUES(3,'Ingles a2', 'bajo', 30.00);
-INSERT INTO Curso (id_curso,idioma,nivel_dificultad, precio) VALUES(4,'Ingles b2', 'bajo', 45.00);
-INSERT INTO Curso (id_curso,idioma,nivel_dificultad, precio) VALUES(5,'Ingles c1', 'bajo', 50.00);
 
+INSERT INTO Curso (id_curso,idioma,nivel_dificultad, precio) VALUES(1,'Ingles a1', 'a1', 25.00);
+INSERT INTO Curso (id_curso,idioma,nivel_dificultad, precio) VALUES(2,'Ingles b1', 'b1', 35.00);
+INSERT INTO Curso (id_curso,idioma,nivel_dificultad, precio) VALUES(3,'Ingles a2', 'a2', 30.00);
+INSERT INTO Curso (id_curso,idioma,nivel_dificultad, precio) VALUES(4,'Ingles b2', 'b2', 45.00);
+INSERT INTO Curso (id_curso,idioma,nivel_dificultad, precio) VALUES(5,'Ingles c1', 'c1', 50.00);
 
-INSERT INTO Estudiante(id,username,password,nombre,apellidos,correo,dni,edad,no_estudiante) VALUES(1,'pepe321', '{bcrypt}$2a$12$958YgJdm4acEfwUiIwNANuxFHl0CHeuZh0KBkbhuYtm.RGIa54YvG', 'Pepe', 'González Pérez', 'pepe@example.com', '12345678A',21, true);
-INSERT INTO   Estudiante(id,username,password,nombre,apellidos,correo,dni,edad,no_estudiante) VALUES(2, 'marialoma', '{bcrypt}$2a$12$958YgJdm4acEfwUiIwNANuxFHl0CHeuZh0KBkbhuYtm.RGIa54YvG', 'María', 'López Martínez', 'marialLopez@example.com', '87654321B',23,false);
-INSERT INTO   Estudiante(id,username,password,nombre,apellidos,correo,dni,edad,no_estudiante) VALUES(3, 'user', '{bcrypt}$2a$12$958YgJdm4acEfwUiIwNANuxFHl0CHeuZh0KBkbhuYtm.RGIa54YvG', 'Juan jose', 'López Martínez', 'Juanjp2001@example.com', '87654321B',17,false);
-INSERT INTO   Estudiante(id,username,password,nombre,apellidos,correo,dni,edad,no_estudiante) VALUES(4, 'admin', '{bcrypt}$2a$12$yyJmcpUq.jrMOtPgRVrUVOnuIgUya/VWdQyS9KGUKGFs6sAGoiF2q', 'Zacarías', 'López Martínez', 'maria@email.com', '87654321B',19,true);
+ALTER SEQUENCE Material_seq RESTART WITH 51;
+INSERT INTO Curso (id_curso,nombre,nivel_dificultad, precio) VALUES(6,'Frances ', 'a1', 25.00);
+ALTER SEQUENCE Curso_seq RESTART WITH 51;
+
+INSERT INTO Estudiante(id,username,password,nombre,apellidos,correo,dni,fecha_nacimiento,genero,no_estudiante) VALUES(1,'pepe321', '{bcrypt}$2a$12$958YgJdm4acEfwUiIwNANuxFHl0CHeuZh0KBkbhuYtm.RGIa54YvG', 'Pepe', 'González Pérez', 'pepe@example.com', '12345678A','2003-03-01', 'Masculino', true);
+INSERT INTO   Estudiante(id,username,password,nombre,apellidos,correo,dni,fecha_nacimiento,genero,no_estudiante) VALUES(2, 'marialoma', '{bcrypt}$2a$12$958YgJdm4acEfwUiIwNANuxFHl0CHeuZh0KBkbhuYtm.RGIa54YvG', 'María', 'López Martínez', 'marialLopez@example.com', '87654321B','2002-04-01','Femenino',false);
+INSERT INTO   Estudiante(id,username,password,nombre,apellidos,correo,dni,fecha_nacimiento,genero,no_estudiante) VALUES(3, 'user', '{bcrypt}$2a$12$958YgJdm4acEfwUiIwNANuxFHl0CHeuZh0KBkbhuYtm.RGIa54YvG', 'Juan jose', 'López Martínez', 'Juanjp2001@example.com', '87654321B','2003-06-10','Masculino',false);
+INSERT INTO   Estudiante(id,username,password,nombre,apellidos,correo,dni,fecha_nacimiento,genero,no_estudiante) VALUES(4, 'admin', '{bcrypt}$2a$12$yyJmcpUq.jrMOtPgRVrUVOnuIgUya/VWdQyS9KGUKGFs6sAGoiF2q', 'Zacarías', 'López Martínez', 'maria@email.com', '87654321B','2004-01-09','Masculino',true);
 
 ALTER SEQUENCE Estudiante_seq RESTART WITH 54;
+
 
 
 

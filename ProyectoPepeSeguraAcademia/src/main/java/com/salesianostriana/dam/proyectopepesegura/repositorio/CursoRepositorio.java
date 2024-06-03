@@ -12,6 +12,6 @@ import com.salesianostriana.dam.proyectopepesegura.modelo.Curso;
 @Repository
 public interface CursoRepositorio extends JpaRepository<Curso, Long>{
 	  
-	@Query("SELECT c FROM Curso c WHERE c.idioma = ingles")
+	@Query("SELECT c FROM Curso c WHERE c.idioma = :idioma") 
     List<Curso> findCursosByIdioma(@Param("idioma") String idioma);
 }

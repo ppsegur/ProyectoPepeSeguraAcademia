@@ -38,13 +38,83 @@
             <input type="text" class="form-control" id="dni" th:field="*{dni}" required placeholder="Ingrese el dni del estudiante">
         </div>
         <div class="form-group">
-            <label for="edad">Edad:</label>
-            <input type="number" class="form-control" id="edad" th:field="*{edad}" required placeholder="Ingrese la edad del estudiante">
+            <label for="edad">Fecha de nacimiento:</label>
+            <input type="date" class="form-control" id="fechaNacimiento" th:field="*{fechaNacimento}" required placeholder="Ingrese la fecha de nacimiento del estudiante">
             <div id="ageFeedback" class="invalid-feedback">La edad mínima es de 18 años.</div>
         </div>
+		<div class="form-group">
+		    <label>Género:</label>
+		         <div>
+		            <input type="radio" th:field="*{genero}" value="M" /> Masculino
+		             <input type="radio" th:field="*{genero}" value="F" /> Femenino
+		          </div>
+		 </div>
         <button type="submit" class="btn btn-primary">Agregar Estudiante</button>
     </form>
 </div>
+
+
+<script>
+    document.getElementById('studentForm').addEventListener('submit', function(event) {
+        let form = event.target;
+        let isValid = true;
+
+        let fields = ['username', 'contrasena', 'nombre', 'apellidos', 'correo', 'dni', 'edad'];
+
+        fields.forEach(function(field) {
+            let input = document.getElementById(field);
+            if (!input.value.trim()) {
+                input.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                input.classList.remove('is-invalid');
+            }
+        });
+
+        // Validar el username
+        let username = document.getElementById('username');
+        if (username.value.length < 2) {
+            username.classList.add('is-invalid');
+            document.getElementById('usernameFeedback').style.display = 'block';
+            isValid = false;
+        } else {
+            username.classList.remove('is-invalid');
+            document.getElementById('usernameFeedback').style.display = 'none';
+        }
+
+        // Validar el correo
+        let correo = document.getElementById('correo');
+		let correoPattern = /@/;
+		        if (!correoPattern.test(correo.value)) {
+            correo.classList.add('is-invalid');
+            document.getElementById('emailFeedback').style.display = 'block';
+            isValid = false;
+        } else {
+            correo.classList.remove('is-invalid');
+            document.getElementById('emailFeedback').style.display = 'none';
+        }
+		
+		   // Validación de edad mínima de 18 años
+		 let fechaNacimiento = document.getElementById('fechaNacimiento');
+		 let fecha = new Date(fechaNacimiento.value);
+		 let hoy = new Date();
+		 let edadMinima = new Date(hoy.getFullYear() - 18, hoy.getMonth(), hoy.getDate());
+		
+		   if (fecha > edadMinima) {
+	        fechaNacimiento.classList.add('is-invalid');
+			document.getElementById('ageFeedback').style.display = 'block';
+		           isValid = false;
+		   } else {
+		     fechaNacimiento.classList.remove('is-invalid');
+		      document.getElementById('ageFeedback').style.display = 'none';
+		   }
+		
+		    if (!isValid) {
+		        event.preventDefault();
+	      }
+		    
+    });
+</script>
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

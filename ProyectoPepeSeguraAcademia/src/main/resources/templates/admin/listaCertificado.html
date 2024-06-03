@@ -19,6 +19,7 @@
         <th>ID</th>
         <th>FechaExamen</th>
         <th>Calificacion</th>
+		<th>Curso</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -28,6 +29,7 @@
         <td th:text="${certificado.idCertificado}"></td>
         <td th:text="${certificado.fechaExamen}"></td>
         <td th:text="${certificado.Calificacion}"></td>
+		<td th:tex="${certificado.curso}"></td>
         <td>
           <a type="button" class="btn btn-primary btn-sm" href="/admin/"  th:href="@{/admin/editarCertificado/{idCertificado}(idCertificado=${certificado.idCertificado})}">Editar</a>
           <a type="button" class="btn btn-danger btn-sm"  th:href="@{/admin/borrarCertificado/{idCertificado}(idCertificado=${certificado.idCertificado})}">Eliminar</a>

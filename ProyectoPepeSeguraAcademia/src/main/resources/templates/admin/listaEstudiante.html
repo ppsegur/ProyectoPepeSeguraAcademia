@@ -22,6 +22,7 @@
         <th>Apellidos</th>
 		<th>Correo</th>
 		<th>DNI</th>
+		<th>Certificados</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -34,6 +35,7 @@
         <td th:text="${estudiante.apellidos}"></td>
 		<td th:text="${estudiante.correo}"></td>
 		<td th:text="${estudiante.dni}"></td>
+		<td th:text="${estudiante.Certificado}"></td>
 		
         <td>
           <a type="button" class="btn btn-primary btn-sm" href="/admin/"  th:href="@{/admin/editarEstudiante/{id}(id=${estudiante.id})}">Editar</a>

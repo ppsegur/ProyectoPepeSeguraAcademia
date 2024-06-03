@@ -69,13 +69,13 @@ public class EstudianteController {
 	}
 	 @GetMapping("/user/nuevoEstudiante")
 	    public String guardarEstudiante(Model model) {
-	        model.addAttribute("estudiante", new Estudiante());
+	        model.addAttribute("estudiante", new Estudiante( ));
 	        return "register"; 
 	    }
 
 	    @PostMapping("/user/nuevoEstudiante/submit")
 	    public String register(@ModelAttribute("estudiante") Estudiante estudiante) {
-	    	estudianteServicio.save(estudiante);
+	    	estudianteServicio.save(estudiante).setNoEstudiante(false);
 	        return "redirect:/index";
 	    }
 }

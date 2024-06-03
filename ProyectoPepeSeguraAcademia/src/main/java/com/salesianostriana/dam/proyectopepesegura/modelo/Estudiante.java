@@ -1,5 +1,7 @@
 package com.salesianostriana.dam.proyectopepesegura.modelo;
 
+import java.time.LocalDate;
+
 import java.util.Collection;
 
 import java.util.List;
@@ -11,14 +13,21 @@ import org.springframework.security.core.userdetails.UserDetails;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+
 import lombok.AllArgsConstructor;
+
+import jakarta.persistence.Table;
+
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import lombok.ToString;
+
 import java.util.ArrayList;
 
 @Entity
@@ -26,6 +35,7 @@ import java.util.ArrayList;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "ESTUDIANTE")
 public class Estudiante implements UserDetails{
 	
 
@@ -40,11 +50,16 @@ public class Estudiante implements UserDetails{
 	private String apellidos;
 	private String correo;
 	private String dni;
-	private int edad;
+	
+	@Column(name="fecha_nacimiento")
+	private LocalDate fechaNacimiento;
+	private String genero;
+	
 	@Column(name = "no_estudiante")
 	private boolean noEstudiante;
 	
 
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		String role = "ROLE_";
@@ -73,11 +88,13 @@ public class Estudiante implements UserDetails{
 		return true;
 	}
 	
-	@OneToMany(mappedBy = "estudiante", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
+	@OneToMany(mappedBy = "estudiante",  cascade = CascadeType.ALL, orphanRemoval = true)
 	@Builder.Default
-	private List<Certificado> certificados = new ArrayList<>();
-	
-		
-	
+	private List<Certificado> Certificado= new ArrayList<>();
+
+
 	
 }

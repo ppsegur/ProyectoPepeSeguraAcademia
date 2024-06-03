@@ -6,6 +6,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+
+import jakarta.persistence.Table;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "MATERIAL")
 public class Material {
 
 	@Id
@@ -26,8 +30,17 @@ public class Material {
 	private String url; 
 	
 	@ManyToOne
-	@JoinColumn(name = "curso_id")
+	@JoinColumn(name="curso_id_curso" )
 	private Curso curso;
 
 
+    @Override
+    public String toString() {
+        return "Material{" +
+                "id=" + idMaterial +
+                ", nombre='" + nombre + '\'' +
+                 ", tipo='" + tipo + '\'' +
+                 ", url='" + url + '\'' +
+                '}';
+    }
 }

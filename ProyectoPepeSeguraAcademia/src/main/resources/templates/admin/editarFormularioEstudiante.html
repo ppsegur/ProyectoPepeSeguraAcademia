@@ -28,7 +28,21 @@
 			 <label for="dni" class="form-label">Dni</label>
 			 <input class="form-control" id="dni" th:field="*{dni}" required></input>
 		</div>
-		
+		<div class="mb-3">
+			<label for="fechaNacimiento">Fecha de nacimiento</label>
+			<input class="form-control" id="fechaNacimiento" th:field="*{fechaNacimiento}"></input>
+		</div>
+		<div class="mb-3">
+		          <label class="form-label">Género:</label>
+		          <div>
+		              <input type="radio" id="generoM" name="genero" th:field="*{genero}" value="M">
+		              <label for="generoM">Masculino</label>
+		          </div>
+		          <div>
+		              <input type="radio" id="generoF" name="genero" th:field="*{genero}" value="F">
+		              <label for="generoF">Femenino</label>
+		          </div>
+		      </div>	
         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
     </form>
 </div>
