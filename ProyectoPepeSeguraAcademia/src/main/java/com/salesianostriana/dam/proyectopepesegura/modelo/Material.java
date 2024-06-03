@@ -1,9 +1,13 @@
 package com.salesianostriana.dam.proyectopepesegura.modelo;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "MATERIAL")
 public class Material {
 
 	@Id
@@ -23,9 +28,17 @@ public class Material {
 	private String tipo;
 	private String url; 
 	
-	/*@ManyToOne
-	@JoinColumn(foreignKey = @ForeignKey(name = "fk_curso_material"))
-	private Curso curso;*/
+	@ManyToOne
+	@JoinColumn(name="curso_id_curso" )
+	private Curso curso;
 
-
+    @Override
+    public String toString() {
+        return "Material{" +
+                "id=" + idMaterial +
+                ", nombre='" + nombre + '\'' +
+                 ", tipo='" + tipo + '\'' +
+                 ", url='" + url + '\'' +
+                '}';
+    }
 }

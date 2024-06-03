@@ -21,10 +21,7 @@ public class MainController {
 	public String mostrarIndiceAdmin() {
 		return  "admin/indexAdmin";
 	}
-	@GetMapping("/login")
-	public String mostrarLogin(Model model) {
-		return "login";
-	}
+	
 	@GetMapping("/register")
 	public String register(Model model) {
 	return "register";
