@@ -13,8 +13,8 @@
     <form action="#" th:action="@{/admin/editarCurso/submit}" th:object="${curso}" method="post">
 		<input th:if="${curso.idCurso != 0}" type="hidden" name="id" th:field="*{idCurso}">
         <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre:</label>
-            <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required>
+            <label for="idioma" class="form-label">Idioma:</label>
+            <input type="text" class="form-control" id="idioma" th:field="*{idioma}" required>
         </div>
         <div class="mb-3">
             <label for="nivelDificultad" class="form-label">Nivel de dificultad:</label>

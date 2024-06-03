@@ -1,32 +1,34 @@
 package com.salesianostriana.dam.proyectopepesegura.modelo;
 
 import java.util.Collection;
+
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.ArrayList;
 
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-@Table(name = "ESTUDIANTE")
 public class Estudiante implements UserDetails{
 	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -42,19 +44,7 @@ public class Estudiante implements UserDetails{
 	@Column(name = "no_estudiante")
 	private boolean noEstudiante;
 	
-	public Estudiante(Long id, String username, String password, String nombre, String apellidos, String correo,
-			String dni, int edad,boolean noEstudiante) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.nombre = nombre;
-		this.apellidos = apellidos;
-		this.correo = correo;
-		this.dni = dni;
-		this.edad=edad;
-		this.noEstudiante = false;
-	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		String role = "ROLE_";
@@ -83,11 +73,11 @@ public class Estudiante implements UserDetails{
 		return true;
 	}
 	
-	/*@OneToMany(mappedBy = "estudiante")
-	private List<Certificado> Certificado;
-
+	@OneToMany(mappedBy = "estudiante", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@Builder.Default
+	private List<Certificado> certificados = new ArrayList<>();
 	
-	/*@OneToMany(mappedBy = "estudiante")
-	private List<Pedido> pedidos;*/
+		
+	
 	
 }

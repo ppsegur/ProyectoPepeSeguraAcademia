@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,9 +25,9 @@ public class Material {
 	private String tipo;
 	private String url; 
 	
-	/*@ManyToOne
-	@JoinColumn(foreignKey = @ForeignKey(name = "fk_curso_material"))
-	private Curso curso;*/
+	@ManyToOne
+	@JoinColumn(name = "curso_id")
+	private Curso curso;
 
 
 }

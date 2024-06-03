@@ -2,7 +2,11 @@
 
 INSERT INTO Material (id_material, nombre, tipo, url ) VALUES(1,'material a1 ingles','video','https://youtu.be/Jzc4HDOKTKg?si=XGFRehqwEeqfgv99');
 
-INSERT INTO Curso (id_curso,nombre,nivel_dificultad, precio) VALUES(1,'Ingles a1', 'bajo', 25.00);
+INSERT INTO Curso (id_curso,idioma,nivel_dificultad, precio) VALUES(1,'Ingles a1', 'bajo', 25.00);
+INSERT INTO Curso (id_curso,idioma,nivel_dificultad, precio) VALUES(2,'Ingles b1', 'bajo', 35.00);
+INSERT INTO Curso (id_curso,idioma,nivel_dificultad, precio) VALUES(3,'Ingles a2', 'bajo', 30.00);
+INSERT INTO Curso (id_curso,idioma,nivel_dificultad, precio) VALUES(4,'Ingles b2', 'bajo', 45.00);
+INSERT INTO Curso (id_curso,idioma,nivel_dificultad, precio) VALUES(5,'Ingles c1', 'bajo', 50.00);
 
 
 INSERT INTO Estudiante(id,username,password,nombre,apellidos,correo,dni,edad,no_estudiante) VALUES(1,'pepe321', '{bcrypt}$2a$12$958YgJdm4acEfwUiIwNANuxFHl0CHeuZh0KBkbhuYtm.RGIa54YvG', 'Pepe', 'González Pérez', 'pepe@example.com', '12345678A',21, true);

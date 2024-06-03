@@ -1,8 +1,15 @@
 package com.salesianostriana.dam.proyectopepesegura.modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,25 +26,16 @@ public class Curso {
 	@GeneratedValue()
 	private long idCurso;
 	
-	private String nombre;
+	private String idioma;
 	private String nivelDificultad;
 	//Lob
 	private String duracion;
 	private double precio;
 
-public String getNivelDificultad() {
-    return nivelDificultad;
-}
-
-public void setNivelDificultad(String nivelDificultad) {
-    this.nivelDificultad = nivelDificultad;
-}
+	@OneToOne(mappedBy = "curso")
+	private Certificado certificado;
 	
-	
-	/*@OneToOne(mappedBy = "curso")
-	private Certificado certificado;*/
-	
-	/*@OneToMany(mappedBy = "curso", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "curso", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@Builder.Default
-	private List<Material> materiales = new ArrayList<>();*/
+	private List<Material> materiales = new ArrayList<>();
 }
