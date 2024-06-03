@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.proyectopepesegura.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.salesianostriana.dam.proyectopepesegura.modelo.Curso;
 import com.salesianostriana.dam.proyectopepesegura.servicio.CursoServicio;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class CursoController {
@@ -59,4 +62,18 @@ public class CursoController {
 	    }
 	    return "redirect:/admin/Curso";
 	}
+	@GetMapping("/user/curso")
+	public String listarCursosUsuarios(Model model) {
+		model.addAttribute("listaCurso", cursoServicio.findAll() );
+		return "/cursosEstudiantes";
+	}
+	@GetMapping("/user/cursoBuscar")
+    public String cursoBuscar(@RequestParam(required = false) String nombre, 
+                              @RequestParam(required = false) String nivel, 
+                              Model model) {
+        List<Curso> listaCurso = cursoServicio.buscarPorIdiomaOrnivel(nombre, nivel);
+        model.addAttribute("listaCurso", listaCurso);
+        return "cursosEstudiantes";
+	}
+	
 }

@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,12 +21,13 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Table(name="CURSO")
 public class Curso {
 		
 	@Id
-	@GeneratedValue()
+	@GeneratedValue
 	private long idCurso;
 	
 	private String nombre;
@@ -52,26 +54,7 @@ public void setNivelDificultad(String nivelDificultad) {
 	@Builder.Default
 	private List<Material> materiales = new ArrayList<>();
 
-	public Curso(long idCurso, String nombre, String nivelDificultad, String duracion, double precio,
-			Certificado certificado, List<Material> materiales) {
-		super();
-		this.idCurso = idCurso;
-		this.nombre = nombre;
-		this.nivelDificultad = nivelDificultad;
-		this.duracion = duracion;
-		this.precio = precio;
-		this.certificado = certificado;
-		this.materiales = materiales;
-	}
-	@Override
-    public String toString() {
-        return "Curso{" +
-                "id=" + idCurso +
-                ", nombre='" + nombre + '\'' +
-                  ", nivelDificultad='" + nivelDificultad + '\'' +
-                  ", duracion='" + duracion + '\'' +
-                   ", duracion='" + duracion + '\'' +
-                   
-                '}';
-    }
+	
+	
+    
 }
