@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrito de Compras</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav th:replace="~{/fragmentos/menu::navbar}"></nav>
+
+<div class="container mt-5">
+    <h2>Carrito de Compras</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Curso</th>
+                <th ></th>
+            </tr>
+        </thead>
+        <tbody>
+			<tbody>
+				<div th:if="${carrito != null}">
+			    <tr th:each="Carrito : ${carrito.lv}">
+			        <td th:text="${Carrito.curso.nombre}"></td>
+			        <td>
+			            <form th:action="@{/carrito/eliminar}" method="post" style="display:inline;">
+			                <input type="hidden" name="cursoId" th:value="${Carrito.curso.idCurso}"/>
+			                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+			            </form>
+			        </td>
+			    </tr>
+				</div>
+			</tbody>
+
+
+        </tbody>
+    </table>
+    <form th:action="@{/carrito/pagar}" method="post">
+        <button type="submit" class="btn btn-success">Pagar</button>
+    </form>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

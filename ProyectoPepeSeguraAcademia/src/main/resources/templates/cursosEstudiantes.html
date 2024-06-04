@@ -31,8 +31,10 @@
           <p class="card-text" th:text="'Precio: $' + ${curso.precio}"></p>
           <p class="card-text" th:text="'Certificado: ' + ${curso.certificado}"></p>
           <p class="card-text" th:text="'Materiales: ' + ${curso.materiales}"></p>
-          <a class="btn btn-primary btn-sm" href="/admin/" th:href="@{/admin/editarCurso/{idCurso}(idCurso=${curso.idCurso})}">COMPRAR</a>
-   
+		  <form th:action="@{/carrito/agregar}" method="post" class="form-inline w-100">
+		      <input type="hidden" name="idCurso" th:value="${curso.idCurso}">
+		      <button type="submit" class="btn btn-primary btn-sm" >COMPRAR</button>
+		  </form>
         </div>
       </div>
     </div>

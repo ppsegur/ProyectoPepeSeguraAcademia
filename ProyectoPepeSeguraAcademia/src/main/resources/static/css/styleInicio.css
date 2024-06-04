@@ -126,7 +126,7 @@ body{
         bottom: 0; /* Alinear el footer en la parte inferior */
         margin: 0;
         padding: 0;
-        height: 30vh; /* Altura total del viewport */
+        height: 70vh; /* Altura total del viewport */
         position: relative
     }
 

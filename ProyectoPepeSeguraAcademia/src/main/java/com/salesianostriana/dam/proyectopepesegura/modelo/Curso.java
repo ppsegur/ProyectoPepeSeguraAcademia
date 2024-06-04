@@ -53,8 +53,13 @@ public void setNivelDificultad(String nivelDificultad) {
 	@OneToMany(mappedBy = "curso"  ,cascade = CascadeType.ALL, orphanRemoval = true)
 	@Builder.Default
 	private List<Material> materiales = new ArrayList<>();
-
 	
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
+	@OneToMany(mappedBy = "curso"  ,cascade = CascadeType.ALL, orphanRemoval = true)
+	@Builder.Default
+	private List<LineaVenta> lv  = new ArrayList<>();
+		
 	
     
 }
