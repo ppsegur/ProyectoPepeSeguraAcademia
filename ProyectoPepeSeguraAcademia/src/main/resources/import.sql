@@ -1,11 +1,13 @@
 
 
 INSERT INTO Material (id_material, nombre, tipo, url ) VALUES(1,'material a1 ingles','video','https://youtu.be/Jzc4HDOKTKg?si=XGFRehqwEeqfgv99');
-ALTER SEQUENCE Material_seq RESTART WITH 51;
+
 INSERT INTO Curso (id_curso,nombre,nivel_dificultad, precio) VALUES(1,'Ingles', 'a1', 25.00);
 INSERT INTO Curso (id_curso,nombre,nivel_dificultad, precio) VALUES(2,'Ingles', 'a2', 25.00);
 INSERT INTO Curso (id_curso,nombre,nivel_dificultad, precio) VALUES(3,'Ingles', 'b1', 25.00);
 INSERT INTO Curso (id_curso,nombre,nivel_dificultad, precio) VALUES(4,'Ingles', 'b2', 25.00);
+INSERT INTO Curso (id_curso,nombre,nivel_dificultad, precio) VALUES(5,'Frances', 'a1', 25.00);
+INSERT INTO Curso (id_curso,nombre,nivel_dificultad, precio) VALUES(6,'Frances', 'a2', 25.00);
 
 
 ALTER SEQUENCE Curso_seq RESTART WITH 51;

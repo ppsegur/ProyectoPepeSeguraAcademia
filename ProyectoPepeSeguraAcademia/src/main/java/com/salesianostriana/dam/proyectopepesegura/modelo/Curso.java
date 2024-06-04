@@ -18,7 +18,7 @@ import lombok.ToString;
 
 import java.util.List;
 
-@Entity
+@Entity 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

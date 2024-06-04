@@ -69,7 +69,7 @@ public class EstudianteController {
 	}
 	 @GetMapping("/user/nuevoEstudiante")
 	    public String guardarEstudiante(Model model) {
-	        model.addAttribute("estudiante", new Estudiante( ));
+	        model.addAttribute("estudiante", new Estudiante());
 	        return "register"; 
 	    }
 

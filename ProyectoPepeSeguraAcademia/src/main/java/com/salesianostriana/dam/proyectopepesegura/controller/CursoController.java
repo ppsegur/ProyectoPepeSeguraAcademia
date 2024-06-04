@@ -67,13 +67,31 @@ public class CursoController {
 		model.addAttribute("listaCurso", cursoServicio.findAll() );
 		return "/cursosEstudiantes";
 	}
+	//Método para buscar por nombre (consulta derivada)
 	@GetMapping("/user/cursoBuscar")
     public String cursoBuscar(@RequestParam(required = false) String nombre, 
-                              @RequestParam(required = false) String nivel, 
                               Model model) {
-        List<Curso> listaCurso = cursoServicio.buscarPorIdiomaOrnivel(nombre, nivel);
+        List<Curso> listaCurso = cursoServicio.buscarPorIdioma(nombre);
         model.addAttribute("listaCurso", listaCurso);
         return "cursosEstudiantes";
+	}
+	//mostrar la lista de cursos en Ingles
+	@GetMapping("/user/ingles")
+	public String listarPorIdiomaIngles(Model model) {
+		model.addAttribute("listaCurso", cursoServicio.buscarPorIdioma("ingles") );
+		return "inglesUser";
+	}
+	//mostrar la lista de cursos en Frances
+	@GetMapping("/user/frances")
+	public String listarPorIdiomaFrances(Model model) {
+		model.addAttribute("listaCurso", cursoServicio.buscarPorIdioma("frances"));
+		return "francesUser";
+	}
+	//mostrar la lista de cursos en español
+	@GetMapping("/user/espanol")
+	public String listarPorIdiomaEspañol(Model model) {
+		model.addAttribute("listaCurso", cursoServicio.buscarPorIdioma("español"));
+		return "esUser";
 	}
 	
 }

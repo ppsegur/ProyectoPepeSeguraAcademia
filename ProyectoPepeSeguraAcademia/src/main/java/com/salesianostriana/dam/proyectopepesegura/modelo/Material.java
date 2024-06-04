@@ -31,13 +31,5 @@ public class Material {
 	@JoinColumn(name="curso_id_curso" )
 	private Curso curso;
 
-    @Override
-    public String toString() {
-        return "Material{" +
-                "id=" + idMaterial +
-                ", nombre='" + nombre + '\'' +
-                 ", tipo='" + tipo + '\'' +
-                 ", url='" + url + '\'' +
-                '}';
-    }
+   
 }

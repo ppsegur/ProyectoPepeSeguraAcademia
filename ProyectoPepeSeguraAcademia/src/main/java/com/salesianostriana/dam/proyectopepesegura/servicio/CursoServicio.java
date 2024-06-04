@@ -15,7 +15,7 @@ public class CursoServicio extends BaseServiceImpl<Curso, Long, CursoRepositorio
 	@Autowired
 	 private CursoRepositorio cursoRepositorio;
 	 
-	public List<Curso> buscarPorIdiomaOrnivel(String nombre, String nivelDificultad) {
-		return cursoRepositorio.findByNombreContainsIgnoreCaseOrNivelDificultadContainsIgnoreCase(nombre, nivelDificultad);
+	public List<Curso> buscarPorIdioma(String nombre) {
+		return cursoRepositorio.findByNombreContainsIgnoreCase(nombre);
 	}
 }

@@ -17,17 +17,23 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.util.ArrayList;
 
 @Entity
 @Data
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Table(name = "ESTUDIANTE")
 public class Estudiante implements UserDetails{
@@ -47,27 +53,14 @@ public class Estudiante implements UserDetails{
 	private String correo;
 	private String dni;
 	
-	@Column(name="fecha_nacimiento")
+
 	private LocalDate fechaNacimiento;
 	private String genero;
 	
 	@Column(name = "no_estudiante")
 	private boolean noEstudiante;
 	
-	 public Estudiante(Long id, String username, String password, String nombre, String apellidos, String correo,
-	            String dni, LocalDate fechaNacimiento, String genero, boolean noEstudiante, List<Certificado> certificados) {
-	        this.id = id;
-	        this.username = username;
-	        this.password = password;
-	        this.nombre = nombre;
-	        this.apellidos = apellidos;
-	        this.correo = correo;
-	        this.dni = dni;
-	        this.fechaNacimiento = fechaNacimiento;
-	        this.genero = genero;
-	        this.noEstudiante = noEstudiante;
-	        this.Certificado = certificados;
-	    }
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		String role = "ROLE_";
