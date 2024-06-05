@@ -1,53 +1,96 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lista de Estudiante</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+	<head>
+	    <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <title>Lista de Estudiantes</title>
+	    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	    <link rel="stylesheet" href="../static/css/" th:href="@{/css/styleTablas.css}">
 
-<div class="container">
-  <h2>Tabla de Estudiantes</h2>
-  <hr>
-  <a class="btn btn-primary btn-sm" href="/admin/" th:href="@{/admin/formularioEstudiante}">Añadir</a>
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>UserName</th>
-        <th>Apellidos</th>
-        <th>Apellidos</th>
-		<th>Correo</th>
-		<th>DNI</th>
-		<th>Certificados</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      
-      <tr th:each="estudiante : ${listaEstudiante}">
-        <td th:text="${estudiante.id}"></td>
-        <td th:text="${estudiante.username}"></td>
-        <td th:text="${estudiante.nombre}"></td>
-        <td th:text="${estudiante.apellidos}"></td>
-		<td th:text="${estudiante.correo}"></td>
-		<td th:text="${estudiante.dni}"></td>
-		<td th:text="${estudiante.Certificado}"></td>
-		
-        <td>
-          <a type="button" class="btn btn-primary btn-sm" href="/admin/"  th:href="@{/admin/editarEstudiante/{id}(id=${estudiante.id})}">Editar</a>
-          <a type="button" class="btn btn-danger btn-sm"  th:href="@{/admin/borrarEstudiante/{id}(id = ${estudiante.id})}">Eliminar</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+	</head>
+	<body>
+	<nav th:replace="~{/fragmentos/menuAdmin::navbar}"></nav>
+	<div class="container">
+	    <h2>Tabla de Estudiantes</h2>
+	    <hr>
+	    <!--  <a class="btn btn-primary btn-sm" href="/admin/" th:href="@{/admin/formularioEstudiante}">Añadir</a> -->
+	    <table class="table">
+	        <thead>
+	        <tr>
+	            <th>ID</th>
+	            <th>UserName</th>
+	            <th>Apellidos</th>
+	            <th>Apellidos</th>
+	            <th>Correo</th>
+	            <th>DNI</th>
+	            <th>Certificados</th>
+	            <th>ROL</th>
+	            <th>Acciones</th>
+	        </tr>
+	        </thead>
+	        <tbody>
+	        <tr th:each="estudiante : ${listaEstudiante}">
+	            <td th:text="${estudiante.id}"></td>
+	            <td th:text="${estudiante.username}"></td>
+	            <td th:text="${estudiante.nombre}"></td>
+	            <td th:text="${estudiante.apellidos}"></td>
+	            <td th:text="${estudiante.correo}"></td>
+	            <td th:text="${estudiante.dni}"></td>
+	            <td th:text="${estudiante.Certificado}"></td>
+	            <td th:text="${estudiante.noEstudiante}"></td>
+	
+	            <td>
+	                <!--  <a type="button" class="btn btn-primary btn-sm" href="/admin/"  th:href="@{/admin/editarEstudiante/{id}(id=${estudiante.id})}">Editar</a> -->
+	                <a type="button" class="btn btn-danger btn-sm" th:href="@{/admin/borrarEstudiante/{id}(id = ${estudiante.id})}"
+	                   th:data-id="${estudiante.id}" th:data-role="${estudiante.noEstudiante}" data-toggle="modal"
+	                   data-target="#confirmDeleteModal">Eliminar</a>
+	            </td>
+	        </tr>
+	        </tbody>
+	    </table>
+	</div>
+	<!-- Modal de confirmación de eliminación -->
+	<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel"
+	     aria-hidden="true">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                    <span aria-hidden="true">&times;</span>
+	                </button>
+	            </div>
+	            <div class="modal-body">
+	                ¿Estás seguro de que quieres eliminar a este usuario? <span id="adminWarning" class="text-danger"></span>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+	                <a id="confirmDeleteButton" class="btn btn-danger" th:href=" @{/admin/estudiante}">Eliminar</a>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script>
+	    $('#confirmDeleteModal').on('show.bs.modal', function (event) {
+	        var button = $(event.relatedTarget);
+	        var userId = button.data('id');
+	        var userRole = button.data('role');
+	        var modal = $(this);
+	
+	        modal.find('#confirmDeleteButton').attr('href', '/admin/borrarEstudiante/' + userId);
+	
+	        if (userRole === 'true') {
+	            modal.find('#adminWarning').text(' Este usuario es un administrador.');
+	            modal.find('#confirmDeleteButton').prop('disabled', true); // Deshabilitar el botón de eliminación
+	        } else {
+	            modal.find('#adminWarning').text('');
+	            modal.find('#confirmDeleteButton').prop('disabled', false); // Habilitar el botón de eliminación
+	        }
+	    });
+	</script>
+	</body>
+	</html>

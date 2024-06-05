@@ -29,6 +29,7 @@ public class CursoController {
 	@GetMapping("/admin/Curso")
 	public String listarCursos(Model model) {
 		model.addAttribute("listaCurso", cursoServicio.findAll() );
+		model.addAttribute("nombreCertificado",  certificadoServicio.findAll());
 		return "admin/listaCurso";
 	}//mostrar formulario
 	@GetMapping("/admin/formularioCurso")
@@ -57,7 +58,7 @@ public class CursoController {
 		cursoServicio.save(c);
 		return "redirect:/admin/Curso";
 	}
-	//Borrar curso
+	/*Borrar curso
 	@GetMapping("/admin/borrarCurso/{idCurso}")
 	public String borrar(@PathVariable("idCurso") long idCurso) {
 	Optional<Curso> curso = cursoServicio.findById(idCurso);
@@ -69,7 +70,12 @@ public class CursoController {
 	        cursoServicio.delete(curso.get());
 	    }
 	    return "redirect:/admin/Curso";
-	}
+	}*/
+	@GetMapping("/admin/borrarCurso/{idCurso}")
+    public String borrar(@PathVariable("idCurso") long idCurso) {
+        cursoServicio.deleteCurso(idCurso);
+        return "redirect:/admin/Curso";
+    }
 	@GetMapping("/user/curso")
 	public String listarCursosUsuarios(Model model) {
 		model.addAttribute("listaCurso", cursoServicio.findAll() );

@@ -100,4 +100,26 @@ public class Estudiante implements UserDetails{
 	@OneToOne
 	@JoinColumn(name = "id")
 	private Carrito carrito;
+	
+	//Métodos helper 
+	/**
+	 * Método auxiliar para el tratamiento bidireccional de la asociación. Añade un material
+	 * a la colección de materiales de un curso, y asigna a dicho material este curso como el suyo.
+	 * @param a
+	 */
+	public void addCertificado(Certificado c) {
+		this.Certificado.add(c);
+		c.setEstudiante(this);
+	}
+	
+	/**
+	 * Método auxiliar para el tratamiento bidireccional de la asociación. Elimina un material
+	 * de la colección de materiales de un curso, y desasigna a dicho mateerial el curso, dejándolo como nulo.
+	 * @param a
+	 */
+	public void removeCertificado(Certificado c) {
+		this.Certificado.add(c);
+		c.setEstudiante(null);
+	
+}
 }

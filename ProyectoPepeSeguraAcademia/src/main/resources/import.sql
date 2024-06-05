@@ -8,7 +8,7 @@ INSERT INTO Curso (id_curso,nombre,nivel_dificultad, precio) VALUES(3,'Ingles', 
 INSERT INTO Curso (id_curso,nombre,nivel_dificultad, precio) VALUES(4,'Ingles', 'b2', 25.00);
 INSERT INTO Curso (id_curso,nombre,nivel_dificultad, precio) VALUES(5,'Frances', 'a1', 25.00);
 INSERT INTO Curso (id_curso,nombre,nivel_dificultad, precio) VALUES(6,'Frances', 'a2', 25.00);
-ALTER SEQUENCE Curso_seq RESTART WITH 51;
+ALTER SEQUENCE Curso_seq RESTART WITH 56;
 
 INSERT INTO Estudiante(id,username,password,nombre,apellidos,correo,dni,fecha_nacimiento,genero,no_estudiante) VALUES(1,'pepe321', '{bcrypt}$2a$12$958YgJdm4acEfwUiIwNANuxFHl0CHeuZh0KBkbhuYtm.RGIa54YvG', 'Pepe', 'González Pérez', 'pepe@example.com', '12345678A','2003-03-01', 'Masculino', true);
 INSERT INTO   Estudiante(id,username,password,nombre,apellidos,correo,dni,fecha_nacimiento,genero,no_estudiante) VALUES(2, 'marialoma', '{bcrypt}$2a$12$958YgJdm4acEfwUiIwNANuxFHl0CHeuZh0KBkbhuYtm.RGIa54YvG', 'María', 'López Martínez', 'marialLopez@example.com', '87654321B','2002-04-01','Femenino',false);

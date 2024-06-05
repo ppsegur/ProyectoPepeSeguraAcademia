@@ -39,4 +39,26 @@ public class Carrito {
     @OneToMany(mappedBy = "carrito", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<LineaVenta> lv = new ArrayList<>();
+
+	//LineaVenta
+	/**
+	 * Método auxiliar para el tratamiento bidireccional de la asociación. Añade un lv
+	 * a la colección de lineaVentas de un curso, y asigna a dicho lv este curso como el suyo.
+	 * @param a
+	 */
+	public void addLineaVenta(LineaVenta lv) {
+		this.lv.add(lv);
+		lv.setCarrito(this);
+	}
+	
+	/**
+	 * Método auxiliar para el tratamiento bidireccional de la asociación. Elimina un material
+	 * de la colección de materiales de un curso, y desasigna a dicho mateerial el curso, dejándolo como nulo.
+	 * @param a
+	 */
+	public void removeLineaVenta(LineaVenta lv) {
+		this.lv.add(lv);
+		lv.setCarrito(null);
+	
+}
 }

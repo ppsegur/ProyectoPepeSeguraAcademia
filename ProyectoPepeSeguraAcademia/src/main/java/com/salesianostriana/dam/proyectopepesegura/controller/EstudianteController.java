@@ -35,7 +35,7 @@ public class EstudianteController {
 	@PostMapping("/admin/nuevoEstudiante/submit")
 	public String procesarFormularioEstudainte(@ModelAttribute("estudiante") Estudiante e) {
 		estudianteServicio.save(e);
-		return "redirect:/adminEstudiante";
+		return "redirect:/admin/listaEstudiante";
 	}
 	
 	@GetMapping("/admin/editarEstudiante/{id}")
@@ -45,13 +45,13 @@ public class EstudianteController {
 			model.addAttribute("estudiante", estudianteEditar.get());
 			return "admin/editarFormularioEstudiante";
 		}else {
-			return "redirect:/adminEstudiante";
+			return "redirect:/admin/Estudiante";
 		}
 	}
 	@PostMapping("/admin/editarEstudiante/submit")
 	public String procesarFormularioEdicionEstudiante(@ModelAttribute("estudiante") Estudiante e) {
 		estudianteServicio.save(e);
-		return "redirect:/adminEstudiante";
+		return "redirect:/admin/Estudiante";
 	}
 	/**
 	 * Método para borrar 
@@ -61,10 +61,12 @@ public class EstudianteController {
 	@GetMapping("/admin/borrarEstudiante/{id}")
 	public String borrarEstudiante(@PathVariable("id") long id) {
 		Optional<Estudiante> estudiantes = estudianteServicio.findById(id);
-		if(estudiantes.isPresent()){
+		if(estudiantes.isPresent() && estudiantes.get().isNoEstudiante()==false){
 		estudianteServicio.delete(estudiantes.get());
+		}if(estudiantes.isPresent() && estudiantes.get().isNoEstudiante()==true){
+			
 		}
-		return "redirect:/index";
+		return "redirect:/admin/Estudiante";
 		
 	}
 	 @GetMapping("/user/nuevoEstudiante")

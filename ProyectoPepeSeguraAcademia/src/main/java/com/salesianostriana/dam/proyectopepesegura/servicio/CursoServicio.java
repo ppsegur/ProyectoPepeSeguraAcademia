@@ -1,11 +1,14 @@
 package com.salesianostriana.dam.proyectopepesegura.servicio;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.salesianostriana.dam.proyectopepesegura.base.BaseServiceImpl;
+import com.salesianostriana.dam.proyectopepesegura.modelo.Certificado;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Curso;
 import com.salesianostriana.dam.proyectopepesegura.repositorio.CertificadoRepositorio;
 import com.salesianostriana.dam.proyectopepesegura.repositorio.CursoRepositorio;
@@ -18,68 +21,37 @@ public class CursoServicio extends BaseServiceImpl<Curso, Long, CursoRepositorio
 	@Autowired
 	 private CursoRepositorio cursoRepositorio;
 	 
+	@Autowired
+	private CertificadoServicio certificadoServicio;
 	
 	public List<Curso> buscarPorIdioma(String nombre) {
 		return cursoRepositorio.findByNombreContainsIgnoreCase(nombre);
 	}
 	
-
-	
-	public CursoServicio(CursoRepositorio repo) {
-		this.cursoRepositorio = repo;
+	public Curso asignaCertificadoACurso(Curso c, @PathVariable("id") Long id ) {
+		Certificado certificado = c.getCertificado();
+		Optional<Curso> cursoAsignado = cursoRepositorio.findById(id);
+		if (certificado != null && cursoAsignado.isPresent()) {
+		cursoAsignado.get().setCertificado(certificado);
+	    certificadoServicio.save(certificado);
+		} 
+		return c;
+		
+		
 	}
 	
-	/**
-	 * Inserta un nuevo curso
-	 * 
-	 * @param El Curso a insertar
-	 * @return El Curso ya insertado (con el Id no vacío).
-	 */
-	public Curso add(Curso c) { 
-		return cursoRepositorio.save(c); }
-	
-	
-	/**
-	 * Edita un curso, si existe; si no existe, lo inserta como uno nuevo.
-	 * @param c
-	 * @return
-	 */
-	public Curso edit(Curso c) {
-		return cursoRepositorio.save(c); }
-
-	/**
-	 * Elimina el curso
-	 * 
-	 * @param c
-	 */
-	public void delete(Curso c) { 
-		cursoRepositorio.delete(c); }
-	
-	/**
-	 * Elimina un Curso por su Id
-	 * @param id
-	 */
-	public void delete(long id) { 
-		cursoRepositorio.deleteById(id); }
-	
-	/**
-	 * Devuelve todos los cursos
-	 * @return
-	 */
-	public List<Curso> findAll() { 
-		return cursoRepositorio.findAll(); }
-	
-	
-	/**
-	 * Devuelve un curso en base a su Id
-	 * @param id
-	 * @return el curso encontrado o <code>null</code>
-	 */
-	public Curso findById(long id) {
-		return cursoRepositorio.findById(id).orElse(null);
-	}
-	
-	
-	
+	@Autowired
+	private CertificadoRepositorio certificadoRepositorio;
+    @Transactional
+    public void deleteCurso(Long id) {
+        Optional<Curso> cursos = cursoRepositorio.findById(id);
+        if (cursos.isPresent()) {
+            Curso curso = cursos.get();
+            if (curso.getCertificado() != null) {
+                certificadoRepositorio.delete(curso.getCertificado());
+            }
+            cursoRepositorio.delete(curso);
+        }
+    }
 
 }

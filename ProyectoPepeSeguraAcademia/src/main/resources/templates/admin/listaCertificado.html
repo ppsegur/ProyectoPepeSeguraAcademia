@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lista de Certificados</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+   <link rel="stylesheet" href="../static/css/" th:href="@{/css/styleTablas.css}">
+
 </head>
 <body>
-
+	<nav  th:replace="~{/fragmentos/menuAdmin::navbar}"></nav>
 <div class="container">
   <h2>Tabla de Certificados</h2>
   <hr>
@@ -26,8 +28,8 @@
       
       <tr th:each="certificado : ${listaCertificado}">
         <td th:text="${certificado.idCertificado}"></td>
-        <td th:text="${certificado.nombre}"></td>
-		<td th:tex="${certificado.curso.nombre}"></td>
+        <td th:text="${certificado.nombreC}"></td>
+		<td th:text="${certificado.curso.nombre +' - ' + certificado.curso.nivelDificultad}"></td>
         <td>
           <a type="button" class="btn btn-primary btn-sm" href="/admin/"  th:href="@{/admin/editarCertificado/{idCertificado}(idCertificado=${certificado.idCertificado})}">Editar</a>
           <a type="button" class="btn btn-danger btn-sm"  th:href="@{/admin/borrarCertificado/{idCertificado}(idCertificado=${certificado.idCertificado})}">Eliminar</a>

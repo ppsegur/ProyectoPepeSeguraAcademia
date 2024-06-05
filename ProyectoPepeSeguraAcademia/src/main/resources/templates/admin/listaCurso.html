@@ -5,8 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lista de Cursos</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+   <link rel="stylesheet" href="../static/css/" th:href="@{/css/styleTablas.css}">
+
 </head>
 <body>
+	<nav  th:replace="~{/fragmentos/menuAdmin::navbar}"></nav>
 
 <div class="container">
   <h2>Tabla de Cursos</h2>

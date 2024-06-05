@@ -3,6 +3,7 @@ package com.salesianostriana.dam.proyectopepesegura.modelo;
 
 import jakarta.persistence.Entity;
 
+
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,10 +29,10 @@ public class Certificado {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idCertificado;
-	private String nombre;
+	private String nombreC;
 	
 	@OneToOne
-	@JoinColumn(name = "curso_id_curso")
+	@JoinColumn(name = "id_curso")
 	private Curso curso;
 
 	@ManyToOne
@@ -42,9 +43,10 @@ public class Certificado {
 @Override
 public String toString() {
     return "Certificado{" +
-            "idCertificado=" + idCertificado +
-            ", nombre='" + nombre + '\'' +
-            ", cursoId=" + (curso != null ? curso.getIdCurso() : "") +
+            ", nombre='" + nombreC + '\'' +
+      
             '}';
 }
+
+
 }
