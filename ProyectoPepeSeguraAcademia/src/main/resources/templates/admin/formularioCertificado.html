@@ -17,10 +17,11 @@
 		            <input type="text" class="form-control" id="Nombre" th:field="*{nombre}" required>
 		        </div>
         
-		<div class="mb-3">
-			<label for="curso" class="form-label">Curso</label>
-			<input class="form-control" id="curso" th:field="*{curso}" required></input>
-		</div>	
+		<select id="curso" class="form-control" th:field="*{curso}">
+				<option value="">Curso</option>
+				<option th:each="curso : ${listaCurso}" th:value="${curso.idCurso}" th:text="${curso.nombre}">N/S</option>				
+		</select>			
+						
         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
     </form>
 </div>

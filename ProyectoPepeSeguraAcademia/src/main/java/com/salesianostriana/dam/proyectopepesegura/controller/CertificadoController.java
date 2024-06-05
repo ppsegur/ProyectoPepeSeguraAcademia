@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.salesianostriana.dam.proyectopepesegura.modelo.Certificado;
 import com.salesianostriana.dam.proyectopepesegura.servicio.CertificadoServicio;
+import com.salesianostriana.dam.proyectopepesegura.servicio.CursoServicio;
 
 @Controller
 public class CertificadoController {
 	@Autowired
 	CertificadoServicio certificadoServicio;
-
+	
+	@Autowired
+	CursoServicio cursoServicio;
 
 	@GetMapping("/admin/Certificado")
 	public String listarCertificados(Model model) {
@@ -27,6 +30,7 @@ public class CertificadoController {
 	//mostrar formulario para añadir un nuevo certificado
 	@GetMapping("/admin/formularioCertificado")
 	public String mostrarFormularioCertificado(Model model) {
+		model.addAttribute("listaCurso",cursoServicio.findAll());
 		model.addAttribute("certificado", new Certificado());
 		return "admin/formularioCertificado";
 	}

@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.salesianostriana.dam.proyectopepesegura.modelo.Certificado;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Curso;
+import com.salesianostriana.dam.proyectopepesegura.servicio.CertificadoServicio;
 import com.salesianostriana.dam.proyectopepesegura.servicio.CursoServicio;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,6 +23,8 @@ public class CursoController {
 
 	@Autowired
 	CursoServicio cursoServicio;
+	@Autowired
+	CertificadoServicio  certificadoServicio;
 	
 	@GetMapping("/admin/Curso")
 	public String listarCursos(Model model) {
@@ -58,6 +62,10 @@ public class CursoController {
 	public String borrar(@PathVariable("idCurso") long idCurso) {
 	Optional<Curso> curso = cursoServicio.findById(idCurso);
 	    if(curso.isPresent()) {
+	    	 //List<Certificado> certificadosAsociados = certificadoServicio.findByCurso(idCurso);	
+	    	 //f(certificadosAsociados!=null){
+	    		 
+	    	 
 	        cursoServicio.delete(curso.get());
 	    }
 	    return "redirect:/admin/Curso";

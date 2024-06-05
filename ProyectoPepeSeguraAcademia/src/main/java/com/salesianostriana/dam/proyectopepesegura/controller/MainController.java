@@ -21,7 +21,7 @@ public class MainController {
 	public String mostrarIndiceAdmin() {
 		return  "admin/indexAdmin";
 	}
-	
+
 	@GetMapping("/register")
 	public String register(Model model) {
 	return "register";

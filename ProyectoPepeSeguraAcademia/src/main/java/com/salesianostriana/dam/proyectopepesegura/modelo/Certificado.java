@@ -31,10 +31,20 @@ public class Certificado {
 	private String nombre;
 	
 	@OneToOne
-	@JoinColumn(name = "curso_id_curso")//BDD
+	@JoinColumn(name = "curso_id_curso")
 	private Curso curso;
 
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_estudiante_certificado"))
 	private Estudiante estudiante;
+
+
+@Override
+public String toString() {
+    return "Certificado{" +
+            "idCertificado=" + idCertificado +
+            ", nombre='" + nombre + '\'' +
+            ", cursoId=" + (curso != null ? curso.getIdCurso() : "") +
+            '}';
+}
 }
