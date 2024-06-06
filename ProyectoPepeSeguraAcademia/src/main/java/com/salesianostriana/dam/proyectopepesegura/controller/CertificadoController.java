@@ -43,6 +43,7 @@ public class CertificadoController {
 	public String mostrarFormularioEdicion(@PathVariable("idCertificado") long id, Model model) {
 		Optional<Certificado> certificadoEditar = certificadoServicio.findById(id);
 		if(certificadoEditar.isPresent()) {
+			model.addAttribute("listaCurso", cursoServicio.findAll());
 			model.addAttribute("certificado", certificadoEditar.get());
 			return "admin/editarFormularioCertificado";
 		}else {

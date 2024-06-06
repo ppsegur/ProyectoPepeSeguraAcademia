@@ -96,11 +96,14 @@ public class Estudiante implements UserDetails{
 	@Builder.Default
 	private List<Certificado> Certificado= new ArrayList<>();
 
-	
+	/*
 	@OneToOne
-	@JoinColumn(name = "id")
-	private Carrito carrito;
-	
+	@JoinColumn(name = "id") 	La idea final sería OneToMany 
+								Que el estudainte pueda comprar varios cursos
+								para ello debemos realizar una asociación compuesta en lineaVenta de dos id 
+								el de curso y el de 
+	private Venta carrito;
+	*/
 	//Métodos helper 
 	/**
 	 * Método auxiliar para el tratamiento bidireccional de la asociación. Añade un material

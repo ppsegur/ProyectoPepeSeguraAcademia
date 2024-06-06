@@ -42,10 +42,7 @@ public class Certificado {
 
 @Override
 public String toString() {
-    return "Certificado{" +
-            ", nombre='" + nombreC + '\'' +
-      
-            '}';
+    return   nombreC ;
 }
 
 

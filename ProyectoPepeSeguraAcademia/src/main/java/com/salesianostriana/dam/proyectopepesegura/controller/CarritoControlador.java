@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.salesianostriana.dam.proyectopepesegura.modelo.Carrito;
+import com.salesianostriana.dam.proyectopepesegura.modelo.Venta;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Estudiante;
 import com.salesianostriana.dam.proyectopepesegura.servicio.CarritoServicio;
 
@@ -29,7 +29,7 @@ public class CarritoControlador {
 
     @GetMapping
     public String verCarrito(@AuthenticationPrincipal Estudiante estudiante, Model model) {
-        Carrito carrito = carritoServicio.obtenerCarrito(estudiante);
+        Venta carrito = carritoServicio.obtenerCarrito(estudiante);
         model.addAttribute("carrito", carrito);
         return "carrito";
     }

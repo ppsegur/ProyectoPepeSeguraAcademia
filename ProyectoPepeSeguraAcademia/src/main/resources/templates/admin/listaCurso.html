@@ -38,8 +38,12 @@
         <td th:text="${curso.duracion}"></td>
 		<td th:text="${curso.precio}"></td>
 		<td th:text="${curso.certificado}"></td>
-		<td th:text="${curso.materiales}"></td>
-        <td>
+		<td>
+		       <ul>
+		           <li th:each="material : ${curso.materiales}" th:text="${material.nombre}"></li>
+		       </ul>
+		   </td>
+		 <td>
           <a type="button" class="btn btn-primary btn-sm" href="/admin/"  th:href="@{/admin/editarCurso/{idCurso}(idCurso=${curso.idCurso})}">Editar</a>
           <a type="button" class="btn btn-danger btn-sm"  th:href="@{/admin/borrarCurso/{id}(id=${curso.idCurso})}">Eliminar</a>
         </td>

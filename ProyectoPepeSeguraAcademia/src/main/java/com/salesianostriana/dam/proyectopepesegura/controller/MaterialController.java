@@ -1,8 +1,5 @@
 package com.salesianostriana.dam.proyectopepesegura.controller;
-
 import java.util.Optional;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,50 +7,57 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.RequestMapping;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Material;
+import com.salesianostriana.dam.proyectopepesegura.servicio.CursoServicio;
 import com.salesianostriana.dam.proyectopepesegura.servicio.MaterialServicio;
 
 
 
 @Controller
+@RequestMapping("/admin")
 public class MaterialController {
 
 	@Autowired
 	public MaterialServicio materialServicio;
+	@Autowired
+	CursoServicio cursoServicio;
 	
 	//Tablas
-	@GetMapping("/admin/Material")
+	@GetMapping("/Material")
 	public String listarMateriales(Model model) {
 		model.addAttribute("listaMateriales", materialServicio.findAll());
 		return "admin/listaMaterial";
 	}
 	//Mostrar el formulario de añadir material
-	@GetMapping("/admin/formularioMaterial")
+	@GetMapping("/formularioMaterial")
 	public String mostrarFormularioMaterial(Model model) {
+		model.addAttribute("listaCurso",cursoServicio.findAll());
 		model.addAttribute("material", new Material());
 		return "admin/formularioMaterial";
 	}
 	//
-	@PostMapping("/admin/nuevoMaterial/submit")
+	@PostMapping("/nuevoMaterial/submit")
 	public String procesarFormularioMaterial(@ModelAttribute("material") Material m) {
 		materialServicio.save(m);		
 		return "redirect:/admin/Material";
 	}
 	//Borrar
-	@GetMapping("/admin/borrarMaterial/{idMaterial}")
+	@GetMapping("/borrarMaterial/{idMaterial}")
 	public String borrarMaterial(@PathVariable("idMaterial") long idMaterial) {
 	    Optional<Material> material = materialServicio.findById(idMaterial);
 	    if(material.isPresent()) {
-	        materialServicio.delete(material.get());
+	    materialServicio.delete(material.get());
+	        
 	    }
 	    return "redirect:/admin/Material";
 	}
 	//Editar
-	@GetMapping("/admin/editarMaterial/{idMaterial}")
+	@GetMapping("/editarMaterial/{idMaterial}")
 	public String mostrarFormularioEdicionMaterial(@PathVariable("idMaterial") long idMaterial , Model model) {
 		Optional<Material> materialEditar = materialServicio.findById(idMaterial);
 		if(materialEditar.isPresent()) {
+			model.addAttribute("listaCurso",cursoServicio.findAll());
 			model.addAttribute("material",materialEditar.get());
 		
 			return "admin/editarFormularioMaterial";	
@@ -63,7 +67,7 @@ public class MaterialController {
 		}
 	}
 	
-	@PostMapping("/admin/editarMaterial/submit")
+	@PostMapping("/editarMaterial/submit")
 	public String editarMaterialSubmit(@ModelAttribute("material") Material material) {
 	    materialServicio.save(material);
 		return "redirect:/admin/Material";

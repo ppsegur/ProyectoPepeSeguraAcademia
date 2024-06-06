@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.proyectopepesegura.servicio;
 
+import java.awt.Dialog.ModalExclusionType;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +20,8 @@ import jakarta.transaction.Transactional;
 public class CursoServicio extends BaseServiceImpl<Curso, Long, CursoRepositorio>{
 	
 	@Autowired
+	private CertificadoRepositorio certificadoRepositorio; 
+	@Autowired
 	 private CursoRepositorio cursoRepositorio;
 	 
 	@Autowired
@@ -27,6 +30,10 @@ public class CursoServicio extends BaseServiceImpl<Curso, Long, CursoRepositorio
 	public List<Curso> buscarPorIdioma(String nombre) {
 		return cursoRepositorio.findByNombreContainsIgnoreCase(nombre);
 	}
+	public Optional<Curso> finById(Long id){
+		return cursoRepositorio.findById(id);
+	}
+	
 	
 	public Curso asignaCertificadoACurso(Curso c, @PathVariable("id") Long id ) {
 		Certificado certificado = c.getCertificado();
@@ -40,18 +47,23 @@ public class CursoServicio extends BaseServiceImpl<Curso, Long, CursoRepositorio
 		
 	}
 	
-	@Autowired
-	private CertificadoRepositorio certificadoRepositorio;
+	public void editarCurso(Long id) {
+		
+	}
+	
     @Transactional
     public void deleteCurso(Long id) {
         Optional<Curso> cursos = cursoRepositorio.findById(id);
         if (cursos.isPresent()) {
             Curso curso = cursos.get();
-            if (curso.getCertificado() != null) {
-                certificadoRepositorio.delete(curso.getCertificado());
+            if (curso.getCertificado() == null || curso.getMateriales() == null) {
+               cursoRepositorio.delete(curso);
+            } if (curso.getCertificado() != null || curso.getMateriales() != null) {
+
+           // String mensaje;//mostrar en pantalla un mensaje que le salga que no puede borrar cursos con datos asociados
+            	String  modal= "No se puede borrar un curso asociado";
             }
-            cursoRepositorio.delete(curso);
-        }
     }
 
+}
 }

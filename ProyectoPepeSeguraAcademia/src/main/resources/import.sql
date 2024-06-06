@@ -1,6 +1,7 @@
 
 
-INSERT INTO Material (id_material, nombre, tipo, url ) VALUES(1,'material a1 ingles','video','https://youtu.be/Jzc4HDOKTKg?si=XGFRehqwEeqfgv99');
+INSERT INTO Material ( nombre, tipo, url ) VALUES('material a1 ingles','video','https://youtu.be/Jzc4HDOKTKg?si=XGFRehqwEeqfgv99');
+ALTER SEQUENCE Material_seq RESTART WITH 51;
 
 INSERT INTO Curso (id_curso,nombre,nivel_dificultad, precio) VALUES(1,'Ingles', 'a1', 25.00);
 INSERT INTO Curso (id_curso,nombre,nivel_dificultad, precio) VALUES(2,'Ingles', 'a2', 25.00);

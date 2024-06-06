@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.proyectopepesegura.controller;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.salesianostriana.dam.proyectopepesegura.modelo.Certificado;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Curso;
 import com.salesianostriana.dam.proyectopepesegura.servicio.CertificadoServicio;
 import com.salesianostriana.dam.proyectopepesegura.servicio.CursoServicio;
+import com.salesianostriana.dam.proyectopepesegura.servicio.MaterialServicio;
+
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -25,11 +27,14 @@ public class CursoController {
 	CursoServicio cursoServicio;
 	@Autowired
 	CertificadoServicio  certificadoServicio;
+	@Autowired
+	MaterialServicio materialServicio;
 	
 	@GetMapping("/admin/Curso")
 	public String listarCursos(Model model) {
 		model.addAttribute("listaCurso", cursoServicio.findAll() );
 		model.addAttribute("nombreCertificado",  certificadoServicio.findAll());
+		model.addAttribute("listaMaterial", materialServicio.findAll());
 		return "admin/listaCurso";
 	}//mostrar formulario
 	@GetMapping("/admin/formularioCurso")
@@ -46,7 +51,11 @@ public class CursoController {
 	public String mostrarFormularioEdicionCurso(@PathVariable("idCurso") long idCurso, Model model) {
 		Optional<Curso> cursoEditar = cursoServicio.findById(idCurso);
 		if(cursoEditar.isPresent()) {
+			model.addAttribute("material",materialServicio.findAll());
+			model.addAttribute("certificado", certificadoServicio.findAll());
+			
 			model.addAttribute("curso", cursoEditar.get());
+		
 			return "admin/editarFormularioCurso";
 		}else {
 			return "redirect:/admin/Curso";
@@ -54,8 +63,8 @@ public class CursoController {
 	}
 
 	@PostMapping("/admin/editarCurso/submit")
-	public String procesarFormularioEdicion(@ModelAttribute("curso") Curso c) {
-		cursoServicio.save(c);
+	public String editarMaterialSubmit(@ModelAttribute("curso") Curso c) {
+	    cursoServicio.save(c);
 		return "redirect:/admin/Curso";
 	}
 	/*Borrar curso

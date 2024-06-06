@@ -28,6 +28,22 @@
 		 	  <label for="precio" class="form-label">Precio:</label>
 		    <textarea class="form-control" id="precio" th:field="*{precio}" required></textarea>
 		 		 </div>
+				 <div class="mb-3">
+				 				<label for="certificado" class="form-label">Certificado:</label>
+				 				<select id="certificado" class="form-control" th:field="*{certificado}">
+				 					<option value="">Certificado</option>
+				 					<option th:each="certificado : ${listaCertificado}" th:value="${certificado.idCertificado}"
+				 						th:text="${certificado.nombreC}">N/S</option>
+				 				</select>
+				</div>
+				<div class="mb-3">
+								<label for="material" class="form-label">Material:</label>
+								<select id="materiales" class="form-control" th:field="*{materiales}">
+									<option value="">Material</option>
+									<option th:each="material : ${listaMaterial}" th:value="${material.idMaterial}"
+										th:text="${material.nombre}">N/S</option>
+								</select>
+							</div>
         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
     </form>
 </div>

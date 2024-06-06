@@ -1,38 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Añadir Material</title>
- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Añadir Material</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
 
-<div class="container">
-  <h2>Añadir Material</h2>
-  <form action="" th:action="@{/admin/nuevoMaterial/submit}" th:object="${material}" method="POST">
-    <div class="form-group">
-      <label for="nombre">Nombre:</label>
-      <input type="text" class="form-control" id="nombre" th:field="*{nombre}" placeholder="Ingrese el nombre del material">
-    </div>
-    <div class="form-group">
-      <label for="tipo">Tipo:</label>
-      <input type="text" class="form-control" id="tipo" th:field="*{tipo}" placeholder="Ingrese el tipo del material">
-    </div>
-    <div class="form-group">
-      <label for="url">URL:</label>
-      <input type="text" class="form-control" id="url" th:field="*{url}" placeholder="Ingrese la URL del material">
-    </div>
-	<div class="form-group">
-		<label for="curso">Curso</label>
-		<input type="text" class="form-control" id="curso" th:field="*{curso}" placeholder="Ingrese al curso que pertenece">
+	<div class="container">
+		<h2>Añadir Material</h2>
+		<form action="" th:action="@{/admin/nuevoMaterial/submit}" th:object="${material}" method="POST">
+			<div class="form-group">
+				<label for="nombre">Nombre:</label>
+				<input type="text" class="form-control" id="nombre" th:field="*{nombre}"
+					placeholder="Ingrese el nombre del material">
+			</div>
+			<div class="form-group">
+				<label for="tipo">Tipo:</label>
+				<input type="text" class="form-control" id="tipo" th:field="*{tipo}"
+					placeholder="Ingrese el tipo del material">
+			</div>
+			<div class="form-group">
+				<label for="url">URL:</label>
+				<input type="text" class="form-control" id="url" th:field="*{url}"
+					placeholder="Ingrese la URL del material">
+			</div>
+			<div class="mb-3">
+				<label for="curso" class="form-label">Curso:</label>
+				<select id="curso" class="form-control" th:field="*{curso}">
+					<option value="">Curso</option>
+					<option th:each="curso : ${listaCurso}" th:value="${curso.idCurso}"
+						th:text="${curso.nombre +'-'+curso.nivelDificultad}">N/S</option>
+				</select>
+			</div>
+			<button type="submit" class="btn btn-primary">Agregar Material</button>
+		</form>
 	</div>
-    <button type="submit" class="btn btn-primary">Agregar Material</button>
-  </form>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
