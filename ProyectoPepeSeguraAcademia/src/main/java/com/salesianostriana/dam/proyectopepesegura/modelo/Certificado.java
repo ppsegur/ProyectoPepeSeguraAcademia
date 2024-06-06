@@ -15,12 +15,14 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 
 @Entity
 @Data
-@NoArgsConstructor@AllArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Table(name="CERTIFICADO")
 public class Certificado {
@@ -32,7 +34,7 @@ public class Certificado {
 	private String nombreC;
 	
 	@OneToOne
-	@JoinColumn(name = "id_curso")
+	@JoinColumn(name = "idCertificado", unique = true )
 	private Curso curso;
 
 	@ManyToOne
@@ -40,10 +42,7 @@ public class Certificado {
 	private Estudiante estudiante;
 
 
-@Override
-public String toString() {
-    return   nombreC ;
-}
+
 
 
 }

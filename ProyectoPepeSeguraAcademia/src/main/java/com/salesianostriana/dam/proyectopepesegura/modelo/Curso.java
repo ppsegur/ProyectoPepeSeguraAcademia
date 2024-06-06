@@ -44,11 +44,14 @@ public void setNivelDificultad(String nivelDificultad) {
     this.nivelDificultad = nivelDificultad;
 }
 	
-	
-	@OneToOne(mappedBy = "curso", cascade=CascadeType.ALL, orphanRemoval = true)
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
+	@OneToOne(mappedBy = "curso",  cascade=CascadeType.ALL, orphanRemoval = true)
 	private Certificado certificado;
 	
-	@OneToOne(mappedBy = "curso"  ,cascade = CascadeType.ALL, orphanRemoval = true)
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
+	@OneToOne(mappedBy = "curso")
 	private Material materiales ;
 	
 	@ToString.Exclude
@@ -60,13 +63,61 @@ public void setNivelDificultad(String nivelDificultad) {
 	 
 	
     //Metodos helper
-	
-	//LineaVenta
 	/**
 	 * Método auxiliar para el tratamiento bidireccional de la asociación. Añade un lv
 	 * a la colección de lineaVentas de un curso, y asigna a dicho lv este curso como el suyo.
 	 * @param a
 	 */
+	public void addCertificado(Certificado c) {
+		if(this.certificado!=null) {
+			this.setCertificado(c);
+			c.setCurso(this);
+		}
+		
+	}
+	
+	/**
+	 * Método auxiliar para el tratamiento bidireccional de la asociación. Elimina un material
+	 * de la colección de materiales de un curso, y desasigna a dicho mateerial el curso, dejándolo como nulo.
+	 * @param lv
+	 */
+	public void removeMaterial(Material m) {
+		if(this.materiales==null) {
+		this.setMateriales(null);
+		m.setCurso(null);
+		}
+}
+	/**
+	 * Método auxiliar para el tratamiento bidireccional de la asociación. Añade un lv
+	 * a la colección de lineaVentas de un curso, y asigna a dicho lv este curso como el suyo.
+	 * @param a
+	 */
+	public void addMaterial(Material m) {
+		if(this.materiales!=null) {
+
+		this.setMateriales(materiales);
+		m.setCurso(this);
+		}
+		
+	}
+	
+	/**
+	 * Método auxiliar para el tratamiento bidireccional de la asociación. Elimina un material
+	 * de la colección de materiales de un curso, y desasigna a dicho mateerial el curso, dejándolo como nulo.
+	 * @param lv
+	 */
+	public void removeCertificado(Certificado c) {
+		if(this.certificado==null) {
+		this.setCertificado(null);
+		c.setCurso(null);
+		}
+}
+	//LineaVenta
+	/**
+	 * Método auxiliar para el tratamiento bidireccional de la asociación. Añade un lv
+	 * a la colección de lineaVentas de un curso, y asigna a dicho lv este curso como el suyo.
+	 * @param a
+	 *
 	public void addLineaVenta(LineaVenta lv) {
 		this.lv.add(lv);
 		lv.setCurso(this);

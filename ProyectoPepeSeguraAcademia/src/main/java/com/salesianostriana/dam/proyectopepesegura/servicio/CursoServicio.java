@@ -11,21 +11,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.salesianostriana.dam.proyectopepesegura.base.BaseServiceImpl;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Certificado;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Curso;
+import com.salesianostriana.dam.proyectopepesegura.modelo.Material;
 import com.salesianostriana.dam.proyectopepesegura.repositorio.CertificadoRepositorio;
 import com.salesianostriana.dam.proyectopepesegura.repositorio.CursoRepositorio;
+import com.salesianostriana.dam.proyectopepesegura.repositorio.MaterialRepositorio;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
 public class CursoServicio extends BaseServiceImpl<Curso, Long, CursoRepositorio>{
 	
 	@Autowired
-	private CertificadoRepositorio certificadoRepositorio; 
-	@Autowired
 	 private CursoRepositorio cursoRepositorio;
 	 
 	@Autowired
 	private CertificadoServicio certificadoServicio;
+	@Autowired
+	private MaterialServicio materialServicio;
 	
 	public List<Curso> buscarPorIdioma(String nombre) {
 		return cursoRepositorio.findByNombreContainsIgnoreCase(nombre);
@@ -34,8 +37,7 @@ public class CursoServicio extends BaseServiceImpl<Curso, Long, CursoRepositorio
 		return cursoRepositorio.findById(id);
 	}
 	
-	
-	public Curso asignaCertificadoACurso(Curso c, @PathVariable("id") Long id ) {
+	public Curso asignaCertificadoACurso(Curso c,  Long id ) {
 		Certificado certificado = c.getCertificado();
 		Optional<Curso> cursoAsignado = cursoRepositorio.findById(id);
 		if (certificado != null && cursoAsignado.isPresent()) {
@@ -46,24 +48,17 @@ public class CursoServicio extends BaseServiceImpl<Curso, Long, CursoRepositorio
 		
 		
 	}
-	
-	public void editarCurso(Long id) {
+	public Curso asignaMaterialACurso(Curso c, Long id ) {
+		Material material = c.getMateriales();
+		Optional<Curso> cursoAsignado = cursoRepositorio.findById(id);
+		if (material != null && cursoAsignado.isPresent()) {
+		cursoAsignado.get().setMateriales(material);
+	    materialServicio.save(material);
+		} 
+		return c;
+		
 		
 	}
 	
-    @Transactional
-    public void deleteCurso(Long id) {
-        Optional<Curso> cursos = cursoRepositorio.findById(id);
-        if (cursos.isPresent()) {
-            Curso curso = cursos.get();
-            if (curso.getCertificado() == null || curso.getMateriales() == null) {
-               cursoRepositorio.delete(curso);
-            } if (curso.getCertificado() != null || curso.getMateriales() != null) {
-
-           // String mensaje;//mostrar en pantalla un mensaje que le salga que no puede borrar cursos con datos asociados
-            	String  modal= "No se puede borrar un curso asociado";
-            }
-    }
-
-}
+	
 }

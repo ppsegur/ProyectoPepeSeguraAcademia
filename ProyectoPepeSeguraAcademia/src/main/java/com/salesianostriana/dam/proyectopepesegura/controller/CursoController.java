@@ -12,12 +12,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.salesianostriana.dam.proyectopepesegura.modelo.Certificado;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Curso;
+import com.salesianostriana.dam.proyectopepesegura.modelo.Material;
 import com.salesianostriana.dam.proyectopepesegura.servicio.CertificadoServicio;
 import com.salesianostriana.dam.proyectopepesegura.servicio.CursoServicio;
 import com.salesianostriana.dam.proyectopepesegura.servicio.MaterialServicio;
 
+import jakarta.persistence.EntityNotFoundException;
+
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -42,18 +47,19 @@ public class CursoController {
 		model.addAttribute("curso", new Curso());
 		return "admin/formularioCurso";
 	}
+	
 	@PostMapping("/admin/nuevoCurso/submit")
 	public String procesarFormularioCurso(@ModelAttribute("curso") Curso c) {
 		cursoServicio.save(c);
 		return "redirect:/admin/Curso";
 	}
+	
 	@GetMapping("/admin/editarCurso/{idCurso}")
 	public String mostrarFormularioEdicionCurso(@PathVariable("idCurso") long idCurso, Model model) {
 		Optional<Curso> cursoEditar = cursoServicio.findById(idCurso);
 		if(cursoEditar.isPresent()) {
-			model.addAttribute("material",materialServicio.findAll());
-			model.addAttribute("certificado", certificadoServicio.findAll());
-			
+			model.addAttribute("listaMaterial",materialServicio.findAll());
+			model.addAttribute("listaCertificado", certificadoServicio.findAll());
 			model.addAttribute("curso", cursoEditar.get());
 		
 			return "admin/editarFormularioCurso";
@@ -61,12 +67,38 @@ public class CursoController {
 			return "redirect:/admin/Curso";
 		}
 	}
+	
+    @PostMapping("/admin/editarCurso/submit")
+    public String editarCurso(@ModelAttribute("curso") Curso c) {
+    	if(c.getCertificado()==null) {
+    			c.setCertificado(null);
+    			c.addMaterial(c.getMateriales());
+    			cursoServicio.edit(c);
 
+    	}if(c.getMateriales()==null) {
+    		c.addCertificado(c.getCertificado());
+    		c.setMateriales(null);
+    		cursoServicio.save(c);
+    		
+
+    	}if(c.getCertificado()==null && c.getMateriales()==null) {
+    		cursoServicio.save(c);
+    	}else {
+    		c.addCertificado(c.getCertificado());
+    		c.addMaterial(c.getMateriales());
+    		cursoServicio.edit(c);	
+    	}
+    		
+    		return "redirect:/admin/Curso";
+    }
+
+/**
 	@PostMapping("/admin/editarCurso/submit")
 	public String editarMaterialSubmit(@ModelAttribute("curso") Curso c) {
-	    cursoServicio.save(c);
+	    cursoServicio.edit(c);
 		return "redirect:/admin/Curso";
 	}
+	**/
 	/*Borrar curso
 	@GetMapping("/admin/borrarCurso/{idCurso}")
 	public String borrar(@PathVariable("idCurso") long idCurso) {
@@ -79,10 +111,15 @@ public class CursoController {
 	        cursoServicio.delete(curso.get());
 	    }
 	    return "redirect:/admin/Curso";
-	}*/
+	}
 	@GetMapping("/admin/borrarCurso/{idCurso}")
     public String borrar(@PathVariable("idCurso") long idCurso) {
         cursoServicio.deleteCurso(idCurso);
+        return "redirect:/admin/Curso";
+    }*/
+    @GetMapping("/admin/borrarCurso/{idCurso}")
+    public String borrar(@PathVariable("idCurso") Long idCurso) {
+            cursoServicio.deleteById(idCurso);
         return "redirect:/admin/Curso";
     }
 	@GetMapping("/user/curso")
@@ -118,3 +155,5 @@ public class CursoController {
 	}
 	
 }
+	
+

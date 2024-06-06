@@ -25,6 +25,7 @@ public class CertificadoController {
 	@GetMapping("/admin/Certificado")
 	public String listarCertificados(Model model) {
 		model.addAttribute("listaCertificado",certificadoServicio.findAll() );
+		model.addAttribute("listaCurso", cursoServicio.findAll());
 		return "admin/listaCertificado";
 	}
 	//mostrar formulario para añadir un nuevo certificado
@@ -63,6 +64,7 @@ public class CertificadoController {
 	@GetMapping("/admin/borrarCertificado/{idCertificado}")
 	public String borrar(@PathVariable("idCertificado") long id) {
 	Optional<Certificado> certificado = certificadoServicio.findById(id);
+	
 		if(certificado.isPresent()){
 		certificadoServicio.delete(certificado.get());
 		}

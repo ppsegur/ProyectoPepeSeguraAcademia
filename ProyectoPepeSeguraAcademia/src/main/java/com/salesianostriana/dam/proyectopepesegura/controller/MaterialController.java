@@ -27,6 +27,7 @@ public class MaterialController {
 	@GetMapping("/Material")
 	public String listarMateriales(Model model) {
 		model.addAttribute("listaMateriales", materialServicio.findAll());
+		model.addAttribute("curso",cursoServicio.findAll());
 		return "admin/listaMaterial";
 	}
 	//Mostrar el formulario de añadir material

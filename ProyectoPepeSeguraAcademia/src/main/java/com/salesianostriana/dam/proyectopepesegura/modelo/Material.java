@@ -30,11 +30,8 @@ public class Material {
 	private String url; 
 	
 	@OneToOne
-	@JoinColumn(name="id_curso" )
+	@JoinColumn(name="id_material",unique=true )
 	private Curso curso;
 
-	@Override
-	public String toString() {
-	    return   nombre ;
-	}
+
 }
