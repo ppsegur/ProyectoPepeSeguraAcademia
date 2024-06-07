@@ -21,7 +21,6 @@ import lombok.NoArgsConstructor;
 public class LineaVenta {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idLv;
     
     @Id
@@ -33,4 +32,15 @@ public class LineaVenta {
     private Curso curso;
 
     private int cantidad ;
+    
+    
+    //Metodos helper paraa añadir un curso 
+   public void addCurso(Curso c) {
+    	this.curso.setIdCurso(c.getIdCurso());
+    	c.addLineaVenta(this);
+    }
+   public void removeCurso(Curso c) {
+	   this.curso.setIdCurso(c.getIdCurso());
+	   c.setLv(null);
+   }
 }

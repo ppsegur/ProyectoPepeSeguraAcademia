@@ -1,5 +1,4 @@
 
-
 INSERT INTO Material ( nombre, tipo, url ) VALUES('material a1 ingles','video','https://youtu.be/Jzc4HDOKTKg?si=XGFRehqwEeqfgv99');
 ALTER SEQUENCE Material_seq RESTART WITH 51;
 

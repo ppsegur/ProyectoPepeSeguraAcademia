@@ -33,10 +33,10 @@ public class CarritoControlador {
         model.addAttribute("carrito", carrito);
         return "carrito";
     }
-
+/* --> Comentamos para un futuro utilizarlo
     @PostMapping("/eliminar")
     public String eliminarCurso(@RequestParam Long cursoId, @AuthenticationPrincipal Estudiante estudiante) {
         carritoServicio.eliminarCurso(estudiante, cursoId);
         return "redirect:/carrito";
-    }
+    }*/
 }

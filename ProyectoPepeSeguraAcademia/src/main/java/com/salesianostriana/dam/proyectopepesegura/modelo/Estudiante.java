@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -39,9 +40,7 @@ import java.util.ArrayList;
 @Table(name = "ESTUDIANTE")
 public class Estudiante implements UserDetails{
 	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -96,14 +95,21 @@ public class Estudiante implements UserDetails{
 	@Builder.Default
 	private List<Certificado> Certificado= new ArrayList<>();
 
-	/*
-	@OneToOne
-	@JoinColumn(name = "id") 	La idea final sería OneToMany 
-								Que el estudainte pueda comprar varios cursos
-								para ello debemos realizar una asociación compuesta en lineaVenta de dos id 
-								el de curso y el de 
-	private Venta carrito;
-	*/
+	
+	
+
+	@ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "estudiante", 
+    		cascade = CascadeType.ALL, 
+    		fetch = FetchType.EAGER,
+    		orphanRemoval = true)
+	@Builder.Default
+	private List<Venta> carrito = new ArrayList<>();
+	
+	
+	
+	
 	//Métodos helper 
 	/**
 	 * Método auxiliar para el tratamiento bidireccional de la asociación. Añade un material
@@ -125,4 +131,7 @@ public class Estudiante implements UserDetails{
 		c.setEstudiante(null);
 	
 }
+
+
+	
 }

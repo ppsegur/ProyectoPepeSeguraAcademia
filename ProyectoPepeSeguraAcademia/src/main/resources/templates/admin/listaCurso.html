@@ -16,14 +16,7 @@
 	<div class="container">
 		<h2>Tabla de Cursos</h2>
 		<hr>
-		<div class="container">
-			<div th:if="${errorMessage}" class="alert alert-danger" role="alert">
-				<span th:text="${errorMessage}"></span>
-			</div>
-			<div th:if="${successMessage}" class="alert alert-success" role="alert">
-				<span th:text="${successMessage}"></span>
-			</div>
-		</div>
+
 		<a class="btn btn-primary btn-sm" href="/admin/" th:href="@{/admin/formularioCurso}">Añadir</a>
 
 		<table class="table">
@@ -49,10 +42,10 @@
 					<td th:text="${curso.duracion}"></td>
 					<td th:text="${curso.precio}"></td>
 					<td>
-											<ul>
-												<li th:each="certificado : ${curso.certificado}" th:text="${certificado.nombreC}"></li>
-											</ul>
-										</td>
+						<ul>
+							<li th:each="certificado : ${curso.certificado}" th:text="${certificado.nombreC}"></li>
+						</ul>
+					</td>
 					<td>
 						<ul>
 							<li th:each="material : ${curso.materiales}" th:text="${material.nombre}"></li>

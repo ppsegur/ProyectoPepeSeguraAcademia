@@ -1,5 +1,7 @@
 package com.salesianostriana.dam.proyectopepesegura.servicio;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +23,24 @@ public class CarritoServicio {
     public Venta obtenerCarrito(Estudiante estudiante) {
         return carritoRepositorio.findByEstudiante(estudiante);
     }
+    
+    public void agregarCurso(Estudiante e, Long idC) {
+    	Venta carrito = obtenerCarrito(e);
+    	if(carrito == null){//si el carrito no existe , creamos uno nuevo y depués le seteamos el estudiante 
+    		carrito = new Venta();
+    		carrito.setEstudiante(e);
+    	}
+    	Curso c =cursoRepositorio.findById(idC).orElse(null);
 
+    	LineaVenta lv = new LineaVenta();
+    	lv.setCurso(c);
+    	lv.setCarrito(carrito);
+    	
+    	carrito.getLv().add(lv);
+    	carritoRepositorio.save(carrito);
+    	
+    }
+/*
     public void agregarCurso(Estudiante estudiante, Long cursoId) {
         Venta carrito = carritoRepositorio.findByEstudiante(estudiante);
         if (carrito == null) {
@@ -34,16 +53,18 @@ public class CarritoServicio {
         lv.setCurso(curso);
         lv.setCarrito(carrito);
 
-        carrito.getLv().add(lv);  // Asegúrate de que el getter y setter para la lista de LineaVenta se llamen correctamente
+        carrito.getLv().add(lv);  
         carritoRepositorio.save(carrito);
     }
-
+    
+    
+    /*
     public void eliminarCurso(Estudiante estudiante, Long idCurso) {
         Venta carrito = carritoRepositorio.findByEstudiante(estudiante);
         if (carrito != null) {
             carrito.getLv().removeIf(lv -> lv.getCurso().getIdCurso() == idCurso);
             carritoRepositorio.save(carrito);
         }
-    }
+    }*/
 }
 

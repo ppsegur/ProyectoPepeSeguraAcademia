@@ -117,7 +117,7 @@ public void setNivelDificultad(String nivelDificultad) {
 	 * Método auxiliar para el tratamiento bidireccional de la asociación. Añade un lv
 	 * a la colección de lineaVentas de un curso, y asigna a dicho lv este curso como el suyo.
 	 * @param a
-	 *
+	 */
 	public void addLineaVenta(LineaVenta lv) {
 		this.lv.add(lv);
 		lv.setCurso(this);

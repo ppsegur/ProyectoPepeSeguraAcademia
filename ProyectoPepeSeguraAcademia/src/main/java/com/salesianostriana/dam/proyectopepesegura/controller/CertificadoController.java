@@ -64,11 +64,14 @@ public class CertificadoController {
 	@GetMapping("/admin/borrarCertificado/{idCertificado}")
 	public String borrar(@PathVariable("idCertificado") long id) {
 	Optional<Certificado> certificado = certificadoServicio.findById(id);
-	
-		if(certificado.isPresent()){
+
+		if(certificado.isPresent()&& certificado.get().getCurso()!=null){
+			
+			return "redirect:/admin/Certificado?error=true";
+		}else {
+		
 		certificadoServicio.delete(certificado.get());
 		}
 		return "redirect:/admin/Certificado";
-		
 	}
 }

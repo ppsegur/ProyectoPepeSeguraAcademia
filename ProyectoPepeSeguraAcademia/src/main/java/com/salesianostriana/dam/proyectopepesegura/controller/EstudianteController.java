@@ -64,7 +64,7 @@ public class EstudianteController {
 		if(estudiantes.isPresent() && estudiantes.get().isNoEstudiante()==false){
 		estudianteServicio.delete(estudiantes.get());
 		}if(estudiantes.isPresent() && estudiantes.get().isNoEstudiante()==true){
-			
+			return "redirect:/admin/Estudiante?error=true";
 		}
 		return "redirect:/admin/Estudiante";
 		
