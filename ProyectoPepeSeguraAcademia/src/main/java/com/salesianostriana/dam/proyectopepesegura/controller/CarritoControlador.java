@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.salesianostriana.dam.proyectopepesegura.modelo.Venta;
+import com.salesianostriana.dam.proyectopepesegura.modelo.Curso;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Estudiante;
 import com.salesianostriana.dam.proyectopepesegura.servicio.CarritoServicio;
 
@@ -22,9 +23,14 @@ public class CarritoControlador {
     private CarritoServicio carritoServicio;
 
     @PostMapping("/agregar")
-    public String agregarCurso(@RequestParam Long idCurso, @AuthenticationPrincipal Estudiante estudiante) {
-        carritoServicio.agregarCurso(estudiante, idCurso);
-        return "redirect:/carrito";
+    public String agregarCurso(@RequestParam Curso curso, @AuthenticationPrincipal Estudiante estudiante) {
+        if(curso !=null && estudiante !=null) {
+        	carritoServicio.agregarCurso(estudiante, curso);
+        	return "redirect:/carrito";
+        }
+        return "redirect:/index";
+    
+        
     }
 
     @GetMapping

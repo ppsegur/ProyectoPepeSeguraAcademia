@@ -9,8 +9,11 @@ import com.salesianostriana.dam.proyectopepesegura.modelo.Venta;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Curso;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Estudiante;
 import com.salesianostriana.dam.proyectopepesegura.modelo.LineaVenta;
+import com.salesianostriana.dam.proyectopepesegura.modelo.LineaVentaPk;
 import com.salesianostriana.dam.proyectopepesegura.repositorio.CarritoRepositorio;
 import com.salesianostriana.dam.proyectopepesegura.repositorio.CursoRepositorio;
+import com.salesianostriana.dam.proyectopepesegura.repositorio.LineaVentaRepositorio;
+import com.salesianostriana.dam.proyectopepesegura.repositorio.VentaRepositorio;
 
 @Service
 public class CarritoServicio {
@@ -19,26 +22,39 @@ public class CarritoServicio {
 
     @Autowired
     private CursoRepositorio cursoRepositorio;
+    
+    @Autowired
+    private VentaRepositorio ventaRepositorio;
+    
+    @Autowired
+    private LineaVentaRepositorio lineaVentaRepositorio;
 
     public Venta obtenerCarrito(Estudiante estudiante) {
         return carritoRepositorio.findByEstudiante(estudiante);
     }
     
-    public void agregarCurso(Estudiante e, Long idC) {
-    	Venta carrito = obtenerCarrito(e);
+    public void agregarCurso(Estudiante e, Curso curso) {
+    	Venta carrito =ventaRepositorio.findByEstudianteAndFinalizada(e, false); 
     	if(carrito == null){//si el carrito no existe , creamos uno nuevo y depués le seteamos el estudiante 
     		carrito = new Venta();
     		carrito.setEstudiante(e);
+    		carrito.setFinalizado(false);
+    		ventaRepositorio.save(carrito);
     	}
-    	Curso c =cursoRepositorio.findById(idC).orElse(null);
-
+    	LineaVentaPk lineaVentaId = new LineaVentaPk(carrito.getIdVenta(), carrito.g);
+    	boolean cursoYaEnCarrito= lineaVentaRepositorio.existsById(lineaVentaId);
+    	if(!cursoYaEnCarrito) {
+    		LineaVenta lineaVenta = new LineaVenta(lineaVentaId, carrito.getIdVenta(), curso.getIdCurso());
+            lineaVentaRepositorio.save(lineaVenta);
+    	}
+    	/*
     	LineaVenta lv = new LineaVenta();
     	lv.setCurso(c);
     	lv.setCarrito(carrito);
     	
     	carrito.getLv().add(lv);
     	carritoRepositorio.save(carrito);
-    	
+    	*/
     }
 /*
     public void agregarCurso(Estudiante estudiante, Long cursoId) {

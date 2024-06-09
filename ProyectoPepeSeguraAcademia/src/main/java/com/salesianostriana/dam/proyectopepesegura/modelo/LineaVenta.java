@@ -1,16 +1,22 @@
 package com.salesianostriana.dam.proyectopepesegura.modelo;
 
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import com.salesianostriana.dam.proyectopepesegura.modelo.LineaVentaPk;
+
 
 @Entity
 @Data
@@ -20,27 +26,32 @@ import lombok.NoArgsConstructor;
 @IdClass(LineaVentaPk.class)
 public class LineaVenta {
 
-    @Id
-    private Long idLv;
+	@EmbeddedId
+	 @Builder.Default
+	 private LineaVentaPk linea = new LineaDeVentaPk();
+  //  private Long idLv;
     
     @Id
     @ManyToOne
-    private Venta carrito;
-
+    @MapsId("LineaVentaPk")
+    @JoinColumn(name = "idVenta")
+    private Long idVenta;
+    
     @ManyToOne
-    @JoinColumn(name = "curso_id")
-    private Curso curso;
+    @JoinColumn(name = "idCurso")
+    private Long idCurso;
 
-    private int cantidad ;
+  
     
-    
-    //Metodos helper paraa añadir un curso 
+    /*Metodos helper paraa añadir un curso 
    public void addCurso(Curso c) {
-    	this.curso.setIdCurso(c.getIdCurso());
+    	this.curso.;
     	c.addLineaVenta(this);
     }
    public void removeCurso(Curso c) {
 	   this.curso.setIdCurso(c.getIdCurso());
 	   c.setLv(null);
    }
+*/
+  
 }
