@@ -1,45 +1,59 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Carrito de Compras</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Carrito</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../static/css/" th:href="@{/css/carritoStyle.css}">
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-<nav th:replace="~{/fragmentos/menu::navbar}"></nav>
+    <div class="container">
+		<div class="container">
+		       <h1>Carrito de Compras</h1>
+		       <div th:if="${carritoVacio}">
+		           <p>Tu carrito está vacío.</p>
+		       </div>
+			   <div th:if="${!carritoVacio}">
+            <table class="carrito-table">
+                <thead>
+                    <tr>
+                        <th>Curso</th>
+                     	<th>Nivel de dificultad</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="entry : ${curso.entrySet()}">
+                        <td th:text="${entry.key.nombre}">Curso</td>
+                        <td th:text="${entry.key.nivelDificultad}">Nivel de dificultad</td>
+                        <td th:text="${entry.key.precio * entry.value}">Precio</td>
+                        <td>
+							<form th:action="@{'/carrito/eliminarProducto/' + ${entry.key.idCurso}}" method="post">
+							    <button type="submit" class="btn btn-danger eliminar-button">Eliminar</button>
+							</form>
 
-<div class="container mt-5">
-    <h2>Carrito de Compras</h2>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Curso</th>
-                <th ></th>
-            </tr>
-        </thead>
-        <tbody>
-			<tbody>
-				<div th:if="${carrito != null}">
-			    <tr th:each="Carrito : ${carrito.lv}">
-			        <td th:text="${Carrito.curso.nombre}"></td>
-			        <td>
-			            <form th:action="@{/carrito/eliminar}" method="post" style="display:inline;">
-			                <input type="hidden" name="cursoId" th:value="${Carrito.curso.idCurso}"/>
-			                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-			            </form>
-			        </td>
-			    </tr>
-				</div>
-			</tbody>
+						<a class="btn btn-primary detalle-link" th:href="@{'/curso/detalle/' + ${entry.key.idCurso}}">Detalles</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
+            <div>
+                <form th:action="@{/carrito/checkout}" method="post">
+                    <button type="submit" class="btn btn-success checkout-button">Finalizar Compra</button>
+                </form>
+            </div>
+        </div>
 
-        </tbody>
-    </table>
-    <form th:action="@{/carrito/pagar}" method="post">
-        <button type="submit" class="btn btn-success">Pagar</button>
-    </form>
-</div>
-
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <div>
+            <a href="cursosEstudiantes.html" th:href="@{/user/curso}" class="btn btn-secondary comprar-mas-link">Seguir Comprando</a>
+        </div>
+    </div>
 </body>
 </html>

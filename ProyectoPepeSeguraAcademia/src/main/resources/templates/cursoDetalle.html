@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Curso</title>
+</head>
+<body>
+    <h1>Detalles del Curso</h1>
+    <div>
+		<div th:if="${curso}">
+		    <p th:text="${curso}">Curso</p>
+		</div>
+        <p>Nombre del Curso: <span th:text="${curso.nombre}">Nombre del Curso</span></p>
+        <p>Nivel de Dificultad: <span th:text="${curso.nivelDificultad}">Nivel de Dificultad</span></p>
+        <p>Duración: <span th:text="${curso.duracion}">Duración</span></p>
+        <p>Precio: <span th:text="${curso.precio}">Precio</span></p>
+		</div>
+    </div>
+    <div>
+        <a href="carrito.html" th:href="@{/carrito}">Volver a la lista de cursos</a>
+    </div>
+</body>
+</html>

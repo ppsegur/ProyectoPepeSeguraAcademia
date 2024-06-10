@@ -1,8 +1,10 @@
 package com.salesianostriana.dam.proyectopepesegura.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.salesianostriana.dam.proyectopepesegura.modelo.Estudiante;
+import com.salesianostriana.dam.proyectopepesegura.modelo.Venta;
 import com.salesianostriana.dam.proyectopepesegura.servicio.EstudianteServicio;
+import com.salesianostriana.dam.proyectopepesegura.servicio.VentaServicio;
 
 
 @Controller
@@ -20,6 +24,8 @@ public class EstudianteController {
 
 	@Autowired
 	 public EstudianteServicio estudianteServicio;
+	@Autowired
+	public VentaServicio ventaServicio;
 	
 	@GetMapping("/admin/Estudiante")
 	public String listarTodosEstudiante(Model model) {
@@ -80,4 +86,13 @@ public class EstudianteController {
 	    	estudianteServicio.save(estudiante).setNoEstudiante(false);
 	        return "redirect:/index";
 	    }
+	    
+	    //Mostrar lista d eventas a usuario
+	    @GetMapping("/ventas")
+	    public String listarVentas(@AuthenticationPrincipal Estudiante estudiante, Model model) {
+	        Optional<Venta> ventas = ventaServicio.obtenerVentasPorEstudiante(estudiante);
+	        model.addAttribute("ventas", ventas);
+	        return "lineaVentaUsuario"; // Aquí debes retornar el nombre de tu plantilla Thymeleaf
+	    }
+
 }

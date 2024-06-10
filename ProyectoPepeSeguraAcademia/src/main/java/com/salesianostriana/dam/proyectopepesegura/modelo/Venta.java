@@ -1,10 +1,13 @@
 package com.salesianostriana.dam.proyectopepesegura.modelo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -49,7 +52,9 @@ public class Venta {
     @Builder.Default
     private List<LineaVenta> lv = new ArrayList<>();
 
-    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate fechaPedido;
+    private double importeTotal;
    //Booleano 
     private boolean finalizada;
 	//LineaVenta
@@ -59,10 +64,12 @@ public class Venta {
 		lv.setVenta(this);
 	}
 
-	public void removeLineaVenta(LineaVenta lv) {
-		this.lv.add(lv);
-		lv.setVenta(null);
 	
+	public void removeLineaVenta(LineaVenta lv) {
+	    this.lv.remove(lv);
+	    lv.setVenta(null);
 	}
+
+	
 	
 }

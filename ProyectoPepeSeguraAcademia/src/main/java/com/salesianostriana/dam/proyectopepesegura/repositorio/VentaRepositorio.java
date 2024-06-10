@@ -1,5 +1,7 @@
 package com.salesianostriana.dam.proyectopepesegura.repositorio;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,7 +19,8 @@ public interface VentaRepositorio  extends JpaRepository<Venta, Long> {
 	           "FROM Venta v LEFT JOIN v.lineaVenta lv " +
 	           "WHERE v.estudiante = :estudiante AND lv.curso = :curso AND v.finalizada = false")
 	    boolean hayCursoEnCarrito(Estudiante estudiante,Curso curso);
-*/
-	    Venta findByEstudianteAndFinalizada(Estudiante estudiante, boolean finalizada);
 
+	    Venta findByEstudianteAndFinalizada(Estudiante estudiante, boolean finalizada);*/
+	    Optional<Venta> findByEstudianteAndFinalizadaFalse(Estudiante estudiante);
+	    boolean existsByEstudianteAndFinalizadaFalse(Estudiante estudiante);
 }

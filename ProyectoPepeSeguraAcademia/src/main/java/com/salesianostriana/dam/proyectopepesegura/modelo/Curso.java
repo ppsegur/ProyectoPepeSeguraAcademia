@@ -119,18 +119,12 @@ public void setNivelDificultad(String nivelDificultad) {
 	 * @param a
 	 */
 	public void addLineaVenta(LineaVenta lv) {
-		this.lv.add(lv);
-		lv.setCurso(lv.getCurso());
+	    this.lv.add(lv);
+	    lv.setCurso(this);
 	}
-	
-	/**
-	 * Método auxiliar para el tratamiento bidireccional de la asociación. Elimina un material
-	 * de la colección de materiales de un curso, y desasigna a dicho mateerial el curso, dejándolo como nulo.
-	 * @param lv
-	 */
+
 	public void removeLineaVenta(LineaVenta lv) {
-		this.lv.add(lv);
-		lv.setCurso(null);
-	
-}
+	    this.lv.remove(lv);
+	    lv.setCurso(null);
+	}
 }

@@ -150,6 +150,21 @@ public class CursoController {
 		model.addAttribute("listaCurso", cursoServicio.buscarPorIdioma("español"));
 		return "esUser";
 	}
+	//mostrar detalles de un curso
+	@GetMapping("/curso/detalle/{idCurso}")
+	public String verDetalleCurso(@PathVariable Long idCurso, Model model) {
+	    // Lógica para obtener el curso por su ID, por ejemplo, mediante un servicio
+	    Optional<Curso> cursoOp = cursoServicio.findById(idCurso);
+	   
+	    if (cursoOp.isPresent()) {
+	        Curso curso = cursoOp.get();
+	        model.addAttribute("curso", curso);
+	        return "cursoDetalle";
+	    } else {
+	        // Manejar el caso donde no se encuentra el curso por el ID
+	        return "error"; // Por ejemplo, podrías redirigir a una página de error
+	    }
+	}
 	
 }
 	

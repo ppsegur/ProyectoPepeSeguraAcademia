@@ -39,8 +39,8 @@
 		  		<li th:each="material : ${curso.materiales}" th:text="${material.nombre}"></li>
 		  	</ul>
 		  </p>		
-		    <form th:action="@{/carrito/agregar}" method="post" class="form-inline w-100">
-		      <input type="hidden" name="idCurso" th:value="${curso.idCurso}">
+		  <form th:action="@{/carrito/agregarCurso/{idCurso}(idCurso=${curso.idCurso})}" method="post" class="form-inline w-100">
+		      <input type="hidden" name="curso" th:value="${curso}">
 		      <button type="submit" class="btn btn-primary btn-sm" >COMPRAR</button>
 		  </form>
         </div>
@@ -48,6 +48,7 @@
     </div>
   </div>
 </div>
+
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 

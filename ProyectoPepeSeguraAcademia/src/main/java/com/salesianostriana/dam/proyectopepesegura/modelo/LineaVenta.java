@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 
 
@@ -45,7 +46,9 @@ public class LineaVenta {
     private Curso curso;
 
 	
-  
+    public double getPrecioLineaVenta() {
+        return curso.getPrecio();
+    }
     
    //Metodos helper paraa añadir un curso 
    public void addCurso(Curso c) {

@@ -42,9 +42,7 @@
 						<li th:each="material : ${curso.materiales}" th:text="${material.nombre}"></li>
 					</ul>
 					</p>
-					<a class="btn btn-primary btn-sm" href="/admin/"
-						th:href="@{/admin/editarCurso/{idCurso}(idCurso=${curso.idCurso})}">COMPRAR</a>
-
+				
 				</div>
 			</div>
 		</div>
