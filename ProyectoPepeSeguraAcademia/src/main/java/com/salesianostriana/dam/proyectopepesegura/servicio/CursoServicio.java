@@ -1,23 +1,21 @@
 package com.salesianostriana.dam.proyectopepesegura.servicio;
 
-import java.awt.Dialog.ModalExclusionType;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
+
 
 import com.salesianostriana.dam.proyectopepesegura.base.BaseServiceImpl;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Certificado;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Curso;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Material;
-import com.salesianostriana.dam.proyectopepesegura.repositorio.CertificadoRepositorio;
-import com.salesianostriana.dam.proyectopepesegura.repositorio.CursoRepositorio;
-import com.salesianostriana.dam.proyectopepesegura.repositorio.MaterialRepositorio;
 
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
+import com.salesianostriana.dam.proyectopepesegura.repositorio.CursoRepositorio;
+
+
+
 
 @Service
 public class CursoServicio extends BaseServiceImpl<Curso, Long, CursoRepositorio>{

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-import org.hibernate.annotations.ManyToAny;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -16,21 +15,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
+
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 import lombok.ToString;
 
 @Entity
 @Data
 @NoArgsConstructor
-@Getter
-@Setter
 @AllArgsConstructor
 @Builder
 public class Venta {
@@ -45,7 +42,7 @@ public class Venta {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "carrito", 
+    @OneToMany(mappedBy = "venta", 
     		cascade = CascadeType.ALL, 
     		fetch = FetchType.EAGER,
     		orphanRemoval = true)
@@ -54,17 +51,17 @@ public class Venta {
 
     
    //Booleano 
-    private boolean finalizado;
+    private boolean finalizada;
 	//LineaVenta
 	
 	public void addLineaVenta(LineaVenta lv) {
 		this.lv.add(lv);
-		lv.setIdVenta(lv.getIdVenta());
+		lv.setVenta(this);
 	}
 
 	public void removeLineaVenta(LineaVenta lv) {
 		this.lv.add(lv);
-		lv.setIdVenta(null);
+		lv.setVenta(null);
 	
 	}
 	

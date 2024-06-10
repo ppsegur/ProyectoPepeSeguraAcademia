@@ -43,7 +43,7 @@ public class Estudiante implements UserDetails{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue()
+	@GeneratedValue
 	private Long id;
 	private String username;
 	private String password;	

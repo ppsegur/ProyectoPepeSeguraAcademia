@@ -120,7 +120,7 @@ public void setNivelDificultad(String nivelDificultad) {
 	 */
 	public void addLineaVenta(LineaVenta lv) {
 		this.lv.add(lv);
-		lv.setIdCurso(lv.getIdCurso());
+		lv.setCurso(lv.getCurso());
 	}
 	
 	/**
@@ -130,7 +130,7 @@ public void setNivelDificultad(String nivelDificultad) {
 	 */
 	public void removeLineaVenta(LineaVenta lv) {
 		this.lv.add(lv);
-		lv.setIdCurso(null);
+		lv.setCurso(null);
 	
 }
 }

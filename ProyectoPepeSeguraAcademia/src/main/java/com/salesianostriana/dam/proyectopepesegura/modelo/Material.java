@@ -3,7 +3,7 @@ package com.salesianostriana.dam.proyectopepesegura.modelo;
 import jakarta.persistence.Entity;
 
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 public class Material {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(generator = "material_seq")
 	private long idMaterial;
 	
 	private String nombre;
