@@ -25,6 +25,9 @@ public class CarritoServicio {
 
 	@Autowired
 	private VentaServicio ventaServicio;
+	
+	@Autowired
+	private CursoServicio cursoServicio;
 
 	public Venta obtenerCarrito(Estudiante estudiante) {
 		return carritoRepositorio.findByEstudiante(estudiante);
@@ -64,7 +67,11 @@ public class CarritoServicio {
 	// Finalizar comprar
 	public void finalizarCompra(Estudiante e) {
 		Venta carrito = getCarrito(e);
-
+		carrito.getLv().forEach(lineaVenta ->{ //esta lambda recorre los cursos en el carrito y setea su atributo bolleano comprado para que no nos aparezca despues de comprarlo
+			Curso c = lineaVenta.getCurso();
+			c.setComprado(true);
+			cursoServicio.save(c);
+			});
 		carrito.setFinalizada(true);
 		carrito.setFechaPedido(LocalDate.now());
 		carrito.setImporteTotal(getImporteTotal(e));

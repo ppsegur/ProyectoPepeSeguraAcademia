@@ -20,7 +20,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="venta : ${ventas}">
+                <tr th:each="venta : ${venta.lv}">
                     <td th:text="${venta.idVenta}"></td>
                     <td th:text="${venta.estudiante.nombre}"></td>
                     <td th:text="${venta.fecha}"></td>

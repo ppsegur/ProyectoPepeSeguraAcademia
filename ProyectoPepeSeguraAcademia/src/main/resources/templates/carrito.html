@@ -29,16 +29,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="entry : ${curso.entrySet()}">
-                        <td th:text="${entry.key.nombre}">Curso</td>
-                        <td th:text="${entry.key.nivelDificultad}">Nivel de dificultad</td>
-                        <td th:text="${entry.key.precio * entry.value}">Precio</td>
+                    <tr th:each="lv : ${venta.lv}">
+                        <td th:text="${lv.curso.nombre}">Curso</td>
+                        <td th:text="${lv.curso.nivelDificultad}">Nivel de dificultad</td>
+                        <td th:text="${lv.curso.precio }">Precio</td>
                         <td>
-							<form th:action="@{'/carrito/eliminarProducto/' + ${entry.key.idCurso}}" method="post">
+							<div>
+								<p>Total</p>
+							</div>
+							<form th:action="@{'/carrito/eliminarProducto/' + ${lv.curso.idCurso}}" method="post">
 							    <button type="submit" class="btn btn-danger eliminar-button">Eliminar</button>
 							</form>
 
-						<a class="btn btn-primary detalle-link" th:href="@{'/curso/detalle/' + ${entry.key.idCurso}}">Detalles</a>
+						<a class="btn btn-primary detalle-link" th:href="@{'/curso/detalle/' + ${lv.curso.idCurso}}">Detalles</a>
                         </td>
                     </tr>
                 </tbody>

@@ -36,6 +36,10 @@ public class Curso {
 	private String duracion;
 	private double precio;
 
+	
+	//Booleano para mostrar o no los cursos
+	private boolean comprado;
+	
 public String getNivelDificultad() {
     return nivelDificultad;
 }

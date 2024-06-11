@@ -47,7 +47,7 @@ public class CursoController {
 	
 	@PostMapping("/admin/nuevoCurso/submit")
 	public String procesarFormularioCurso(@ModelAttribute("curso") Curso c) {
-		cursoServicio.save(c);
+		cursoServicio.save(c).setComprado(false); //Se guarda como un curso no comprado todo aquel que entre
 		return "redirect:/admin/Curso";
 	}
 	
@@ -119,18 +119,39 @@ public class CursoController {
             cursoServicio.deleteById(idCurso);
         return "redirect:/admin/Curso";
     }
+    
+    //muestra todos los cursos no comprados
+    @GetMapping("/user/curso")
+	public String listarCursosUsuarios(Model model) {
+		model.addAttribute("listaCurso", cursoServicio.obtenerCursosPorComprado(false));
+		return "/cursosEstudiantes";
+    }
+    @GetMapping("/user/curso/comprado")
+    public String listarCursosComprado(Model model) {
+    	model.addAttribute("listaCurso", cursoServicio.obtenerCursosPorComprado(true));
+    	return "cursosComprado";
+    }
+    /*
+     * Muestra todos los cursos Comprados y sin comprar /primera versión
 	@GetMapping("/user/curso")
 	public String listarCursosUsuarios(Model model) {
 		model.addAttribute("listaCurso", cursoServicio.findAll() );
 		return "/cursosEstudiantes";
-	}
+	}*/
 	//Método para buscar por nombre (consulta derivada)
 	@GetMapping("/user/cursoBuscar")
     public String cursoBuscar(@RequestParam(required = false) String nombre, 
                               Model model) {
-        List<Curso> listaCurso = cursoServicio.buscarPorIdioma(nombre);
+        List<Curso> listaCurso = cursoServicio.buscarPorNombreNoComprados(nombre);
         model.addAttribute("listaCurso", listaCurso);
         return "cursosEstudiantes";
+	}
+	@GetMapping("/user/cursoBuscar/comprado")
+    public String cursoBuscarComprado(@RequestParam(required = false) String nombre, 
+                              Model model) {
+        List<Curso> listaCurso = cursoServicio.buscarPorNombreSiComprados(nombre);
+        model.addAttribute("listaCurso", listaCurso);
+        return "cursosComprado";
 	}
 	//mostrar la lista de cursos en Ingles
 	@GetMapping("/user/ingles")

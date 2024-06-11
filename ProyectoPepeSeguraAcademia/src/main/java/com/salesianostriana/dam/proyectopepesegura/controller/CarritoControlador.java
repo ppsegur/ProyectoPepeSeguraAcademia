@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.proyectopepesegura.controller;
 
-import java.util.List;
+
+
 import java.util.Optional;
 
 
@@ -39,8 +40,9 @@ public class CarritoControlador {
 	@GetMapping()
 	public String mostrarCarrito(@AuthenticationPrincipal Estudiante e, Model model) {
 	    if (carritoServicio.hayCarritoCreado(e)) {
-	        model.addAttribute("curso", carritoServicio.getProductosEnCarrito(e));
-	        model.addAttribute("carritoVacio", false);
+	    	Venta carrito = carritoServicio.getCarrito(e);
+	        model.addAttribute("venta", carrito );
+	        model.addAttribute("carritoVacio", carrito.getLv().isEmpty());
 	    } else {
 	        model.addAttribute("carritoVacio", true);
 	    }
@@ -66,9 +68,10 @@ public class CarritoControlador {
 	//Controller para finalizar compra
 
 		@PostMapping ("/checkout")
-		public String finalizarCompra(@AuthenticationPrincipal Estudiante e) {
+		public String finalizarCompra(@AuthenticationPrincipal Estudiante e, Venta v) {
 			carritoServicio.finalizarCompra(e);
-			return "index";
+			ventaServicio.save(v);
+			return "redirect:/index";
 		}
 
 	//Controller para eliminar producto

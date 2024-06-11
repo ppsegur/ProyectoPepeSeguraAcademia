@@ -27,10 +27,21 @@ public class CursoServicio extends BaseServiceImpl<Curso, Long, CursoRepositorio
 	private CertificadoServicio certificadoServicio;
 	@Autowired
 	private MaterialServicio materialServicio;
-	
+	//1ºra Consulta utilizada
 	public List<Curso> buscarPorIdioma(String nombre) {
 		return cursoRepositorio.findByNombreContainsIgnoreCase(nombre);
 	}
+	//2ºda Consulta utilizada 
+	public List<Curso> obtenerCursosPorComprado(boolean comprado){
+		return cursoRepositorio.findByComprado(comprado);
+	}
+	//3ºra Consulta utilizada(para que al buscar un curso en el html donde se compra no te aparezacn los comprados
+	  public List<Curso> buscarPorNombreNoComprados(String nombre) {
+	        return cursoRepositorio.findByNombreContainsIgnoreCaseAndCompradoFalse(nombre);
+	    }
+	  public List<Curso> buscarPorNombreSiComprados(String nombre) {
+	        return cursoRepositorio.findByNombreContainsIgnoreCaseAndCompradoTrue(nombre);
+	    }
 	public Optional<Curso> finById(Long id){
 		return cursoRepositorio.findById(id);
 	}
