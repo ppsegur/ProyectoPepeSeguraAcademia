@@ -59,21 +59,30 @@ public class EstudianteController {
 		estudianteServicio.save(e);
 		return "redirect:/admin/Estudiante";
 	}
-	/**
-	 * Método para borrar 
-	 * @param id
-	 * @return 
-	 */
+	/*
 	@GetMapping("/admin/borrarEstudiante/{id}")
 	public String borrarEstudiante(@PathVariable("id") long id) {
-		Optional<Estudiante> estudiantes = estudianteServicio.findById(id);
-		if(estudiantes.isPresent() && estudiantes.get().isNoEstudiante()==false){
-		estudianteServicio.delete(estudiantes.get());
-		}if(estudiantes.isPresent() && estudiantes.get().isNoEstudiante()==true){
-			return "redirect:/admin/Estudiante?error=true";
-		}
-		return "redirect:/admin/Estudiante";
-		
+		Optional<Estudiante> estudiante = estudianteServicio.findById(id);
+	    if (estudiante.isPresent()) {
+	        if (estudiante.get().isNoEstudiante()) {
+	            return "redirect:/admin/Estudiante?error=true";
+	        } else {
+	            estudianteServicio.delete(estudiante.get());
+	        }
+	    }
+	    return "redirect:/admin/Estudiante";
+	}*/
+	@GetMapping("/admin/borrarEstudiante/{id}")
+	public String borrarEstudiante(@PathVariable("id") long id) {
+	    Optional<Estudiante> estudiante = estudianteServicio.findById(id);
+	    if (estudiante.isPresent()) {
+	        if (estudiante.get().isNoEstudiante()) {
+	            return "redirect:/admin/Estudiante?error=true";
+	        } else {
+	            estudianteServicio.delete(estudiante.get());
+	        }
+	    }
+	    return "redirect:/admin/Estudiante";
 	}
 	 @GetMapping("/user/nuevoEstudiante")
 	    public String guardarEstudiante(Model model) {

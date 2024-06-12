@@ -16,6 +16,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -87,7 +88,7 @@ public class Estudiante implements UserDetails{
 	public boolean isAccountNonExpired() {
 		return true;
 	}
-	
+	//Asociaciones
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	@OneToMany(mappedBy = "estudiante",  cascade = CascadeType.ALL, orphanRemoval = true)
@@ -106,7 +107,8 @@ public class Estudiante implements UserDetails{
 	@Builder.Default
 	private List<Venta> carrito = new ArrayList<>();
 	
-	
+	@ManyToMany
+	private List<Estudiante> listaEstudiante ;
 	
 	
 	//Métodos helper 

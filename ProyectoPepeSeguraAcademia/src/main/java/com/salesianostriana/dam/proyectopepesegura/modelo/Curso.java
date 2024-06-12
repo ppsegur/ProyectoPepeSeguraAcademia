@@ -6,6 +6,9 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -63,8 +66,7 @@ public void setNivelDificultad(String nivelDificultad) {
 	@OneToMany(mappedBy = "curso"  ,cascade = CascadeType.ALL, orphanRemoval = true)
 	@Builder.Default
 	private List<LineaVenta> lv  = new ArrayList<>();
-		
-	 
+
 	
     //Metodos helper
 	/**
