@@ -2,8 +2,8 @@ package com.salesianostriana.dam.proyectopepesegura.controller;
 
 import java.util.List;
 
-
 import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -116,6 +116,17 @@ public class CursoController {
 	    }
 	    return "redirect:/admin/Curso";
 	}
+<<<<<<< HEAD
+	
+	//Controladores del usuario
+	//Obtener todos los cursos e ingles y mostrarselo al usuario 
+	    @GetMapping("/cursos/ingles")
+	    public String listarCursosDeIngles(Model model) {
+	        List<Curso> cursos = cursoServicio.obtenerCursosDeIngles();
+	        model.addAttribute("listaCurso", cursos);
+	        return "cursosEstudiantes";
+	    }
+=======
 	@GetMapping("/admin/borrarCurso/{idCurso}")
     public String borrar(@PathVariable("idCurso") long idCurso) {
         cursoServicio.deleteCurso(idCurso);

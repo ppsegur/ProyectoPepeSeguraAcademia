@@ -10,14 +10,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
+
 import com.salesianostriana.dam.proyectopepesegura.repositorio.VentaRepositorio;
+
 
 
 @Controller
 @RequestMapping("/admin")
 public class AdminControlador {
+
 	@Autowired
-	private VentaRepositorio ventaServicio;
+	private VentaRepositorio ventaRepositorio;
 	@GetMapping()
 	public String index() {
 		return "index";
@@ -25,7 +28,7 @@ public class AdminControlador {
 
 	 @GetMapping("/ventas")
 	    public String listarVentas(Model model) {
-	        model.addAttribute("listaVentas", ventaServicio.findAll() );
+	        model.addAttribute("listaVentas", ventaRepositorio.findAll() );
 	        return "/admin/listaVentas";
 	    }
 }
