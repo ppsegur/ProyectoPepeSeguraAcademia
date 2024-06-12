@@ -9,5 +9,6 @@ import com.salesianostriana.dam.proyectopepesegura.modelo.Material;
 public interface MaterialRepositorio extends JpaRepository<Material, Long>{
 
 	List<Material> findByCursoIdCurso(Long idcurso);
+	boolean existsByCurso_IdCurso(Long idCurso);
 
 }

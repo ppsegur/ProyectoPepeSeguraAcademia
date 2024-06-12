@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.salesianostriana.dam.proyectopepesegura.modelo.Certificado;
+import com.salesianostriana.dam.proyectopepesegura.modelo.Curso;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Material;
 import com.salesianostriana.dam.proyectopepesegura.servicio.CursoServicio;
 import com.salesianostriana.dam.proyectopepesegura.servicio.MaterialServicio;
@@ -53,6 +57,7 @@ public class MaterialController {
 	    }
 	    return "redirect:/admin/Material";
 	}
+
 	//Editar
 	@GetMapping("/editarMaterial/{idMaterial}")
 	public String mostrarFormularioEdicionMaterial(@PathVariable("idMaterial") long idMaterial , Model model) {
@@ -70,8 +75,10 @@ public class MaterialController {
 	
 	@PostMapping("/editarMaterial/submit")
 	public String editarMaterialSubmit(@ModelAttribute("material") Material material) {
-	    materialServicio.save(material);
+		materialServicio.edit(material);
 		return "redirect:/admin/Material";
+		
 	}
+	
 
 }

@@ -27,13 +27,13 @@
 				<textarea class="form-control" id="utl" th:field="*{url}" required></textarea>
 			</div>
 			<div class="mb-3">
-				<label for="curso" class="form-label">Curso:</label>
-				<select id="curso" class="form-control" th:field="*{curso}">
-					<option value="">Curso</option>
-					<option th:each="curso : ${listaCurso}" th:value="${curso.idCurso}"
-						th:text="${curso.nombre + '-'+ curso.nivelDificultad}">N/S</option>
-				</select>
-			</div>
+									<label for="curso" class="form-label">Curso:</label>
+									<select id="curso" class="form-control" th:field="*{curso}">
+										<option value="">Curso</option>
+										<option th:each="curso : ${listaCurso}" th:value="${curso.idCurso}"
+											th:text="${curso.nombre + '-'+ curso.nivelDificultad}">N/S</option>
+									</select>
+								</div>
 			<!-- Agrega más campos según sea necesario -->
 			<button type="submit" class="btn btn-primary">Guardar Cambios</button>
 		</form>

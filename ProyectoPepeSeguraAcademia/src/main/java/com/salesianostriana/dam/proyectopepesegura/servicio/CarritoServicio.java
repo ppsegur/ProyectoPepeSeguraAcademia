@@ -38,7 +38,8 @@ public class CarritoServicio {
 
 		Venta carrito = getCarrito(estudiante);
 		if (!ventaServicio.hayProductosEnCarrito(estudiante, curso)) {
-			carrito.addLineaVenta(LineaVenta.builder()
+			carrito.addLineaVenta(LineaVenta.
+					builder()
 					.curso(curso).
 					build());
 		} else {

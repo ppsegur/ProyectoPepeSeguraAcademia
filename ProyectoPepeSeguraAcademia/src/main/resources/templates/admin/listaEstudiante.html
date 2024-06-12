@@ -7,16 +7,16 @@
 	<title>Lista de Estudiantes</title>
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="../static/css/" th:href="@{/css/styleTablas.css}">
-
+	<link rel = "styleesheet" href="../static/css/" th:href="@{/jss/estudianteModal.js}">
 </head>
 
 <body>
 	<nav th:replace="~{/fragmentos/menuAdmin::navbar}"></nav>
 	<div class="alert alert-danger alert-dismissible fade show text-center" style="margin: 0 auto; width: 50%; margin-top: 50px;"
 		role="alert" th:if="${param.error}">
-		<strong>!ERROR</strong> No puedes eliminar un administrador></strong>
+		<strong>!ERROR</strong> No puedes eliminar un administrador</strong>
 			<span aria-hidden="true">&times;</span>
-		</button> 
+		 
 		
 	</div>
 			<div class="container">
@@ -47,20 +47,34 @@
 							<td th:text="${estudiante.dni}"></td>
 							<td th:text="${estudiante.Certificado}"></td>
 							<td th:text="${estudiante.noEstudiante}"></td>
+							<td style="width: 9%;">
+								<button id="modelEliminar" href=""" data-bs-toggle="modal" data-bs-target="#modalEliminar" th:data-id="${estudiante.id}" ></button>
+								</button>
+							</td>
+							
+						</tr>
+						</tbody>
+				</table>
+			</div>
+			<div class="modal fade" id="modalEliminar">
+					                        <div class="modal-dialog modal-dialog-scrollable">
+					                            <div class="modal-content">
+					                                <div class="modal-body">
+					                                    <p>¿Estás seguro de que deseas eliminar este usuario?</p>
+					                                </div>
+					                                <div class="modal-footer">
+					                                    <a href="#" class="btn btn-danger" id="confirmarBorrado">Eliminar usuario</a>
+					                                    <a href="#" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar operación</a>
+					                                </div>
+					                            </div>
+					                        </div>
+					                    </div>
+			</body>
 
-							<td>
-								<!--  <a type="button" class="btn btn-primary btn-sm" href="/admin/"  th:href="@{/admin/editarEstudiante/{id}(id=${estudiante.id})}">Editar</a> -->
-								<a type="button" class="btn btn-danger btn-sm"
-									th:href="@{/admin/borrarEstudiante/{id}(id = ${estudiante.id})}" >Eliminar</a>
-	     
-		</td>
-	
-	<script src=" https://code.jquery.com/jquery-3.5.1.min.js"></script>
-									<script
-										src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-									<script
-										src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
+		    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+		    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+		    <script src="../static/js/estudianteModal.js" defer th:src="@{/js/estudianteModal.js}"></script>
 
-</body>
 
 </html>

@@ -37,7 +37,7 @@
         <td th:text="${material.url}"></td>
 		<td th:if="${material.curso==null}">No asignado</td>
 		<td th:if="${material.curso!=null}" th:text="${material.curso.nombre +' - ' + material.curso.nivelDificultad}"></td>
-		
+	
 		
 		<div th:if="${error}" class="alert alert-danger" role="alert">
 		    <p th:text="${error}"></p>

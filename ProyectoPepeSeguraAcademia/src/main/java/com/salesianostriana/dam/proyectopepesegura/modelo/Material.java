@@ -30,7 +30,7 @@ public class Material {
 	private String url; 
 	
 	@OneToOne
-	@JoinColumn(name="id_material",unique=true )
+	@JoinColumn(name="id_curso",unique=true )
 	private Curso curso;
 
 

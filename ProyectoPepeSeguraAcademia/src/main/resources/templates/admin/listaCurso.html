@@ -11,11 +11,16 @@
 </head>
 
 <body>
+	
 	<nav th:replace="~{/fragmentos/menuAdmin::navbar}"></nav>
 
+	
 	<div class="container">
 		<h2>Tabla de Cursos</h2>
 		<hr>
+		<div th:if="${param.error}" class="alert alert-danger">
+			            <p>No puedes eliminar un curso con datos asociados</p>
+			        </div>
 
 		<a class="btn btn-primary btn-sm" href="/admin/" th:href="@{/admin/formularioCurso}">Añadir</a>
 

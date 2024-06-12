@@ -11,7 +11,6 @@ import com.salesianostriana.dam.proyectopepesegura.base.BaseServiceImpl;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Curso;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Estudiante;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Venta;
-import com.salesianostriana.dam.proyectopepesegura.repositorio.CursoRepositorio;
 import com.salesianostriana.dam.proyectopepesegura.repositorio.VentaRepositorio;
 
 @Service

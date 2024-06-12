@@ -5,7 +5,7 @@
     <title>Carrito</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="../static/css/" th:href="@{/css/carritoStyle.css}">
+	<link rel="stylesheet" href="../static/css/" th:href="@{/css/styleTablas.css}">
 	
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	
@@ -34,9 +34,7 @@
                         <td th:text="${lv.curso.nivelDificultad}">Nivel de dificultad</td>
                         <td th:text="${lv.curso.precio }">Precio</td>
                         <td>
-							<div>
-								<p>Total</p>
-							</div>
+							
 							<form th:action="@{'/carrito/eliminarProducto/' + ${lv.curso.idCurso}}" method="post">
 							    <button type="submit" class="btn btn-danger eliminar-button">Eliminar</button>
 							</form>
@@ -46,7 +44,9 @@
                     </tr>
                 </tbody>
             </table>
-
+			<div>
+			<p>Total: <span th:text="${Importe}"></span></p>
+			</div>
             <div>
                 <form th:action="@{/carrito/checkout}" method="post">
                     <button type="submit" class="btn btn-success checkout-button">Finalizar Compra</button>

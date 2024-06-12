@@ -38,8 +38,9 @@
       <tr th:each="certificado : ${listaCertificado}">
         <td th:text="${certificado.idCertificado}"></td>
         <td th:text="${certificado.nombreC}"></td>
-		<td th:text="${certificado.curso.nombre +' - ' + certificado.curso.nivelDificultad}"></td>
-        <td>
+		<td th:if="${certificado.curso != null}" th:text="${certificado.curso.nombre + ' - ' + certificado.curso.nivelDificultad}"></td>
+		 <td th:unless="${certificado.curso != null}">Sin curso</td>
+       <td>
           <a type="button" class="btn btn-primary btn-sm" href="/admin/"  th:href="@{/admin/editarCertificado/{idCertificado}(idCertificado=${certificado.idCertificado})}">Editar</a>
           <a type="button" class="btn btn-danger btn-sm"  th:href="@{/admin/borrarCertificado/{idCertificado}(idCertificado=${certificado.idCertificado})}">Eliminar</a>
         </td>

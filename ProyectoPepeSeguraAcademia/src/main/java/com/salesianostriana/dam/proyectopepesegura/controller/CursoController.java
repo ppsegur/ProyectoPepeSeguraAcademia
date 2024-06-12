@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.salesianostriana.dam.proyectopepesegura.modelo.Curso;
+import com.salesianostriana.dam.proyectopepesegura.repositorio.LineaVentaRepositorio;
+import com.salesianostriana.dam.proyectopepesegura.repositorio.MaterialRepositorio;
 import com.salesianostriana.dam.proyectopepesegura.servicio.CertificadoServicio;
 import com.salesianostriana.dam.proyectopepesegura.servicio.CursoServicio;
 import com.salesianostriana.dam.proyectopepesegura.servicio.MaterialServicio;
@@ -31,6 +33,10 @@ public class CursoController {
 	CertificadoServicio  certificadoServicio;
 	@Autowired
 	MaterialServicio materialServicio;
+	@Autowired
+	LineaVentaRepositorio lineaVentaRepositorio;
+	@Autowired
+	MaterialRepositorio materialRepositorio;
 	
 	@GetMapping("/admin/Curso")
 	public String listarCursos(Model model) {
@@ -115,7 +121,13 @@ public class CursoController {
         return "redirect:/admin/Curso";
     }*/
     @GetMapping("/admin/borrarCurso/{idCurso}")
-    public String borrar(@PathVariable("idCurso") Long idCurso) {
+    public String borrar(@PathVariable("idCurso") Long idCurso, Model model) {
+    	boolean materialExiste = materialRepositorio.existsByCurso_IdCurso(idCurso);
+    	boolean existeLinea = lineaVentaRepositorio.existsByCurso_IdCurso(idCurso);
+    	if(existeLinea || materialExiste) {
+
+    		return "redirect:/admin/Curso?error=true";
+    	}
             cursoServicio.deleteById(idCurso);
         return "redirect:/admin/Curso";
     }

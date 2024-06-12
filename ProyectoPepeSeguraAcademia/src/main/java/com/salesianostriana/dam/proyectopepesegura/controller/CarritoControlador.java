@@ -43,6 +43,7 @@ public class CarritoControlador {
 	    	Venta carrito = carritoServicio.getCarrito(e);
 	        model.addAttribute("venta", carrito );
 	        model.addAttribute("carritoVacio", carrito.getLv().isEmpty());
+	        model.addAttribute("Importe", carritoServicio.getImporteTotal(e));
 	    } else {
 	        model.addAttribute("carritoVacio", true);
 	    }

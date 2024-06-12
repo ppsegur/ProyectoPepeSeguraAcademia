@@ -34,7 +34,7 @@ public class Certificado {
 	private String nombreC;
 	
 	@OneToOne
-	@JoinColumn(name = "idCertificado", unique = true )
+	@JoinColumn(name = "id_curso", unique = true )
 	private Curso curso;
 
 	@ManyToOne
