@@ -1,6 +1,25 @@
 
+<<<<<<< HEAD
+CREATE SEQUENCE IF NOT EXISTS Material_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE IF NOT EXISTS Curso_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE IF NOT EXISTS Estudiante_seq START WITH 1 INCREMENT BY 1;
+
+INSERT INTO Material (id_material, nombre, tipo, url ) VALUES(1,'material a1 ingles','video','https://youtu.be/Jzc4HDOKTKg?si=XGFRehqwEeqfgv99');
+
+
+INSERT INTO Curso (id_curso,idioma,nivel_dificultad, precio) VALUES(1,'Ingles a1', 'a1', 25.00);
+INSERT INTO Curso (id_curso,idioma,nivel_dificultad, precio) VALUES(2,'Ingles b1', 'b1', 35.00);
+INSERT INTO Curso (id_curso,idioma,nivel_dificultad, precio) VALUES(3,'Ingles a2', 'a2', 30.00);
+INSERT INTO Curso (id_curso,idioma,nivel_dificultad, precio) VALUES(4,'Ingles b2', 'b2', 45.00);
+INSERT INTO Curso (id_curso,idioma,nivel_dificultad, precio) VALUES(5,'Ingles c1', 'c1', 50.00);
+
+ALTER SEQUENCE Material_seq RESTART WITH 51;
+INSERT INTO Curso (id_curso,nombre,nivel_dificultad, precio) VALUES(6,'Frances ', 'a1', 25.00);
+ALTER SEQUENCE Curso_seq RESTART WITH 51;
+=======
 INSERT INTO Material ( id_material ,nombre, tipo, url ) VALUES(1,'material a1 ingles','video','https://youtu.be/Jzc4HDOKTKg?si=XGFRehqwEeqfgv99');
 ALTER SEQUENCE Material_seq RESTART WITH 51;
+>>>>>>> c6062f168ce2b3f77dd0b7c6cbf11a970795bca4
 
 INSERT INTO Curso (id_curso,nombre,nivel_dificultad, precio, comprado) VALUES(1,'Ingles', 'a1', 25.00, false);
 INSERT INTO Curso (id_curso,nombre,nivel_dificultad, precio, comprado) VALUES(2,'Ingles', 'a2', 25.00, false);

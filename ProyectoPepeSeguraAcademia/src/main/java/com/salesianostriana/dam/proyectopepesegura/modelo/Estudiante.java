@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 
 import java.util.Collection;
+
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -18,22 +19,25 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+
 import lombok.AllArgsConstructor;
+
+import jakarta.persistence.Table;
+
+import lombok.AllArgsConstructor;
+
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 import lombok.ToString;
 
 import java.util.ArrayList;
 
 @Entity
 @Data
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -60,6 +64,7 @@ public class Estudiante implements UserDetails{
 	@Column(name = "no_estudiante")
 	private boolean noEstudiante;
 	
+
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -88,14 +93,19 @@ public class Estudiante implements UserDetails{
 	public boolean isAccountNonExpired() {
 		return true;
 	}
+
+	
+
+
 	//Asociaciones
+
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	@OneToMany(mappedBy = "estudiante",  cascade = CascadeType.ALL, orphanRemoval = true)
 	@Builder.Default
 	private List<Certificado> Certificado= new ArrayList<>();
 
-	
+
 	
 
 	@ToString.Exclude

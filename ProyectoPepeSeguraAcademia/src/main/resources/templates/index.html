@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
-	
+<html lang="es" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,20 +9,24 @@
 	<link rel="stylesheet" href="../static/css/" th:href="@{/css/styleInicio.css}">
 </head>
 
-<body>
+
     <!-- Navbar -->
 	<div 	sec:authorize="hasRole('ROLE_USER')" >
-	<nav th:replace="~{/fragmentos/menu::navbar}"></nav>
+		 <nav  th:replace="~{/fragmentos/menu::navbar}"></nav>
+
 	</div>
 	<div 	sec:authorize="hasRole('ROLE_ADMIN')">
 	 <nav  th:replace="~{/fragmentos/menuAdmin::navbar}"></nav>
 	 </div>
+	
+
     
 	<div sec:authorize="isAnonymous"> 
 	<nav class="d-flex justify-content-center align-items-center" >
 		<a th:href="@{/login}" method="post"> Iniciar sesión</a>
 	   </nav>
 	</div>
+
     <div id="demo" class="carousel slide" data-bs-ride="carousel">
         <!-- Indicators/dots -->
         <div class="carousel-indicators">

@@ -52,6 +52,7 @@ public class SecurityConfig {
                         (authz) -> authz.requestMatchers("/css/**", "/js/**","/img/**", "/h2-console/**").permitAll()
                         .requestMatchers("/user/nuevoEstudiante", "/user/nuevoEstudiante/submit","/").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
+
                         .requestMatchers("/carrito/checkout").permitAll()
                                 .anyRequest().authenticated())
   
