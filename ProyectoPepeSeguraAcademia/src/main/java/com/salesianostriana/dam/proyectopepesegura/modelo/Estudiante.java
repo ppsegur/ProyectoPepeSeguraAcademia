@@ -16,6 +16,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -32,8 +34,6 @@ import java.util.ArrayList;
 
 @Entity
 @Data
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -107,9 +107,17 @@ public class Estudiante implements UserDetails{
 	@Builder.Default
 	private List<Venta> carrito = new ArrayList<>();
 	
-	@ManyToMany
-	private List<Estudiante> listaEstudiante ;
 	
+	
+	 @ManyToMany
+	    @JoinTable(
+	        name = "Favorito",
+	        joinColumns = @JoinColumn(name = "estudiante_id"),
+	        inverseJoinColumns = @JoinColumn(name = "curso_id")
+	    )
+	 	@ToString.Exclude
+	 	@EqualsAndHashCode.Exclude
+	    private List<Curso> cursosFavoritos = new ArrayList<>();
 	
 	//Métodos helper 
 	/**
@@ -132,6 +140,7 @@ public class Estudiante implements UserDetails{
 		c.setEstudiante(null);
 	
 }
+	
 
 
 	

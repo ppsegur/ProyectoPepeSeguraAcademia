@@ -43,6 +43,7 @@ public class Curso {
 	//Booleano para mostrar o no los cursos
 	private boolean comprado;
 	
+	 
 public String getNivelDificultad() {
     return nivelDificultad;
 }
@@ -66,8 +67,10 @@ public void setNivelDificultad(String nivelDificultad) {
 	@OneToMany(mappedBy = "curso"  ,cascade = CascadeType.ALL, orphanRemoval = true)
 	@Builder.Default
 	private List<LineaVenta> lv  = new ArrayList<>();
-
 	
+	 @ManyToMany(mappedBy = "cursosFavoritos")
+	    private List<Estudiante> estudiantesFavoritos = new ArrayList<>();
+	 
     //Metodos helper
 	/**
 	 * Método auxiliar para el tratamiento bidireccional de la asociación. Añade un lv

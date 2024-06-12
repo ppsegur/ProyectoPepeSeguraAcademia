@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lista de Cursos</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="../static/css/" th:href="@{/css/cursos.css}">
 
 </head>
@@ -43,6 +44,11 @@
 		      <input type="hidden" name="curso" th:value="${curso}">
 		      <button type="submit" class="btn btn-primary btn-sm" >COMPRAR</button>
 		  </form>
+		  <!--Icono de favoritos
+		-->		  <form th:action="@{/user/agregarFavorito/{idCurso}(idCurso=${curso.idCurso})}" method="post">
+						<input type="hidden" name="curso" value="${curso}">
+		                <button type="submit" class="btn btn-warning btn-sm"> 			<i class="bi bi-balloon-heart"></i>
+		              </form>
         </div>
       </div>
     </div>

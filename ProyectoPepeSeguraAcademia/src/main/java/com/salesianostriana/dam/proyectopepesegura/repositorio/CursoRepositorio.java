@@ -17,6 +17,7 @@ public interface CursoRepositorio extends JpaRepository<Curso, Long>{
 	List<Curso> findByComprado(boolean comprado);
 	
 	
+	
 	//Una unión de las dos anteriores
 	List<Curso> findByNombreContainsIgnoreCaseAndCompradoFalse(String nombre);
 	List<Curso> findByNombreContainsIgnoreCaseAndCompradoTrue(String nombre);

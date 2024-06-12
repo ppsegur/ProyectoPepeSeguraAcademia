@@ -35,7 +35,6 @@ public class CarritoServicio {
 
 	// Metodo agregar producto
 	public void addProducto(Estudiante estudiante, Curso curso) {
-
 		Venta carrito = getCarrito(estudiante);
 		if (!ventaServicio.hayProductosEnCarrito(estudiante, curso)) {
 			carrito.addLineaVenta(LineaVenta.
