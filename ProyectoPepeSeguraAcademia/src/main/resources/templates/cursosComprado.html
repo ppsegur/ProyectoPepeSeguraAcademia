@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
@@ -16,7 +15,7 @@
   <hr>
 
   <div class="input-group mb-3">
-      <form th:action="@{/user/cursoBuscar}" method="get" class="form-inline w-100">
+      <form th:action="@{/user/cursoBuscar/comprado}" method="get" class="form-inline w-100">
         <input type="search" name="nombre" class="form-control rounded" placeholder="Buscar por nombre" aria-label="Buscar por nombre" aria-describedby="search-addon" />
         <button type="submit" class="btn btn-outline-primary ml-2">Buscar</button>
       </form>
@@ -42,7 +41,7 @@
 		  </p>		
 		  <form th:action="@{/carrito/agregarCurso/{idCurso}(idCurso=${curso.idCurso})}" method="post" class="form-inline w-100">
 		      <input type="hidden" name="curso" th:value="${curso}">
-		      <button type="submit" class="btn btn-primary btn-sm" >COMPRAR</button>
+		      <button type="submit" class="btn btn-primary btn-sm" >Acceder</button>
 		  </form>
         </div>
       </div>

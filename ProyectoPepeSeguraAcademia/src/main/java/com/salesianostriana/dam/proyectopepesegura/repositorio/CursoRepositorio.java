@@ -2,16 +2,24 @@ package com.salesianostriana.dam.proyectopepesegura.repositorio;
 
 import java.util.List;
 
+
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
+
 
 import com.salesianostriana.dam.proyectopepesegura.modelo.Curso;
 
-@Repository
+
+
 public interface CursoRepositorio extends JpaRepository<Curso, Long>{
-	  
-	@Query("SELECT c FROM Curso c WHERE c.idioma = :idioma") 
-    List<Curso> findCursosByIdioma(@Param("idioma") String idioma);
+	//Buscar por idioma
+	List<Curso> findByNombreContainsIgnoreCase(String idioma);
+	
+	//Consulta para buscar cursos comprados 
+	List<Curso> findByComprado(boolean comprado);
+	
+	
+	//Una unión de las dos anteriores
+	List<Curso> findByNombreContainsIgnoreCaseAndCompradoFalse(String nombre);
+	List<Curso> findByNombreContainsIgnoreCaseAndCompradoTrue(String nombre);
+
 }

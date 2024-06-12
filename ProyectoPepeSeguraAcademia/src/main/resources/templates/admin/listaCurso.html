@@ -1,52 +1,72 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lista de Cursos</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Lista de Cursos</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="../static/css/" th:href="@{/css/styleTablas.css}">
+
 </head>
+
 <body>
+	
+	<nav th:replace="~{/fragmentos/menuAdmin::navbar}"></nav>
 
-<div class="container">
-  <h2>Tabla de Cursos</h2>
-  <hr>
-  <a class="btn btn-primary btn-sm" href="/admin/" th:href="@{/admin/formularioCurso}">Añadir</a>
+	
+	<div class="container">
+		<h2>Tabla de Cursos</h2>
+		<hr>
+		<div th:if="${param.error}" class="alert alert-danger">
+			            <p>No puedes eliminar un curso con datos asociados</p>
+			        </div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nombre</th>
+					<th>NivelDificultad</th>
+					<th>Duración</th>
+					<th>Precio</th>
+					<th>Certificado</th>
+					<th>Materiales</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>NivelDificultad</th>
-        <th>Duración</th>
-		<th>Precio</th>
-		<th>Certificado</th>
-		<th>Materiales</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      
-      <tr th:each="curso : ${listaCurso}">
-        <td th:text="${curso.idCurso}"></td>
-        <td th:text="${curso.idioma}"></td>
-        <td th:text="${curso.nivelDificultad}"></td>
-        <td th:text="${curso.duracion}"></td>
-		<td th:text="${curso.precio}"></td>
-		<td th:text="${curso.certificado}"></td>
-		<td th:text="${curso.materiales}"></td>
-        <td>
-          <a type="button" class="btn btn-primary btn-sm" href="/admin/"  th:href="@{/admin/editarCurso/{idCurso}(idCurso=${curso.idCurso})}">Editar</a>
-          <a type="button" class="btn btn-danger btn-sm"  th:href="@{/admin/borrarCurso/{id}(id=${curso.idCurso})}">Eliminar</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+				<tr th:each="curso : ${listaCurso}">
+					<td th:text="${curso.idCurso}"></td>
+					<td th:text="${curso.nombre}"></td>
+					<td th:text="${curso.nivelDificultad}"></td>
+					<td th:text="${curso.duracion}"></td>
+					<td th:text="${curso.precio}"></td>
+					<td>
+						<ul>
+							<li th:each="certificado : ${curso.certificado}" th:text="${certificado.nombreC}"></li>
+						</ul>
+					</td>
+					<td>
+						<ul>
+							<li th:each="material : ${curso.materiales}" th:text="${material.nombre}"></li>
+						</ul>
+					</td>
+					<td>
+						<a type="button" class="btn btn-primary btn-sm" href="/admin/"
+							th:href="@{/admin/editarCurso/{idCurso}(idCurso=${curso.idCurso})}">Editar</a>
+						<a type="button" class="btn btn-danger btn-sm"
+							th:href="@{/admin/borrarCurso/{id}(id=${curso.idCurso})}">Eliminar</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

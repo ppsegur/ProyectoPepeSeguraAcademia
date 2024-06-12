@@ -1,11 +1,14 @@
 package com.salesianostriana.dam.proyectopepesegura.modelo;
 
 import jakarta.persistence.Entity;
+
+
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+
+import jakarta.persistence.OneToOne;
 
 import jakarta.persistence.Table;
 
@@ -19,28 +22,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "MATERIAL")
+@Table(name = "Material")
 public class Material {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(generator = "material_seq")
 	private long idMaterial;
+	
 	private String nombre;
 	private String tipo;
 	private String url; 
 	
-	@ManyToOne
-	@JoinColumn(name="curso_id_curso" )
+	@OneToOne
+	@JoinColumn(name="id_curso",unique=true )
 	private Curso curso;
 
 
-    @Override
-    public String toString() {
-        return "Material{" +
-                "id=" + idMaterial +
-                ", nombre='" + nombre + '\'' +
-                 ", tipo='" + tipo + '\'' +
-                 ", url='" + url + '\'' +
-                '}';
-    }
 }

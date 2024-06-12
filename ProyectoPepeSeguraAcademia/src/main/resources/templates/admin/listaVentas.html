@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Ventas</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="../static/css/" th:href="@{/css/styleTablas.css}"></head>
+<body>
+    <div class="container">
+        <h1>Lista de Ventas</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID Venta</th>
+                    <th>Estudiante</th>
+                    <th>Fecha</th>
+                    <th>Total</th>
+                    <th>Detalles</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="venta : ${listaVentas}">
+                    <td th:text="${venta.idVenta}"></td>
+                    <td th:text="${venta.estudiante.nombre}"></td>
+                    <td th:text="${venta.fechaPedido}"></td>
+                    <td th:text="${venta.importeTotal}"></td>
+                    <td>
+                        <a class="btn btn-primary" th:href="@{'/admin/venta/' + ${venta.idVenta}}">Ver Detalles</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
