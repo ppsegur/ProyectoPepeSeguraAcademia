@@ -20,11 +20,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="venta : ${venta.lv}">
+                <tr th:each="venta : ${listaVentas}">
                     <td th:text="${venta.idVenta}"></td>
                     <td th:text="${venta.estudiante.nombre}"></td>
-                    <td th:text="${venta.fecha}"></td>
-                    <td th:text="${venta.total}"></td>
+                    <td th:text="${venta.fechaPedido}"></td>
+                    <td th:text="${venta.importeTotal}"></td>
                     <td>
                         <a class="btn btn-primary" th:href="@{'/admin/venta/' + ${venta.idVenta}}">Ver Detalles</a>
                     </td>

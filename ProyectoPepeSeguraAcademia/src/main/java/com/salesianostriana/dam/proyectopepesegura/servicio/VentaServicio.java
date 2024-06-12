@@ -7,19 +7,25 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.salesianostriana.dam.proyectopepesegura.base.BaseServiceImpl;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Curso;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Estudiante;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Venta;
+import com.salesianostriana.dam.proyectopepesegura.repositorio.CursoRepositorio;
 import com.salesianostriana.dam.proyectopepesegura.repositorio.VentaRepositorio;
 
 @Service
-public class VentaServicio {
+public class VentaServicio extends BaseServiceImpl<Venta, Long, VentaRepositorio>{
 	@Autowired
     private VentaRepositorio ventaRepositorio;
 	
 	public Optional<Venta> obtenerVentasPorEstudiante(Estudiante estudiante) {
 	        return ventaRepositorio.findById(estudiante.getId());
 	    }
+	
+	 public List<Venta> obtenerVentaParaEstudiante(Estudiante e){
+		 return e.getCarrito();
+	 }
     // Método para verificar si existe una venta sin finalizar
     public boolean existeVentaSinFinalizar(Estudiante estudiante) {
         return ventaRepositorio.existsByEstudianteAndFinalizadaFalse(estudiante);
@@ -31,11 +37,11 @@ public class VentaServicio {
     }
 
     // Método para editar una venta
-    public void edit(Venta venta) {
-        ventaRepositorio.save(venta);
+    public Venta edit(Venta venta) {
+      return  ventaRepositorio.save(venta);
     }
 
-    // Método para verificar si hay productos en el carrito
+   
 
     // Método para verificar si hay productos en el carrito
     public boolean hayProductosEnCarrito(Estudiante estudiante, Curso curso) {
@@ -52,8 +58,8 @@ public class VentaServicio {
         return ventaRepositorio.save(venta);
     }
     
-    public List<Venta> obtenerTodasLasVentas() {
-        return ventaRepositorio.findAll();
+    public List<Venta> obtenerTodasLasVentas(Estudiante e) {
+        return ventaRepositorio.findByEstudiante(e);
     }
 }
 

@@ -88,11 +88,19 @@ public class EstudianteController {
 	    }
 	    
 	    //Mostrar lista d eventas a usuario
+	   /* @GetMapping("/ventas")
+	    public String listarVentas(@AuthenticationPrincipal Estudiante estudiante, Model model) {
+	        List<Venta> ventas = ventaServicio.obtenerTodasLasVentas();
+	        model.addAttribute("venta", ventas);
+	        return "lineaVentaUsuario";
+	    }*/
 	    @GetMapping("/ventas")
 	    public String listarVentas(@AuthenticationPrincipal Estudiante estudiante, Model model) {
-	        Optional<Venta> ventas = ventaServicio.obtenerVentasPorEstudiante(estudiante);
-	        model.addAttribute("ventas", ventas);
-	        return "lineaVentaUsuario"; // Aquí debes retornar el nombre de tu plantilla Thymeleaf
+	    	List<Venta> ventas = ventaServicio.obtenerTodasLasVentas(estudiante);
+	        if (!ventas.isEmpty()) {
+	            model.addAttribute("ventas", ventas);
+	        }
+	        return "lineaVentaUsuario";
 	    }
-
 }
+

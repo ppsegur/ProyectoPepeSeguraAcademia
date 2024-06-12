@@ -50,7 +50,7 @@ public class CarritoControlador {
 	}
 
 		
-	//Controller para añadirProducto
+	
 	// Controller para añadirProducto
 	@PostMapping("/agregarCurso/{idCurso}")
 	public String añadirProducto(@AuthenticationPrincipal Estudiante e,
@@ -59,7 +59,7 @@ public class CarritoControlador {
 	    Optional<Curso> curso = cursoServicio.findById(idProducto);
 
 	    if (curso.isPresent()) {
-	        carritoServicio.addProducto(e, curso.get(), 1);
+	        carritoServicio.addProducto(e, curso.get());
 	        return "redirect:/carrito";
 	    }
 	    return "redirect:/index";
@@ -68,9 +68,8 @@ public class CarritoControlador {
 	//Controller para finalizar compra
 
 		@PostMapping ("/checkout")
-		public String finalizarCompra(@AuthenticationPrincipal Estudiante e, Venta v) {
+		public String finalizarCompra(@AuthenticationPrincipal Estudiante e) {
 			carritoServicio.finalizarCompra(e);
-			ventaServicio.save(v);
 			return "redirect:/index";
 		}
 

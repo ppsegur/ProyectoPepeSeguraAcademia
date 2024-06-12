@@ -34,11 +34,13 @@ public class CarritoServicio {
 	}
 
 	// Metodo agregar producto
-	public void addProducto(Estudiante estudiante, Curso curso, int cantidad) {
+	public void addProducto(Estudiante estudiante, Curso curso) {
 
 		Venta carrito = getCarrito(estudiante);
 		if (!ventaServicio.hayProductosEnCarrito(estudiante, curso)) {
-			carrito.addLineaVenta(LineaVenta.builder().curso(curso).build());
+			carrito.addLineaVenta(LineaVenta.builder()
+					.curso(curso).
+					build());
 		} else {
 			Optional<LineaVenta> lv = BuscarPorCurso(estudiante, curso);
 			if (lv.isPresent()) {

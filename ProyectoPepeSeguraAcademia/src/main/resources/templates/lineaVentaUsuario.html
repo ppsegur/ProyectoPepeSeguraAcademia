@@ -1,41 +1,45 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>	<nav th:replace="~{/fragmentos/menu::navbar}" ></nav>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="../static/css/" th:href="@{/css/styleTablas.css}">
+<head>
+	<nav th:replace="~{/fragmentos/menu::navbar}"></nav>
+
 </head>
+
+</head>
+
 <body class="d-flex flex-column min-vh-100">
-   
+	<main class="flex-grow-1" style="margin-top: 100px;">
+		<div class="container">
+			<h1 class="mt-5">Mis Ventas</h1>
 
-    <main class="flex-grow-1" style="margin-top: 100px;">
-        <div class="container">
-            <h1 class="mt-5">Mis Ventas</h1>
-            <div th:if="${ventas.empty}">
-                <p>No tienes ninguna venta finalizada.</p>
-            </div>
-            <div th:unless="${ventas.empty}">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Importe Total</th>
-                            <th scope="col">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="venta : ${ventas}">
-                            <td th:text="${venta.id}"></td>
-                            <td th:text="${venta.fecha}"></td>
-                            <td th:text="${#numbers.formatDecimal(venta.importeTotal, 0, 2)} + '€'"></td>
-                            <td>
-                                <a th:href="@{/user/ventas/{id}(id=${venta.id})}" class="btn btn-primary"><i class="bi bi-search"></i></a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </main>
-
-    
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Fecha</th>
+						<th scope="col">Importe Total</th>
+						<th scope="col">Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="venta : ${ventas}">
+						<td th:text="${venta.idVenta}"></td>
+						<td th:text="${venta.fechaPedido}"></td>
+						<td th:text="${#numbers.formatDecimal(venta.importeTotal, 0, 2)} + '€'"></td>
+						<td>
+							<a th:href="@{/user/ventas/{id}(id=${venta.idVenta})}" class="btn btn-primary"><i
+									class="bi bi-search"></i></a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		</div>
+	</main>
 </body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </html>

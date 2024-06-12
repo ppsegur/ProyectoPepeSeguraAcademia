@@ -26,6 +26,6 @@ public class AdminControlador {
 	 @GetMapping("/ventas")
 	    public String listarVentas(Model model) {
 	        model.addAttribute("listaVentas", ventaServicio.findAll() );
-	        return "listaVentas";
+	        return "/admin/listaVentas";
 	    }
 }

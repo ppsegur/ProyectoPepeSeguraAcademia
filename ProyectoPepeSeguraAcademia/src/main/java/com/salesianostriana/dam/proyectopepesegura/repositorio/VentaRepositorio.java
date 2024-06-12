@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.proyectopepesegura.repositorio;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,4 +24,5 @@ public interface VentaRepositorio  extends JpaRepository<Venta, Long> {
 	    Venta findByEstudianteAndFinalizada(Estudiante estudiante, boolean finalizada);*/
 	    Optional<Venta> findByEstudianteAndFinalizadaFalse(Estudiante estudiante);
 	    boolean existsByEstudianteAndFinalizadaFalse(Estudiante estudiante);
+	    List<Venta> findByEstudiante(Estudiante e);
 }

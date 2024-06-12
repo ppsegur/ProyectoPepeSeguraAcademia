@@ -129,7 +129,7 @@ public class CursoController {
     @GetMapping("/user/curso/comprado")
     public String listarCursosComprado(Model model) {
     	model.addAttribute("listaCurso", cursoServicio.obtenerCursosPorComprado(true));
-    	return "cursosComprado";
+    	return "/cursosComprado";
     }
     /*
      * Muestra todos los cursos Comprados y sin comprar /primera versión
