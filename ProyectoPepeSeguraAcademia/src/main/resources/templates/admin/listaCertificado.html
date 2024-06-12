@@ -5,20 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lista de Certificados</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+   <link rel="stylesheet" href="../static/css/" th:href="@{/css/styleTablas.css}">
+
 </head>
 <body>
-
+	<nav  th:replace="~{/fragmentos/menuAdmin::navbar}"></nav>
+	>
 <div class="container">
   <h2>Tabla de Certificados</h2>
   <hr>
+  <div class="alert alert-danger alert-dismissible fade show text-center" style="margin: 0 auto; width: 50%; margin-top: 50px;"
+  			role="alert" th:if="${param.error}">
+  			<strong>!ERROR</strong> No puedes eliminar un certificado asociado a un curso, para ello elimina el curso asociado
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  				<span aria-hidden="true">&times;</span>
+  			</button> 
+  			
+  		</div>
   <a class="btn btn-primary btn-sm" href="/admin/" th:href="@{/admin/formularioCertificado}">Añadir</a>
 
   <table class="table">
     <thead>
       <tr>
         <th>ID</th>
-        <th>FechaExamen</th>
-        <th>Calificacion</th>
+        <th>Nombre</th>
 		<th>Curso</th>
         <th>Acciones</th>
       </tr>
@@ -27,10 +37,10 @@
       
       <tr th:each="certificado : ${listaCertificado}">
         <td th:text="${certificado.idCertificado}"></td>
-        <td th:text="${certificado.fechaExamen}"></td>
-        <td th:text="${certificado.Calificacion}"></td>
-		<td th:tex="${certificado.curso}"></td>
-        <td>
+        <td th:text="${certificado.nombreC}"></td>
+		<td th:if="${certificado.curso != null}" th:text="${certificado.curso.nombre + ' - ' + certificado.curso.nivelDificultad}"></td>
+		 <td th:unless="${certificado.curso != null}">Sin curso</td>
+       <td>
           <a type="button" class="btn btn-primary btn-sm" href="/admin/"  th:href="@{/admin/editarCertificado/{idCertificado}(idCertificado=${certificado.idCertificado})}">Editar</a>
           <a type="button" class="btn btn-danger btn-sm"  th:href="@{/admin/borrarCertificado/{idCertificado}(idCertificado=${certificado.idCertificado})}">Eliminar</a>
         </td>

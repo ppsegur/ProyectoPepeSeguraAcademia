@@ -12,21 +12,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.salesianostriana.dam.proyectopepesegura.modelo.Certificado;
 import com.salesianostriana.dam.proyectopepesegura.servicio.CertificadoServicio;
+import com.salesianostriana.dam.proyectopepesegura.servicio.CursoServicio;
 
 @Controller
 public class CertificadoController {
 	@Autowired
 	CertificadoServicio certificadoServicio;
-
+	
+	@Autowired
+	CursoServicio cursoServicio;
 
 	@GetMapping("/admin/Certificado")
 	public String listarCertificados(Model model) {
 		model.addAttribute("listaCertificado",certificadoServicio.findAll() );
+		model.addAttribute("listaCurso", cursoServicio.findAll());
 		return "admin/listaCertificado";
 	}
 	//mostrar formulario para añadir un nuevo certificado
 	@GetMapping("/admin/formularioCertificado")
 	public String mostrarFormularioCertificado(Model model) {
+		model.addAttribute("listaCurso",cursoServicio.findAll());
 		model.addAttribute("certificado", new Certificado());
 		return "admin/formularioCertificado";
 	}
@@ -39,6 +44,7 @@ public class CertificadoController {
 	public String mostrarFormularioEdicion(@PathVariable("idCertificado") long id, Model model) {
 		Optional<Certificado> certificadoEditar = certificadoServicio.findById(id);
 		if(certificadoEditar.isPresent()) {
+			model.addAttribute("listaCurso", cursoServicio.findAll());
 			model.addAttribute("certificado", certificadoEditar.get());
 			return "admin/editarFormularioCertificado";
 		}else {
@@ -58,10 +64,14 @@ public class CertificadoController {
 	@GetMapping("/admin/borrarCertificado/{idCertificado}")
 	public String borrar(@PathVariable("idCertificado") long id) {
 	Optional<Certificado> certificado = certificadoServicio.findById(id);
-		if(certificado.isPresent()){
+
+		if(certificado.isPresent()&& certificado.get().getCurso()!=null){
+			
+			return "redirect:/admin/Certificado?error=true";
+		}else {
+		
 		certificadoServicio.delete(certificado.get());
 		}
 		return "redirect:/admin/Certificado";
-		
 	}
 }

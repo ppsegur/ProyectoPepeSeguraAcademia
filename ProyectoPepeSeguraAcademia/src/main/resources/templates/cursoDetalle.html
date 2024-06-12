@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Curso</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	 <link rel="stylesheet" href="../static/css/" th:href="@{/css/detalleStyle.css}">
+
+</head>
+<body>
+    <div class="course-details-container">
+        <div class="course-details">
+            <h1>Detalles del Curso</h1>
+            <div th:if="${curso}">
+              
+            </div>
+            <p>Nombre del Curso: <span class="detail" th:text="${curso.nombre}">Nombre del Curso</span></p>
+            <p>Nivel de Dificultad: <span class="detail" th:text="${curso.nivelDificultad}">Nivel de Dificultad</span></p>
+            <p>Duración: <span class="detail" th:text="${curso.duracion}">Duración</span></p>
+            <p>Precio: <span class="detail" th:text="${curso.precio}">Precio</span></p>
+        </div>
+        <div class="back-button">
+            <a href="carrito.html" th:href="@{/carrito}">Volver al carrito de compra</a>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

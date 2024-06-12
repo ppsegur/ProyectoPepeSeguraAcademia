@@ -35,8 +35,16 @@
         <td th:text="${material.nombre}"></td>
         <td th:text="${material.tipo}"></td>
         <td th:text="${material.url}"></td>
-		<td th:text="${material.curso}"></td>
-        <td>
+		<td th:if="${material.curso==null}">No asignado</td>
+		<td th:if="${material.curso!=null}" th:text="${material.curso.nombre +' - ' + material.curso.nivelDificultad}"></td>
+	
+		
+		<div th:if="${error}" class="alert alert-danger" role="alert">
+		    <p th:text="${error}"></p>
+		</div>
+
+
+		  <td>
           <a type="button" class="btn btn-primary btn-sm" href="/admin/"  th:href="@{/admin/editarMaterial/{idMaterial}(idMaterial=${material.idMaterial})}">Editar</a>
           <a type="button" class="btn btn-danger btn-sm"  th:href="@{/admin/borrarMaterial/{id}(id=${material.idMaterial})}">Eliminar</a>
         </td>
@@ -48,5 +56,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
 </body>
 </html>

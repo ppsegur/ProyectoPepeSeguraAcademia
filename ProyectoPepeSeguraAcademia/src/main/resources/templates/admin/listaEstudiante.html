@@ -1,53 +1,97 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lista de Estudiante</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Estudiantes</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/" th:href="@{/css/styleTablas.css}">
 </head>
 <body>
+    <nav th:replace="~{/fragmentos/menuAdmin::navbar}"></nav>
+    <div class="alert alert-danger alert-dismissible fade show text-center" style="margin: 0 auto; width: 50%; margin-top: 50px;" role="alert" th:if="${param.error}">
+        <strong>!ERROR</strong> No puedes eliminar un administrador
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="container">
+        <h2>Tabla de Estudiantes</h2>
+        <hr>
+        <table id="userList" class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>UserName</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Correo</th>
+                    <th>DNI</th>
+                    <th>Certificados</th>
+                    <th>ROL</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="estudiante : ${listaEstudiante}">
+                    <td th:text="${estudiante.id}"></td>
+                    <td th:text="${estudiante.username}"></td>
+                    <td th:text="${estudiante.nombre}"></td>
+                    <td th:text="${estudiante.apellidos}"></td>
+                    <td th:text="${estudiante.correo}"></td>
+                    <td th:text="${estudiante.dni}"></td>
+                    <td th:text="${estudiante.Certificado}"></td>
+                    <td th:text="${estudiante.noEstudiante} ? 'Admin' : 'Estudiante'"></td>
+                    <td>
+                        <a class="btn btn-danger btn-sm" href="#" th:onclick="'javascript:confirmDelete(' + ${estudiante.id} + ');'">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="alert alert-danger text-center" th:if="${listErrorMenssage}" th:text="${listErrorMenssage}"> Error</div>
+    </div>
 
-<div class="container">
-  <h2>Tabla de Estudiantes</h2>
-  <hr>
-  <a class="btn btn-primary btn-sm" href="/admin/" th:href="@{/admin/formularioEstudiante}">Añadir</a>
+    <!-- Modal eliminar un usuario -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalTitle">Confirmar Eliminación</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro de que deseas eliminar a este estudiante?</p>
+                    <input type="hidden" id="confirmar" name="confirmar"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" onclick="deleteUser()">Eliminar Estudiante</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>UserName</th>
-        <th>Apellidos</th>
-        <th>Apellidos</th>
-		<th>Correo</th>
-		<th>DNI</th>
-		<th>Certificados</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      
-      <tr th:each="estudiante : ${listaEstudiante}">
-        <td th:text="${estudiante.id}"></td>
-        <td th:text="${estudiante.username}"></td>
-        <td th:text="${estudiante.nombre}"></td>
-        <td th:text="${estudiante.apellidos}"></td>
-		<td th:text="${estudiante.correo}"></td>
-		<td th:text="${estudiante.dni}"></td>
-		<td th:text="${estudiante.Certificado}"></td>
-		
-        <td>
-          <a type="button" class="btn btn-primary btn-sm" href="/admin/"  th:href="@{/admin/editarEstudiante/{id}(id=${estudiante.id})}">Editar</a>
-          <a type="button" class="btn btn-danger btn-sm"  th:href="@{/admin/borrarEstudiante/{id}(id = ${estudiante.id})}">Eliminar</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+    <!-- jQuery, Bootstrap JS y DataTables -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        function confirmDelete(id) {
+            $('#deleteModal').modal('show');
+            $("#confirmar").val(id);
+        }
+
+        function deleteUser() {
+            var id = $("#confirmar").val();
+            window.location.href = "/admin/borrarEstudiante/" + id;
+        }
+
+        $(document).ready(function() {
+            $('#userList').DataTable();
+        });
+    </script>
 </body>
 </html>

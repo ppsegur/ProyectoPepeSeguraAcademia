@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrito</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../static/css/" th:href="@{/css/styleTablas.css}">
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+		<div class="container">
+		       <h1>Carrito de Compras</h1>
+		       <div th:if="${carritoVacio}">
+		           <p>Tu carrito está vacío.</p>
+		       </div>
+			   <div th:if="${!carritoVacio}">
+            <table class="carrito-table">
+                <thead>
+                    <tr>
+                        <th>Curso</th>
+                     	<th>Nivel de dificultad</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="lv : ${venta.lv}">
+                        <td th:text="${lv.curso.nombre}">Curso</td>
+                        <td th:text="${lv.curso.nivelDificultad}">Nivel de dificultad</td>
+                        <td th:text="${lv.curso.precio }">Precio</td>
+                        <td>
+							
+							<form th:action="@{'/carrito/eliminarProducto/' + ${lv.curso.idCurso}}" method="post">
+							    <button type="submit" class="btn btn-danger eliminar-button">Eliminar</button>
+							</form>
+
+						<a class="btn btn-primary detalle-link" th:href="@{'/curso/detalle/' + ${lv.curso.idCurso}}">Detalles</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+			<div>
+			<p>Total: <span th:text="${Importe}"></span></p>
+			</div>
+            <div>
+                <form th:action="@{/carrito/checkout}" method="post">
+                    <button type="submit" class="btn btn-success checkout-button">Finalizar Compra</button>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a href="cursosEstudiantes.html" th:href="@{/user/curso}" class="btn btn-secondary comprar-mas-link">Seguir Comprando</a>
+        </div>
+    </div>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+</body>
+</html>

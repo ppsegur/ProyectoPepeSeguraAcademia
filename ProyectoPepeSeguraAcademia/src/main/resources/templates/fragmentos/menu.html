@@ -1,24 +1,38 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar de GlobalLingo</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Navbar de GlobalLingo</title>
 
-    
+
 </head>
-<body>
-    <nav  class="menuChulo "th:fragment="navbar">
-        <ul>
-            <li><a href="#">GLOBA<span style="color: #4CAF50;">LINGO</span></a></li>
-            <li><a href="#">inglés</a></li>
-            <li><a href="#">español</a></li>
-            <li><a href="#">francés</a></li>
-            <li><a href="#">sobre nosotros</a></li>
-			<li><a href="/admin/" th:href ="@{/logout}">Salir</a></li>
 
-        </ul>
-    </nav>
- 
+<body>
+	<nav class="menuChulo " th:fragment="navbar">
+		<ul>
+			<li><a href="../index.html" th:href="@{/}">GLOBA<span style="color: #4CAF50;">LINGO</span></a></li>
+			<li><a href="../cursosEstudiantes.html" th:href="@{/user/curso}">Cursos</a></li>
+			<li><a href="../inglesUser.html" th:href="@{/user/ingles}">Ingles</a></li>
+			<li><a href="../esUser.html" th:href="@{/user/espanol}">español</a></li>
+			<li><a href="../francesUser.html" th:href="@{/user/frances}">francés</a></li>
+			<li><a href="../lineaVentaUsuario.html" th:href="@{/ventas}">Tus compras</a></li>
+			<li><a href="../cursosComprado.html" th:href="@{/user/curso/comprado}">Tus cursos</a></li>
+			<li><a href="#">sobre nosotros</a></li>
+			<li><a href="/admin/" th:href="@{/logout}">Salir</a></li>
+
+			<li></li>
+			<li></li>
+			<li><a href="../carrito.html" th:href="@{/carrito}"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+						height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+						<path
+							d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+					</svg></a></li>
+
+		</ul>
+	</nav>
+
 </body>
+
 </html>
