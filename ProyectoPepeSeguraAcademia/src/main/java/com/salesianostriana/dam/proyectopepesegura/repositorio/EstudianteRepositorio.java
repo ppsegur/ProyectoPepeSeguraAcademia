@@ -12,4 +12,7 @@ public interface EstudianteRepositorio extends JpaRepository<Estudiante, Long>{
 	
 	Optional<Estudiante> findFirstByUsername(String username);
 	
+	//Consulta para favoritos
+	Estudiante findByUsername(String username);
+	
 }

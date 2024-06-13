@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Cursos Favoritos</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="../static/css/" th:href="@{/css/cursos.css}">
+</head>
+<body>
+    <nav th:replace="~{/fragmentos/menu::navbar}"></nav>
+<hr>
+<hr>
+    <div class="container mt-4">
+        <h2>Mis Cursos Favoritos</h2>
+        <hr>
+
+        <div class="row">
+            <div class="col-md-4" th:each="curso : ${listaFav}">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${curso.nombre}"></h5>
+                        <p class="card-text" th:text="'Nivel de Dificultad: ' + ${curso.nivelDificultad}"></p>
+                        <p class="card-text" th:text="'Duración: ' + ${curso.duracion} + ' horas'"></p>
+                        <p class="card-text" th:text="'Precio: $' + ${curso.precio}"></p>
+                        <p class="card-text">
+                            <ul>
+                                <li th:each="certificado : ${curso.certificado}" th:text="${certificado.nombreC}"></li>
+                            </ul>
+                        </p>
+                        <p class="card-text">
+                            <ul>
+                                <li th:each="material : ${curso.materiales}" th:text="${material.nombre}"></li>
+                            </ul>
+                        </p>
+                        <form th:action="@{/eliminarFavorito/{idCurso}(idCurso=${curso.idCurso})}" method="post">
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fas fa-star"></i> Eliminar de Favoritos
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+</body>
+</html>

@@ -8,9 +8,10 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
@@ -46,6 +47,7 @@ public class Curso {
 	//Booleano para mostrar o no los cursos
 	private boolean comprado;
 	
+	 
 public String getNivelDificultad() {
     return nivelDificultad;
 }
@@ -69,8 +71,13 @@ public void setNivelDificultad(String nivelDificultad) {
 	@OneToMany(mappedBy = "curso"  ,cascade = CascadeType.ALL, orphanRemoval = true)
 	@Builder.Default
 	private List<LineaVenta> lv  = new ArrayList<>();
-
 	
+	 @ManyToMany(mappedBy = "cursosFavoritos", fetch = FetchType.EAGER)
+	 @Builder.Default
+	 @ToString.Exclude
+	 @EqualsAndHashCode.Exclude
+	    private List<Estudiante> estudiantesFavoritos = new ArrayList<Estudiante>();
+	 
     //Metodos helper
 	/**
 	 * Método auxiliar para el tratamiento bidireccional de la asociación. Añade un lv
