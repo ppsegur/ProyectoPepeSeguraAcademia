@@ -8,6 +8,7 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
@@ -71,8 +72,11 @@ public void setNivelDificultad(String nivelDificultad) {
 	@Builder.Default
 	private List<LineaVenta> lv  = new ArrayList<>();
 	
-	 @ManyToMany(mappedBy = "cursosFavoritos")
-	    private List<Estudiante> estudiantesFavoritos = new ArrayList<>();
+	 @ManyToMany(mappedBy = "cursosFavoritos", fetch = FetchType.EAGER)
+	 @Builder.Default
+	 @ToString.Exclude
+	 @EqualsAndHashCode.Exclude
+	    private List<Estudiante> estudiantesFavoritos = new ArrayList<Estudiante>();
 	 
     //Metodos helper
 	/**

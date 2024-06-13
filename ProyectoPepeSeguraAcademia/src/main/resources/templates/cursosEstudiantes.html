@@ -46,7 +46,7 @@
 		      <button type="submit" class="btn btn-primary btn-sm" >COMPRAR</button>
 		  </form>
 		  <!--Icono de favoritos
-		-->		  <form th:action="@{/user/agregarFavorito/{idCurso}(idCurso=${curso.idCurso})}" method="post">
+		-->		  <form th:action="@{/agregarFavorito/{idCurso}(idCurso=${curso.idCurso})}" method="post">
 						<input type="hidden" name="curso" value="${curso}">
 		                <button type="submit" class="btn btn-warning btn-sm"> 			<i class="bi bi-balloon-heart"></i>
 		              </form>

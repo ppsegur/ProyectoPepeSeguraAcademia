@@ -3,6 +3,7 @@ package com.salesianostriana.dam.proyectopepesegura.modelo;
 import java.time.LocalDate;
 
 
+
 import java.util.Collection;
 
 import java.util.List;
@@ -26,12 +27,11 @@ import lombok.AllArgsConstructor;
 
 import jakarta.persistence.Table;
 
-import lombok.AllArgsConstructor;
 
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
+
 import lombok.NoArgsConstructor;
 
 import lombok.ToString;
@@ -121,15 +121,15 @@ public class Estudiante implements UserDetails{
 	
 	
 	
-	 @ManyToMany
+	 @ManyToMany(fetch = FetchType.EAGER)
 	    @JoinTable(
 	        name = "Favorito",
 	        joinColumns = @JoinColumn(name = "estudiante_id"),
 	        inverseJoinColumns = @JoinColumn(name = "curso_id")
+	       
 	    )
-	 	@ToString.Exclude
-	 	@EqualsAndHashCode.Exclude
-	    private List<Curso> cursosFavoritos = new ArrayList<>();
+	 	@Builder.Default
+	    private List<Curso> cursosFavoritos = new ArrayList<Curso>();
 	
 	//Métodos helper 
 	/**
@@ -148,11 +148,21 @@ public class Estudiante implements UserDetails{
 	 * @param a
 	 */
 	public void removeCertificado(Certificado c) {
-		this.Certificado.add(c);
+		this.Certificado.remove(c);
 		c.setEstudiante(null);
 	
 }
+	//Metodos helper para añadir los favoritos 
+	public void addFavoritos(Curso c) {
+		this.cursosFavoritos.add(c);
+		c.getEstudiantesFavoritos().add(this);
+	}
 	
+	public void removeFavorito(Curso c) {
+		c.getEstudiantesFavoritos().remove(this);
+		this.cursosFavoritos.remove(c);
+	
+	}
 
 
 	

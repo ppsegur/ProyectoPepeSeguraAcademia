@@ -31,23 +31,26 @@ public class EstudianteController {
 	@Autowired
 	public CursoServicio cursoServicio;
 	
+	//Controlador para qeu el administrador pueda ver la lista de estudiantes o usuarios 
 	@GetMapping("/admin/Estudiante")
 	public String listarTodosEstudiante(Model model) {
 		model.addAttribute("listaEstudiante",estudianteServicio.findAll() );
 		return "admin/listaEstudiante";
 	}
+	//Controlador deprecateD para añadir un estudiante
 	@GetMapping("/admin/formularioEstudiante")
 	public String mostrarFormularioEstudiante(Model model) {
 		model.addAttribute("estudiante", new Estudiante());
 		return "admin/formularioEstudiante";
 	}
-	
+	//Procesar el anterior método
 	@PostMapping("/admin/nuevoEstudiante/submit")
 	public String procesarFormularioEstudainte(@ModelAttribute("estudiante") Estudiante e) {
 		estudianteServicio.save(e);
 		return "redirect:/admin/listaEstudiante";
 	}
 	
+	//
 	@GetMapping("/admin/editarEstudiante/{id}")
 	public String mostrarFormularioEdicionEstudiante(@PathVariable("id") long id, Model model) {
 		Optional<Estudiante> estudianteEditar = estudianteServicio.findById(id);
@@ -63,7 +66,7 @@ public class EstudianteController {
 		estudianteServicio.save(e);
 		return "redirect:/admin/Estudiante";
 	}
-
+	//Controlador para borra estudiante con modal(y con error)
 	@GetMapping("/admin/borrarEstudiante/{id}")
 	public String borrarEstudiante(@PathVariable("id") long id) {
 	    Optional<Estudiante> estudiante = estudianteServicio.findById(id);
@@ -76,19 +79,20 @@ public class EstudianteController {
 	    }
 	    return "redirect:/admin/Estudiante";
 	}
+	//COntrolador para el registro
 	 @GetMapping("/user/nuevoEstudiante")
 	    public String guardarEstudiante(Model model) {
 	        model.addAttribute("estudiante", new Estudiante());
 	        return "register"; 
 	    }
-
+	 //controlador para procesar el anterior
 	    @PostMapping("/user/nuevoEstudiante/submit")
 	    public String register(@ModelAttribute("estudiante") Estudiante estudiante) {
 	    	estudianteServicio.save(estudiante).setNoEstudiante(false);
 	        return "redirect:/index";
 	    }
 	    
-	    
+	    //Controlador para listar ventas
 	    @GetMapping("/ventas")
 	    public String listarVentas(@AuthenticationPrincipal Estudiante estudiante, Model model) {
 	    	List<Venta> ventas = ventaServicio.obtenerTodasLasVentas(estudiante);
@@ -112,7 +116,7 @@ public class EstudianteController {
 	        estudianteServicio.save(e);
 	        if (curso.isPresent()) {
 	          if(e.getCursosFavoritos().contains(curso.get())) {
-	        	 
+	        	  	return "redirect:/user/cursofav";
 	          }else{
 	        	  e.getCursosFavoritos().add(curso.get());
 	        	  estudianteServicio.edit(e);
@@ -122,7 +126,7 @@ public class EstudianteController {
 	        return "redirect:/user/cursofav";
 	    }
 	    
-	    @GetMapping("/eliminarFavorito/{cursoId}")
+	    @PostMapping("/eliminarFavorito/{cursoId}")
 	    public String eliminarFavorito(@AuthenticationPrincipal Estudiante e, @PathVariable("cursoId") long cursoId) {
 	        
 	        Optional<Curso> curso = cursoServicio.findById(cursoId);

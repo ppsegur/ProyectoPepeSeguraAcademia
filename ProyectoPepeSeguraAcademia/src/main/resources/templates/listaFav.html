@@ -32,7 +32,7 @@
                                 <li th:each="material : ${curso.materiales}" th:text="${material.nombre}"></li>
                             </ul>
                         </p>
-                        <form th:action="@{/user/eliminarFavorito/{idCurso}(idCurso=${curso.idCurso})}" method="post">
+                        <form th:action="@{/eliminarFavorito/{idCurso}(idCurso=${curso.idCurso})}" method="post">
                             <button type="submit" class="btn btn-danger btn-sm">
                                 <i class="fas fa-star"></i> Eliminar de Favoritos
                             </button>
