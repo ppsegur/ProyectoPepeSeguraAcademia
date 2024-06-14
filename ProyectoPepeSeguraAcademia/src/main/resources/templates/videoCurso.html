@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video del Curso</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav th:replace="~{/fragmentos/menu::navbar}"></nav>
+
+    <div class="container mt-5">
+        <div th:if="${curso != null}">
+            <h1 th:text="'Video del Curso: ' + ${curso.nombre}"></h1>
+            <div th:if="${curso.materiales != null}">
+                <div th:each="material : ${curso.materiales}">
+                    <div th:if="${material.url != null}">
+                        <div>
+                            <iframe width="100%" height="480"
+                                    th:src="'https://www.youtube.com/embed/' + ${#strings.split(material.url, 'v=')[1]}"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div th:unless="${curso.materiales != null}">
+                <p>No hay materiales disponibles para este curso.</p>
+            </div>
+            <div class="mt-3">
+                <a href="@{/user/curso}" class="btn btn-secondary">Volver a la Lista de Cursos</a>
+            </div>
+        </div>
+        <div th:unless="${curso != null}">
+            <p>Curso no encontrado.</p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

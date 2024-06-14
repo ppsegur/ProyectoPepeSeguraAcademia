@@ -213,6 +213,17 @@ public class CursoController {
 	    }
 	}
 	
+	//Controlador para mostrar video 
+	@GetMapping("/video/{idCurso}")
+    public String mostrarVideoCurso(@PathVariable("idCurso") long idCurso, Model model) {
+        Optional<Curso> curso = cursoServicio.findById(idCurso);
+        if (curso.isPresent()) {
+            model.addAttribute("curso", curso.get());
+        } 
+
+        return "videoCurso";
+    }
+	
 }
 	
 

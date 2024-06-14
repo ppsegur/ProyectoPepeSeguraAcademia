@@ -4,7 +4,7 @@ INSERT INTO Material ( id_material ,nombre, tipo, url ) VALUES(1,'material a1 in
 ALTER SEQUENCE Material_seq RESTART WITH 51;
 
 INSERT INTO Curso (id_curso,nombre,nivel_dificultad, duracion, precio, comprado) VALUES(1,'Ingles', 'a1', '2 semanas' ,25.00, false);
-INSERT INTO Curso (id_curso,nombre,nivel_dificultad duracion, precio, comprado) VALUES(2,'Ingles', 'a2', '2 semanas' ,25.00, false);
+INSERT INTO Curso (id_curso,nombre,nivel_dificultad, duracion, precio, comprado) VALUES(2,'Ingles', 'a2', '2 semanas' ,25.00, false);
 INSERT INTO Curso (id_curso,nombre,nivel_dificultad, duracion, precio, comprado) VALUES(3,'Ingles', 'b1', '2 semanas', 40.00, false);
 INSERT INTO Curso (id_curso,nombre,nivel_dificultad, duracion, precio, comprado) VALUES(4,'Ingles', 'b2', '2 semanas' ,40.00, false);
 INSERT INTO Curso (id_curso,nombre,nivel_dificultad, duracion, precio, comprado) VALUES(5,'Frances', 'a1','2 semanas' , 25.00, false);
