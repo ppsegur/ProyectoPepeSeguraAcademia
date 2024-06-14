@@ -48,6 +48,14 @@ public class CursoServicio extends BaseServiceImpl<Curso, Long, CursoRepositorio
 	public Optional<Curso> finById(Long id){
 		return cursoRepositorio.findById(id);
 	}
+	//USo de la consulta de los mas caros 
+	public List<Curso> filtrarPorMasCaros(){
+		return cursoRepositorio.findByCaros();
+	}
+	//Consulta para mostrar video 
+	 public Curso buscarPorId(Long id) {
+	        return cursoRepositorio.findById(id).orElse(null); // Devuelve null si no se encuentra el curso
+	    }
 	
 	public Curso asignaCertificadoACurso(Curso c,  Long id ) {
 		Certificado certificado = c.getCertificado();

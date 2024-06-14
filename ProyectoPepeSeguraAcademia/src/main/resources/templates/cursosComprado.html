@@ -39,8 +39,14 @@
 		  		<li th:each="material : ${curso.materiales}" th:text="${material.nombre}"></li>
 		  	</ul>
 		  </p>		
+<<<<<<< HEAD
 		  <a th:href="@{/video/{idCurso}(idCurso=${curso.idCurso})}" class="btn btn-primary btn-sm">Acceder</a>
 		
+=======
+		  <form th:action="@{/video/{idCurso}(idCurso=${curso.idCurso})}" method="get" class="form-inline w-100">
+		      <input type="hidden" name="curso" th:value="${curso}">
+		      <button type="submit" class="btn btn-primary btn-sm" >Acceder</button>
+>>>>>>> c3ebacb9632c0bbcbfcba484a3599bedaacc0bbc
 		  </form>
         </div>
       </div>

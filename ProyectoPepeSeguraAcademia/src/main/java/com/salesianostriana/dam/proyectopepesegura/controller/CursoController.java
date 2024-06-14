@@ -96,13 +96,13 @@ public class CursoController {
     		return "redirect:/admin/Curso";
     }
 
-/**
+/*
 	@PostMapping("/admin/editarCurso/submit")
 	public String editarMaterialSubmit(@ModelAttribute("curso") Curso c) {
 	    cursoServicio.edit(c);
 		return "redirect:/admin/Curso";
 	}
-	**/
+	
 	/*Borrar curso
 	@GetMapping("/admin/borrarCurso/{idCurso}")
 	public String borrar(@PathVariable("idCurso") long idCurso) {
@@ -155,13 +155,7 @@ public class CursoController {
     	model.addAttribute("listaCurso", cursoServicio.obtenerCursosPorComprado(true));
     	return "/cursosComprado";
     }
-    /*
-     * Muestra todos los cursos Comprados y sin comprar /primera versión
-	@GetMapping("/user/curso")
-	public String listarCursosUsuarios(Model model) {
-		model.addAttribute("listaCurso", cursoServicio.findAll() );
-		return "/cursosEstudiantes";
-	}*/
+    
 	//Método para buscar por nombre (consulta derivada)
 	@GetMapping("/user/cursoBuscar")
     public String cursoBuscar(@RequestParam(required = false) String nombre, 
@@ -178,7 +172,13 @@ public class CursoController {
         return "cursosComprado";
 	}
 
-
+	//Metodo para filtrar por los cursos mas caros
+	@GetMapping("/user/caros")
+	public String cursoMasCaros(Model model) {
+		List<Curso> listacurso = cursoServicio.filtrarPorMasCaros();
+		model.addAttribute("listaCurso", listacurso);
+		return "cursosEstudiantes";
+	}
 	//mostrar la lista de cursos en Ingles
 	@GetMapping("/user/ingles")
 	public String listarPorIdiomaIngles(Model model) {
@@ -212,6 +212,17 @@ public class CursoController {
 	        return "error"; // Por ejemplo, podrías redirigir a una página de error
 	    }
 	}
+	//Controlador par ver el curso 
+    @GetMapping("/video/{id}")
+    public String verCurso(@PathVariable Long id, Model model) {
+      Curso curso = cursoServicio.buscarPorId(id);
+        if (curso != null) {
+            model.addAttribute("curso", curso);
+        }else {
+        	model.addAttribute("curso", null);
+        }
+        return "videoCurso"; 
+    }
 	
 	//Controlador para mostrar video 
 	@GetMapping("/video/{idCurso}")

@@ -7,6 +7,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<<<<<<< HEAD
     <nav th:replace="~{/fragmentos/menu::navbar}"></nav>
 
     <div class="container mt-5">
@@ -21,10 +22,24 @@
                                     frameborder="0"
                                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen></iframe>
+=======
+    <nav th:replace="~{/fragmentos/menu::navbar}"></nav> <!-- Navegación usando un fragmento Thymeleaf -->
+
+    <div class="container mt-5">
+        <div th:if="${curso != null}"> <!-- Condicional para mostrar contenido si el curso está presente -->
+            <h1 th:text="'Video del Curso: ' + ${curso.nombre}"></h1> <!-- Mostrar el nombre del curso -->
+            <div th:if="${curso.materiales != null}"> <!-- Condicional para verificar si hay materiales -->
+                <div th:each="material : ${curso.materiales}"> <!-- Iterar sobre los materiales del curso -->
+                    <div th:if="${material.url != null}"> <!-- Condicional para verificar si la URL del material está presente -->
+                        <div>
+                            <!-- Construir la URL del video de YouTube usando JavaScript -->
+                            <div th:attr="data-url=${material.url}" class="youtube-video"></div>
+>>>>>>> c3ebacb9632c0bbcbfcba484a3599bedaacc0bbc
                         </div>
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
             <div th:unless="${curso.materiales != null}">
                 <p>No hay materiales disponibles para este curso.</p>
             </div>
@@ -33,11 +48,64 @@
             </div>
         </div>
         <div th:unless="${curso != null}">
+=======
+            <div th:unless="${curso.materiales != null}"> <!-- Mostrar mensaje si no hay materiales -->
+                <p>No hay materiales disponibles para este curso.</p>
+            </div>
+            <div class="mt-3">
+                <a href="@{/user/curso}" class="btn btn-secondary">Volver a la Lista de Cursos</a> <!-- Botón para volver a la lista de cursos -->
+            </div>
+        </div>
+        <div th:unless="${curso != null}"> <!-- Mostrar mensaje si el curso no está presente -->
+>>>>>>> c3ebacb9632c0bbcbfcba484a3599bedaacc0bbc
             <p>Curso no encontrado.</p>
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<<<<<<< HEAD
+=======
+    <script>
+		
+		//investigacion= YouTube Embedded Players and Player Parameters
+        document.addEventListener("DOMContentLoaded", function() {
+            const videos = document.querySelectorAll(".youtube-video");
+            videos.forEach(function(video) {
+                const url = video.getAttribute("data-url");
+                let videoId = null;
+
+                // Regular expressions to extract video ID from different YouTube URL formats
+                const patterns = [
+                    /youtu\.be\/([a-zA-Z0-9_-]+)/, // short URL (youtu.be)
+                    /youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/, // standard URL (youtube.com/watch?v=)
+                    /youtube\.com\/embed\/([a-zA-Z0-9_-]+)/, // embed URL (youtube.com/embed/)
+                    /youtube\.com\/v\/([a-zA-Z0-9_-]+)/ // alternative embed URL (youtube.com/v/)
+                ];
+
+                for (const pattern of patterns) {
+                    const match = url.match(pattern);
+                    if (match && match[1]) {
+                        videoId = match[1];
+                        break;
+                    }
+                }
+
+                if (videoId) {
+                    const iframe = document.createElement("iframe");
+                    iframe.width = "100%";
+                    iframe.height = "480";
+                    iframe.src = `https://www.youtube.com/embed/${videoId}`;
+                    iframe.frameborder = "0";
+                    iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
+                    iframe.allowFullscreen = true;
+                    video.appendChild(iframe);
+                } else {
+                    video.innerHTML = "<p>La URL del material no es válida para incrustar el video.</p>";
+                }
+            });
+        });
+    </script>
+>>>>>>> c3ebacb9632c0bbcbfcba484a3599bedaacc0bbc
 </body>
 </html>

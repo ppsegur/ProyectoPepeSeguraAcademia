@@ -4,7 +4,7 @@ import java.util.List;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
+import org.springframework.data.jpa.repository.Query;
 
 import com.salesianostriana.dam.proyectopepesegura.modelo.Curso;
 
@@ -22,5 +22,8 @@ public interface CursoRepositorio extends JpaRepository<Curso, Long>{
 	//Una unión de las dos anteriores
 	List<Curso> findByNombreContainsIgnoreCaseAndCompradoFalse(String nombre);
 	List<Curso> findByNombreContainsIgnoreCaseAndCompradoTrue(String nombre);
+	//Buscar el producto con más ventas
+	@Query ("select c from Curso c where c.precio > 30")
+	List<Curso> findByCaros();
 
 }
