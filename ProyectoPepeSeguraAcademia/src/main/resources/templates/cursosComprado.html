@@ -39,7 +39,7 @@
 		  		<li th:each="material : ${curso.materiales}" th:text="${material.nombre}"></li>
 		  	</ul>
 		  </p>		
-		  <form th:action="@{/carrito/agregarCurso/{idCurso}(idCurso=${curso.idCurso})}" method="post" class="form-inline w-100">
+		  <form th:action="@{/video/{idCurso}(idCurso=${curso.idCurso})}" method="get" class="form-inline w-100">
 		      <input type="hidden" name="curso" th:value="${curso}">
 		      <button type="submit" class="btn btn-primary btn-sm" >Acceder</button>
 		  </form>

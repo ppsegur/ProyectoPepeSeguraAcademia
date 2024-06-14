@@ -36,9 +36,9 @@ public class CarritoServicio {
 	// Metodo agregar producto
 	public void addProducto(Estudiante estudiante, Curso curso) {
 		Venta carrito = getCarrito(estudiante);
+		//Traemos la venta 
 		if (!ventaServicio.hayProductosEnCarrito(estudiante, curso)) {
-			carrito.addLineaVenta(LineaVenta.
-					builder()
+			carrito.addLineaVenta(LineaVenta.builder() //añadimos la linea Venta al carrito
 					.curso(curso).
 					build());
 		} else {
@@ -64,6 +64,7 @@ public class CarritoServicio {
 	private Optional<LineaVenta> BuscarPorCurso(Estudiante e, Curso c) {
 		Venta carrito = getCarrito(e);
 		return carrito.getLv().stream().filter(lv -> lv.getCurso().getIdCurso() == c.getIdCurso()).findFirst();
+		//en la labda lo que hacemos es coger el id del producto que nos pasan y lo comparamos, y nos devolverá el perimero que enceuntre
 	}
 
 	// Finalizar comprar
@@ -96,7 +97,7 @@ public class CarritoServicio {
 
 	// Método obtener el carrito de un estudiante
 	public Venta getCarrito(Estudiante e) {
-		return ventaServicio.getVentasSinFinalizar(e).orElseGet(() -> crearCarrito(e));
+		return ventaServicio.getVentasSinFinalizar(e).orElseGet(() -> crearCarrito(e));//nos devuelve la venta sin finalizar y si no me crea un carrito
 	}
 
 	// Productos en carrito
@@ -104,14 +105,15 @@ public class CarritoServicio {
 	    Venta carrito = getCarrito(e);
 	    if (carrito != null) {
 	        return carrito.getLv().stream()
-	            .collect(Collectors.toMap(LineaVenta::getCurso, lv -> 1));
+	            .collect(Collectors.toMap(LineaVenta::getCurso,lv -> 1));
 	    } else {
 	        return Collections.emptyMap(); // O devuelve un mapa vacío o maneja de otra manera los casos nulos
 	    }
 	}
 
-	// Importe Total
+	// Importe Total calcula
 	public double getImporteTotal(Estudiante e) {
+		//lo que hacemos es cojer de los stream de linea venta su precio y despues sumamos todo
 		return getCarrito(e).getLv().stream().mapToDouble(LineaVenta::getPrecioLineaVenta).sum();
 	}
 		/*

@@ -21,6 +21,9 @@
         <input type="search" name="nombre" class="form-control rounded" placeholder="Buscar por nombre" aria-label="Buscar por nombre" aria-describedby="search-addon" />
         <button type="submit" class="btn btn-outline-primary ml-2">Buscar</button>
       </form>
+	  <form th:action="@{/user/caros}" method="get" class="form-inline w-100 mt-2">
+	          <button type="submit" class="btn btn-outline-primary">Cursos caros</button>
+	      </form>
     </div>
 	
   <div class="row">
