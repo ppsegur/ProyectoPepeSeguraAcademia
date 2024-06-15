@@ -212,17 +212,7 @@ public class CursoController {
 	        return "error"; // Por ejemplo, podrías redirigir a una página de error
 	    }
 	}
-	//Controlador par ver el curso 
-    @GetMapping("/video/{id}")
-    public String verCurso(@PathVariable Long id, Model model) {
-      Curso curso = cursoServicio.buscarPorId(id);
-        if (curso != null) {
-            model.addAttribute("curso", curso);
-        }else {
-        	model.addAttribute("curso", null);
-        }
-        return "videoCurso"; 
-    }
+
 	
 	//Controlador para mostrar video 
 	@GetMapping("/video/{idCurso}")

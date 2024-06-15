@@ -21,6 +21,7 @@
 		<div th:if="${param.error}" class="alert alert-danger">
 			            <p>No puedes eliminar un curso con datos asociados, si no ves un material asociado, este curso será asociado a una venta</p>
 			        </div>
+					<a class="btn btn-primary btn-sm" href="/admin/" th:href="@{/admin/formularioCurso}">Añadir </a>
 		<table class="table">
 			<thead>
 				<tr>

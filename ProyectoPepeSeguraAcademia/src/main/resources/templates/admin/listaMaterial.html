@@ -21,7 +21,6 @@
       <tr>
         <th>ID</th>
         <th>Nombre</th>
-        <th>Tipo</th>
         <th>URL</th>
 		<th>Curso</th>
         <th>Acciones</th>
@@ -33,7 +32,6 @@
       <tr th:each="material : ${listaMateriales}">
         <td th:text="${material.idMaterial}"></td>
         <td th:text="${material.nombre}"></td>
-        <td th:text="${material.tipo}"></td>
         <td th:text="${material.url}"></td>
 		<td th:if="${material.curso==null}">No asignado</td>
 		<td th:if="${material.curso!=null}" th:text="${material.curso.nombre +' - ' + material.curso.nivelDificultad}"></td>
