@@ -25,4 +25,12 @@ public interface VentaRepositorio  extends JpaRepository<Venta, Long> {
 	    Optional<Venta> findByEstudianteAndFinalizadaFalse(Estudiante estudiante);
 	    boolean existsByEstudianteAndFinalizadaFalse(Estudiante estudiante);
 	    List<Venta> findByEstudiante(Estudiante e);
+	    
+	    
+	    //Consulta para ver el usuario con más ventas
+	    @Query("SELECT v.estudiante FROM Venta v GROUP BY v.estudiante ORDER BY SUM(v.importeTotal) DESC")
+	    Estudiante findEstudianteConMasVentas();
+	    //Consulta para ver el total de ventas
+	    @Query("SELECT SUM(v.importeTotal) FROM Venta v")
+	    double findTotalVentas();
 }

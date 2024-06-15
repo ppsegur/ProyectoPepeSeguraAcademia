@@ -49,12 +49,12 @@ c
                 const url = video.getAttribute("data-url");
                 let videoId = null;
 
-                // Regular expressions to extract video ID from different YouTube URL formats
+                // 
                 const patterns = [
-                    /youtu\.be\/([a-zA-Z0-9_-]+)/, // short URL (youtu.be)
-                    /youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/, // standard URL (youtube.com/watch?v=)
-                    /youtube\.com\/embed\/([a-zA-Z0-9_-]+)/, // embed URL (youtube.com/embed/)
-                    /youtube\.com\/v\/([a-zA-Z0-9_-]+)/ // alternative embed URL (youtube.com/v/)
+                    /youtu\.be\/([a-zA-Z0-9_-]+)/, //
+                    /youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/,
+                    /youtube\.com\/embed\/([a-zA-Z0-9_-]+)/, 
+                    /youtube\.com\/v\/([a-zA-Z0-9_-]+)/ 
                 ];
 
                 for (const pattern of patterns) {

@@ -16,7 +16,7 @@
                     <th>Estudiante</th>
                     <th>Fecha</th>
                     <th>Total</th>
-                    <th>Detalles</th>
+           
                 </tr>
             </thead>
             <tbody>
@@ -25,10 +25,31 @@
                     <td th:text="${venta.estudiante.nombre}"></td>
                     <td th:text="${venta.fechaPedido}"></td>
                     <td th:text="${venta.importeTotal}"></td>
-                    <td>
-                        <a class="btn btn-primary" th:href="@{'/admin/venta/' + ${venta.idVenta}}">Ver Detalles</a>
-                    </td>
+                 
                 </tr>
+				<div class="container">
+				    <h1>Total de ventas</h1>
+				    <p>Total: <span th:text="${totalVentas}"></span> EUR</p>
+				    <a href="/ventas" class="btn btn-primary">Volver</a>
+				</div>
+				<head>
+				    <title>Estudiante con más ventas</title>
+				</head>
+				<body>
+					<div>
+					           <h3>Total de ventas: <span th:text="${totalVentas}"></span> EUR</h3>
+					           <div th:if="${estudianteConMasVentas != null}">
+					               <h3>Estudiante con más ventas</h3>
+					               <p>Nombre: <span th:text="${estudianteConMasVentas.nombre}"></span></p>
+					               <p>Correo: <span th:text="${estudianteConMasVentas.correo}"></span></p>
+					           </div>
+					           <div th:if="${estudianteConMasVentas == null}">
+					               <p>No hay datos disponibles.</p>
+					           </div>
+						
+				</body>
+				</html>
+
             </tbody>
         </table>
     </div>
