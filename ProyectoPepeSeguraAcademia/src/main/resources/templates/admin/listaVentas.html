@@ -3,55 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista de Ventas</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="../static/css/" th:href="@{/css/styleTablas.css}"></head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/styleTablas.css" th:href="@{/css/styleTablas.css}">
+   
+</head>
 <body>
+	<nav  th:replace="~{/fragmentos/menuAdmin::navbar}"></nav>
+
     <div class="container">
         <h1>Lista de Ventas</h1>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID Venta</th>
-                    <th>Estudiante</th>
-                    <th>Fecha</th>
-                    <th>Total</th>
-           
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="venta : ${listaVentas}">
-                    <td th:text="${venta.idVenta}"></td>
-                    <td th:text="${venta.estudiante.nombre}"></td>
-                    <td th:text="${venta.fechaPedido}"></td>
-                    <td th:text="${venta.importeTotal}"></td>
-                 
-                </tr>
-				<div class="container">
-				    <h1>Total de ventas</h1>
-				    <p>Total: <span th:text="${totalVentas}"></span> EUR</p>
-				    <a href="/ventas" class="btn btn-primary">Volver</a>
-				</div>
-				<head>
-				    <title>Estudiante con más ventas</title>
-				</head>
-				<body>
-					<div>
-					           <h3>Total de ventas: <span th:text="${totalVentas}"></span> EUR</h3>
-					           <div th:if="${estudianteConMasVentas != null}">
-					               <h3>Estudiante con más ventas</h3>
-					               <p>Nombre: <span th:text="${estudianteConMasVentas.nombre}"></span></p>
-					               <p>Correo: <span th:text="${estudianteConMasVentas.correo}"></span></p>
-					           </div>
-					           <div th:if="${estudianteConMasVentas == null}">
-					               <p>No hay datos disponibles.</p>
-					           </div>
-						
-				</body>
-				</html>
-
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID Venta</th>
+                            <th>Estudiante</th>
+                            <th>Fecha</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="venta : ${listaVentas}">
+                            <td th:text="${venta.idVenta}"></td>
+                            <td th:text="${venta.estudiante.nombre}"></td>
+                            <td th:text="${venta.fechaPedido}"></td>
+                            <td th:text="${venta.importeTotal}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <div>
+                    <h3>Total de ventas: <span th:text="${totalVentas}"></span> EUR</h3>
+                    <div th:if="${estudianteConMasVentas != null}">
+                        <h3>Estudiante con más ventas</h3>
+                        <p>Nombre: <span th:text="${estudianteConMasVentas.nombre}"></span></p>
+                        <p>Correo: <span th:text="${estudianteConMasVentas.correo}"></span></p>
+                    </div>
+                    <div th:if="${estudianteConMasVentas == null}">
+                        <p>No hay datos disponibles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

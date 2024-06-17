@@ -1,7 +1,8 @@
 
 
-INSERT INTO Material ( id_material ,nombre,  url ) VALUES(1,'material a1 ingles','https://youtu.be/Jzc4HDOKTKg?si=XGFRehqwEeqfgv99');
-ALTER SEQUENCE Material_seq RESTART WITH 51;
+
+
+
 
 INSERT INTO Curso (id_curso,nombre,nivel_dificultad, duracion, precio, comprado) VALUES(1,'Ingles', 'a1', '2 semanas' ,25.00, false);
 INSERT INTO Curso (id_curso,nombre,nivel_dificultad, duracion, precio, comprado) VALUES(2,'Ingles', 'a2', '2 semanas' ,25.00, false);
@@ -16,6 +17,17 @@ INSERT INTO Curso (id_curso,nombre,nivel_dificultad, duracion, precio, comprado)
 INSERT INTO Curso (id_curso,nombre,nivel_dificultad, duracion, precio, comprado) VALUES(11,'Frances', 'b1','2 semanas' , 40.00, false);
 INSERT INTO Curso (id_curso,nombre,nivel_dificultad, duracion, precio, comprado) VALUES(12,'Frances', 'b2','2 semanas' , 40.00, false);
 ALTER SEQUENCE Curso_seq RESTART WITH 62;
+
+INSERT INTO Material ( id_material ,nombre,  url ,id_curso) VALUES(1,'material a1 ingles','https://youtu.be/Jzc4HDOKTKg?si=XGFRehqwEeqfgv99',1);
+ALTER SEQUENCE Material_seq RESTART WITH 51;
+
+INSERT INTO Certificado(id_certificado, nombreC, id_curso) VALUES(1,'Inglés A1',1);
+INSERT INTO Certificado(id_certificado, nombreC, id_curso) VALUES(2,'Inglés A2',2);
+INSERT INTO Certificado(id_certificado, nombreC, id_curso) VALUES(3,'Inglés B1',3);
+INSERT INTO Certificado(id_certificado, nombreC, id_curso) VALUES(4,'Inglés B2',4);
+INSERT INTO Certificado(id_certificado, nombreC,id_curso) VALUES(5,'Francés A1',5);
+INSERT INTO Certificado(id_certificado, nombreC, id_curso) VALUES(6,'Francés A2',6);
+ALTER SEQUENCE Certificado_seq RESTART WITH 56;
 
 INSERT INTO Estudiante(id,username,password,nombre,apellidos,correo,dni,fecha_nacimiento,genero,no_estudiante) VALUES(1,'pepe321', '{bcrypt}$2a$12$958YgJdm4acEfwUiIwNANuxFHl0CHeuZh0KBkbhuYtm.RGIa54YvG', 'Pepe', 'González Pérez', 'pepe@gmail.com', '12345678A','2003-03-01', 'Masculino', true);
 INSERT INTO   Estudiante(id,username,password,nombre,apellidos,correo,dni,fecha_nacimiento,genero,no_estudiante) VALUES(2, 'marialoma', '{bcrypt}$2a$12$958YgJdm4acEfwUiIwNANuxFHl0CHeuZh0KBkbhuYtm.RGIa54YvG', 'María', 'López Martínez', 'marialLopez@gmail.com', '87654321B','2002-04-01','Femenino',false);

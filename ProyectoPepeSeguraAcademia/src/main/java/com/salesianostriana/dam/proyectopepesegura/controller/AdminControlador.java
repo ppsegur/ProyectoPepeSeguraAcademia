@@ -39,7 +39,7 @@ public class AdminControlador {
 	        	model.addAttribute("totalVentas", totalVentas);
 	        	   model.addAttribute("estudianteConMasVentas", estudianteConMasVentas);
 	
-	        model.addAttribute("ventas", ventas);
+	        model.addAttribute("listaVentas", ventas);
 	     
 	        
 
