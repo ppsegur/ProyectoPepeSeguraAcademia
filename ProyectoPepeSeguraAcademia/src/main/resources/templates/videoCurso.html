@@ -10,7 +10,7 @@
 </head>
 
 <body>
-	<nav th:replace="~{/fragmentos/menu::navbar}"></nav> <!-- Navegación usando un fragmento Thymeleaf -->
+	<nav th:replace="~{/fragmentos/menu::navbar}"></nav> 
 
 	<div class="container mt-5">
 		<div th:if="${curso != null}">
@@ -35,7 +35,7 @@
 			</div>
 			<div class="mt-3">
 				<a href="@{/user/curso}" class="btn btn-secondary">Volver a la Lista de Cursos</a>
-				<!-- Botón para volver a la lista de cursos -->
+			
 			</div>
 		</div>
 		<div th:unless="${curso != null}"> <!-- Mostrar mensaje si el curso no está presente -->

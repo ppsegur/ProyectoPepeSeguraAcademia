@@ -1,7 +1,7 @@
 package com.salesianostriana.dam.proyectopepesegura.repositorio;
 
 import java.util.List;
-
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,6 +18,7 @@ public interface CursoRepositorio extends JpaRepository<Curso, Long>{
 	List<Curso> findByComprado(boolean comprado);
 	
 	
+	Optional<Curso> findById(Long id);
 	
 	//Una unión de las dos anteriores
 	List<Curso> findByNombreContainsIgnoreCaseAndCompradoFalse(String nombre);

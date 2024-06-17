@@ -12,12 +12,12 @@
 	<nav  th:replace="~{/fragmentos/menu::navbar}"></nav>
 	<br>
 	<br>
-	<h1>Quejas o sugerencias</h1>
-	<p>Aqui deja nos tus datos para poder contactar con usted cuando nos sea posible</p>
+	
 <div class="container">
     <div class="card">
         <div class="jumbotron">
-            <h1 style="text-align: center;">Enviar e-mail</h1>
+            <h1 style="text-align: center;">Quejas o sugerencias			</h1>
+				<p style="text-align: center">Aqui deja nos tus datos para poder contactar con usted cuando nos sea posible</p>
         </div>
         <form method="POST" th:action="@{/sendMail}" id="emailForm" class="container">
             <div class="form-group">

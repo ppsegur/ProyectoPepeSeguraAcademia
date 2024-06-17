@@ -5,6 +5,7 @@ package com.salesianostriana.dam.proyectopepesegura.controller;
 import java.util.Optional;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,7 @@ import com.salesianostriana.dam.proyectopepesegura.modelo.Estudiante;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Venta;
 import com.salesianostriana.dam.proyectopepesegura.servicio.CarritoServicio;
 import com.salesianostriana.dam.proyectopepesegura.servicio.CursoServicio;
-import com.salesianostriana.dam.proyectopepesegura.servicio.VentaServicio;
+
 
 @Controller
 @RequestMapping("/carrito")
@@ -32,8 +33,7 @@ public class CarritoControlador {
 	@Autowired
 	private CursoServicio cursoServicio;
 	
-	@Autowired
-	private VentaServicio ventaServicio;
+
 
 
 	//Controller para mostrarCarrito

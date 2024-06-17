@@ -18,6 +18,13 @@
 	<div class="container">
 		<h2>Tabla de Cursos</h2>
 		<hr>
+		<div class="input-group mb-3">
+		           <form th:action="@{/admin/cursoBuscar}" method="get" class="form-inline w-100">
+		               <input type="search" name="id" class="form-control rounded" placeholder="Buscar por ID"
+		                      aria-label="Buscar por ID" />
+		               <button type="submit" class="btn btn-outline-primary ml-2">Buscar</button>
+		           </form>
+		       </div>
 		<div th:if="${param.error}" class="alert alert-danger">
 			            <p>No puedes eliminar un curso con datos asociados, si no ves un material asociado, este curso será asociado a una venta</p>
 			        </div>

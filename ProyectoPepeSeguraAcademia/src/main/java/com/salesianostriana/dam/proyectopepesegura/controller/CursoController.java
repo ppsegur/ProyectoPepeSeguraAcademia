@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.salesianostriana.dam.proyectopepesegura.modelo.Curso;
 import com.salesianostriana.dam.proyectopepesegura.repositorio.LineaVentaRepositorio;
@@ -96,42 +97,7 @@ public class CursoController {
     		return "redirect:/admin/Curso";
     }
 
-/*
-	@PostMapping("/admin/editarCurso/submit")
-	public String editarMaterialSubmit(@ModelAttribute("curso") Curso c) {
-	    cursoServicio.edit(c);
-		return "redirect:/admin/Curso";
-	}
-	
-	/*Borrar curso
-	@GetMapping("/admin/borrarCurso/{idCurso}")
-	public String borrar(@PathVariable("idCurso") long idCurso) {
-	Optional<Curso> curso = cursoServicio.findById(idCurso);
-	    if(curso.isPresent()) {
-	    	 //List<Certificado> certificadosAsociados = certificadoServicio.findByCurso(idCurso);	
-	    	 //f(certificadosAsociados!=null){
-	    		 
-	    	 
-	        cursoServicio.delete(curso.get());
-	    }
-	    return "redirect:/admin/Curso";
-	}
-<<<<<<< HEAD
-	
-	//Controladores del usuario
-	//Obtener todos los cursos e ingles y mostrarselo al usuario 
-	    @GetMapping("/cursos/ingles")
-	    public String listarCursosDeIngles(Model model) {
-	        List<Curso> cursos = cursoServicio.obtenerCursosDeIngles();
-	        model.addAttribute("listaCurso", cursos);
-	        return "cursosEstudiantes";
-	    }
-=======
-	@GetMapping("/admin/borrarCurso/{idCurso}")
-    public String borrar(@PathVariable("idCurso") long idCurso) {
-        cursoServicio.deleteCurso(idCurso);
-        return "redirect:/admin/Curso";
-    }*/
+
     @GetMapping("/admin/borrarCurso/{idCurso}")
     public String borrar(@PathVariable("idCurso") Long idCurso, Model model) {
     	boolean materialExiste = materialRepositorio.existsByCurso_IdCurso(idCurso);
@@ -163,6 +129,16 @@ public class CursoController {
         List<Curso> listaCurso = cursoServicio.buscarPorNombreNoComprados(nombre);
         model.addAttribute("listaCurso", listaCurso);
         return "cursosEstudiantes";
+	}
+	@GetMapping("/admin/cursoBuscar")
+	public String cursoBuscarPorId(@RequestParam(required = false) Long id, Model model) {
+	    if (id != null) {
+	        Curso c = cursoServicio.buscarPorId(id);
+	        if (c != null) {
+	            model.addAttribute("curso", c);
+	        }
+	    }
+	    return "/admin/listaCurso.html";
 	}
 	@GetMapping("/user/cursoBuscar/comprado")
     public String cursoBuscarComprado(@RequestParam(required = false) String nombre, 
@@ -200,7 +176,6 @@ public class CursoController {
 	//mostrar detalles de un curso
 	@GetMapping("/curso/detalle/{idCurso}")
 	public String verDetalleCurso(@PathVariable Long idCurso, Model model) {
-	    // Lógica para obtener el curso por su ID, por ejemplo, mediante un servicio
 	    Optional<Curso> cursoOp = cursoServicio.findById(idCurso);
 	   
 	    if (cursoOp.isPresent()) {
@@ -208,8 +183,8 @@ public class CursoController {
 	        model.addAttribute("curso", curso);
 	        return "cursoDetalle";
 	    } else {
-	        // Manejar el caso donde no se encuentra el curso por el ID
-	        return "error"; // Por ejemplo, podrías redirigir a una página de error
+	       
+	       return "error.html";
 	    }
 	}
 
