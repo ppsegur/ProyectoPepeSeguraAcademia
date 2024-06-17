@@ -135,7 +135,7 @@ public class CursoController {
 	    if (id != null) {
 	        Curso c = cursoServicio.buscarPorId(id);
 	        if (c != null) {
-	            model.addAttribute("curso", c);
+	            model.addAttribute("listaCurso", c);
 	        }
 	    }
 	    return "/admin/listaCurso.html";

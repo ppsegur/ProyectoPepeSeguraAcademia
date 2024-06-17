@@ -17,8 +17,7 @@ public interface CursoRepositorio extends JpaRepository<Curso, Long>{
 	//Consulta para buscar cursos comprados 
 	List<Curso> findByComprado(boolean comprado);
 	
-	
-	Optional<Curso> findById(Long id);
+
 	
 	//Una unión de las dos anteriores
 	List<Curso> findByNombreContainsIgnoreCaseAndCompradoFalse(String nombre);
@@ -26,5 +25,7 @@ public interface CursoRepositorio extends JpaRepository<Curso, Long>{
 	//Buscar el producto con más ventas
 	@Query ("select c from Curso c where c.precio > 30")
 	List<Curso> findByCaros();
+
+	Optional<Curso> findById(Long id);
 
 }
