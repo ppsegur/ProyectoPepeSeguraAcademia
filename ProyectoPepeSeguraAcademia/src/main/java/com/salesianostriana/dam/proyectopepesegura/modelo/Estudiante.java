@@ -52,6 +52,7 @@ public class Estudiante implements UserDetails{
 	@Id
 	@GeneratedValue
 	private Long id;
+	
 	private String username;
 	private String password;	
 	private String nombre;

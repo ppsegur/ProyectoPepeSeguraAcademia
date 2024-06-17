@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<script src="../js/Registro.js" th:src="@{/js/Registro.js}" defer></script>
+
 </head>
 <body>
 
@@ -20,6 +22,11 @@
             <label for="contraseña">Contraseña:</label>
             <input type="password" class="form-control" id="contrasena" th:field="*{password}" required placeholder="Ingrese la nueva contraseña ">
         </div>
+		<div class="form-group">
+		            <label for="confirmarContraseña">Confirmar contraseña:</label>
+		            <input type="password" class="form-control" id="confirmarContraseña" required placeholder="Confirme su contraseña">
+		            <div id="confirmPasswordFeedback" class="invalid-feedback">Las contraseñas no coinciden.</div>
+		        </div>
         <div class="form-group">
             <label for="nombre">Nombre:</label>
             <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required placeholder="Ingrese el nombre del estudiante">
@@ -52,69 +59,97 @@
         <button type="submit" class="btn btn-primary">Agregar Estudiante</button>
     </form>
 </div>
+<div class="alerta-error">Todos los campos son obligatorios</div>
 
 
 <script>
-    document.getElementById('studentForm').addEventListener('submit', function(event) {
-        let form = event.target;
-        let isValid = true;
+	const formRegister = document.querySelector(".form-register");
+const inputUser = document.querySelector('.form-register input[type="text"]');
+const inputPass = document.querySelector('.form-register input[type="password"]');
+const inputEmail = document.querySelector('.form-register input[type="email"]');
+const alertaError = document.querySelector(".form-register .alerta-error");
+const alertaExito = document.querySelector(".form-register .alerta-exito");
 
-        let fields = ['username', 'contrasena', 'nombre', 'apellidos', 'correo', 'dni', 'edad'];
+const userNameRegex = /^[a-zA-Z0-9\_\-]{4,16}$/;
+const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+const passwordRegex = /^.{4,12}$/;
 
-        fields.forEach(function(field) {
-            let input = document.getElementById(field);
-            if (!input.value.trim()) {
-                input.classList.add('is-invalid');
-                isValid = false;
-            } else {
-                input.classList.remove('is-invalid');
-            }
-        });
+const estadoValidacionCampos = {
+  userName: false,
+  userEmail: false,
+  userPassword: false,
+};
 
-        // Validar el username
-        let username = document.getElementById('username');
-        if (username.value.length < 2) {
-            username.classList.add('is-invalid');
-            document.getElementById('usernameFeedback').style.display = 'block';
-            isValid = false;
-        } else {
-            username.classList.remove('is-invalid');
-            document.getElementById('usernameFeedback').style.display = 'none';
-        }
+document.addEventListener("DOMContentLoaded", () => {
+  formRegister.addEventListener("submit", (e) => {
+    e.preventDefault();
+    enviarFormulario();
+  });
 
-        // Validar el correo
-        let correo = document.getElementById('correo');
-		let correoPattern = /@/;
-		        if (!correoPattern.test(correo.value)) {
-            correo.classList.add('is-invalid');
-            document.getElementById('emailFeedback').style.display = 'block';
-            isValid = false;
-        } else {
-            correo.classList.remove('is-invalid');
-            document.getElementById('emailFeedback').style.display = 'none';
-        }
-		
-		   // Validación de edad mínima de 18 años
-		 let fechaNacimiento = document.getElementById('fechaNacimiento');
-		 let fecha = new Date(fechaNacimiento.value);
-		 let hoy = new Date();
-		 let edadMinima = new Date(hoy.getFullYear() - 18, hoy.getMonth(), hoy.getDate());
-		
-		   if (fecha > edadMinima) {
-	        fechaNacimiento.classList.add('is-invalid');
-			document.getElementById('ageFeedback').style.display = 'block';
-		           isValid = false;
-		   } else {
-		     fechaNacimiento.classList.remove('is-invalid');
-		      document.getElementById('ageFeedback').style.display = 'none';
-		   }
-		
-		    if (!isValid) {
-		        event.preventDefault();
-	      }
-		    
-    });
-</script>
+  inputUser.addEventListener("input", () => {
+    validarCampo(userNameRegex,inputUser,"El usuario tiene que ser de 4 a 16 dígitos y solo puede contener, letras y guión bajo.");
+  });
+
+  inputEmail.addEventListener("input", () => {
+    validarCampo(emailRegex,inputEmail,"El correo solo puede contener letras, números, puntos, guiones y guíon bajo.");
+  });
+
+  inputPass.addEventListener("input", () => {
+    validarCampo(passwordRegex,inputPass,"La contraseña tiene que ser de 4 a 12 dígitos");
+  });
+});
+
+function validarCampo(regularExpresion, campo, mensaje) {
+  const validarCampo= regularExpresion.test(campo.value);
+  if (validarCampo) {
+    eliminarAlerta(campo.parentElement.parentElement);
+    estadoValidacionCampos[campo.name] = true;
+    campo.parentElement.classList.remove("error");
+    return;
+  }
+  estadoValidacionCampos[campo.name] = false;
+  campo.parentElement.classList.add("error");
+  mostrarAlerta(campo.parentElement.parentElement,mensaje);
+}
+
+function mostrarAlerta(referencia,mensaje) {
+  eliminarAlerta(referencia);
+  const alertaDiv = document.createElement("div");
+  alertaDiv.classList.add("alerta");
+  alertaDiv.textContent = mensaje;
+  referencia.appendChild(alertaDiv);
+}
+
+function eliminarAlerta(referencia) {
+  const alerta = referencia.querySelector(".alerta");
+
+  if (alerta) alerta.remove();
+}
+
+function enviarFormulario() {
+  //VALIDAMOS EL ENVIO DE NUESTRO FORMULARIO
+
+  if (estadoValidacionCampos.userName && estadoValidacionCampos.userEmail && estadoValidacionCampos.userPassword) {
+    /*ACTUALIZACION DEL CODIGO - RESETEAMOS A FALSE LAS PROPIEDADES DEL OBJETO*/
+    estadoValidacionCampos.userName = false;
+    estadoValidacionCampos.userEmail = false;
+    estadoValidacionCampos.userPassword = false;
+
+    formRegister.reset();
+    alertaExito.classList.add("alertaExito");
+    alertaError.classList.remove("alertaError");
+    setTimeout(() => {
+      alertaExito.classList.remove("alertaExito");
+    }, 3000); 
+    return;
+  }
+  
+  alertaExito.classList.remove("alertaExito");
+  alertaError.classList.add("alertaError");
+  setTimeout(() => {
+    alertaError.classList.remove("alertaError");
+  }, 3000);
+}</script>
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

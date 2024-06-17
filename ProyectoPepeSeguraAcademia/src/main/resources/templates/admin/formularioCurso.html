@@ -6,6 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Añadir Curso</title>
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<script src="../js/precio.js" th:src="@{/js/precio.js}" defer></script>
+
 </head>
 
 <body>
@@ -42,18 +44,7 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	<!--JavaScrip validación formulario que sea mayor a 1 -->
-	<script>
-		
-		function validateForm() {
-			var precio = document.getElementById('precio').value;
-			if (precio < 1) {
-				alert("El precio debe ser mayor o igual a 1");
-				return false;
-			}
-			return true;
-		}
-	</script>
+	
 </body>
 
 </html>
