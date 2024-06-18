@@ -8,10 +8,12 @@ import java.util.Collection;
 
 import java.util.List;
 
+import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -53,7 +55,10 @@ public class Estudiante implements UserDetails{
 	@GeneratedValue
 	private Long id;
 	
+	@NonNull
 	private String username;
+	
+	@NonNull
 	private String password;	
 	private String nombre;
 	private String apellidos;
@@ -113,11 +118,9 @@ public class Estudiante implements UserDetails{
 
 	@ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "estudiante", 
-    		cascade = CascadeType.ALL, 
-    		fetch = FetchType.EAGER,
-    		orphanRemoval = true)
+    
 	@Builder.Default
+	 @OneToMany(mappedBy = "estudiante", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Venta> carrito = new ArrayList<>();
 	
 	
@@ -164,7 +167,11 @@ public class Estudiante implements UserDetails{
 		this.cursosFavoritos.remove(c);
 	
 	}
-
-
+	
+	
+	public void removeVenta(Venta venta) {
+        this.carrito.remove(venta);
+        venta.setEstudiante(null);
+    }
 	
 }

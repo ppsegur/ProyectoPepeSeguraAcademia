@@ -22,6 +22,7 @@
                             <th>Estudiante</th>
                             <th>Fecha</th>
                             <th>Total</th>
+							<th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,6 +31,9 @@
                             <td th:text="${venta.estudiante.nombre}"></td>
                             <td th:text="${venta.fechaPedido}"></td>
                             <td th:text="${venta.importeTotal}"></td>
+							<td>
+								<a type="button" class="btn btn-danger btn-sm"  th:href="@{/admin/borrarVenta/{id}(id=${venta.idVenta})}">Eliminar</a>
+							</td>
                         </tr>
                     </tbody>
                 </table>

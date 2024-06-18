@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.authentication.PasswordEncoderParser;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Curso;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Estudiante;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Venta;
+import com.salesianostriana.dam.proyectopepesegura.security.PasswordEncoderConfig;
 import com.salesianostriana.dam.proyectopepesegura.servicio.CursoServicio;
 import com.salesianostriana.dam.proyectopepesegura.servicio.EstudianteServicio;
 import com.salesianostriana.dam.proyectopepesegura.servicio.VentaServicio;
@@ -31,6 +34,10 @@ public class EstudianteController {
 	@Autowired
 	public CursoServicio cursoServicio;
 	
+	@GetMapping("/indexEstudiante")
+	public String index() {
+		return "index";
+	}
 	//Controlador para qeu el administrador pueda ver la lista de estudiantes o usuarios 
 	@GetMapping("/admin/Estudiante")
 	public String listarTodosEstudiante(Model model) {
@@ -46,25 +53,34 @@ public class EstudianteController {
 	//Procesar el anterior método
 	@PostMapping("/admin/nuevoEstudiante/submit")
 	public String procesarFormularioEstudainte(@ModelAttribute("estudiante") Estudiante e) {
+	
 		estudianteServicio.save(e);
+		
 		return "redirect:/admin/listaEstudiante";
 	}
 	
-	//
-	@GetMapping("/admin/editarEstudiante/{id}")
-	public String mostrarFormularioEdicionEstudiante(@PathVariable("id") long id, Model model) {
-		Optional<Estudiante> estudianteEditar = estudianteServicio.findById(id);
-		if(estudianteEditar.isPresent()) {
-			model.addAttribute("estudiante", estudianteEditar.get());
-			return "admin/editarFormularioEstudiante";
-		}else {
-			return "redirect:/admin/Estudiante";
+	/**
+	 * @deprecated
+	 * @param e
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/user/editarFormularioEstudiante")
+	public String mostrarFormularioEdicionEstudiante(@AuthenticationPrincipal Estudiante e, Model model) {
+			model.addAttribute("estudiante", e);
+	
+			return "editarFormularioEstudiante";
 		}
-	}
-	@PostMapping("/admin/editarEstudiante/submit")
+	
+	/***
+	 * 
+	 * @deprecated
+	 */@PostMapping("/user/editarFormularioEstudiante/submit")
 	public String procesarFormularioEdicionEstudiante(@ModelAttribute("estudiante") Estudiante e) {
+
+	e.setPassword(e.getPassword());
 		estudianteServicio.save(e);
-		return "redirect:/admin/Estudiante";
+		return "redirect:/indexEstudiante";
 	}
 	//Controlador para borra estudiante con modal(y con error)
 	@GetMapping("/admin/borrarEstudiante/{id}")

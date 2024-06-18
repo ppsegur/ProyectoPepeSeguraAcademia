@@ -1,6 +1,6 @@
 
 
-CREATE  SEQUENCE Certificado_seq START WITH 1;
+
 
 
 

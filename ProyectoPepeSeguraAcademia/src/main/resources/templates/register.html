@@ -65,10 +65,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const formRegister = document.querySelector("#studentForm");
 
     formRegister.addEventListener("submit", (e) => {
-        e.preventDefault(); // Detener el envío predeterminado
+        e.preventDefault();
 
         if (validarFormulario()) {
-            formRegister.submit(); // Envía el formulario si es válido
+            formRegister.submit(); 
         } else {
             mostrarError();
         }

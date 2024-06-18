@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!-- deprecated -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Estudiante</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <h2>Editar Estudiante</h2>
+    <form id="editStudentForm" action="#" th:action="@{/user/editarFormularioEstudiante/submit}" th:object="${estudiante}" method="post">
+        <input th:if="${estudiante.id != 0}" type="hidden" name="id" th:field="*{id}">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre:</label>
+            <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required>
+        </div>
+        <div class="mb-3">
+            <label for="apellidos" class="form-label">Apellidos:</label>
+            <input type="text" class="form-control" id="apellidos" th:field="*{apellidos}" required>
+        </div>
+        <div class="mb-3">
+            <label for="correo" class="form-label">Correo:</label>
+            <input type="email" class="form-control" id="correo" th:field="*{correo}" required>
+        </div>
+        <div class="mb-3">
+            <label for="dni" class="form-label">DNI:</label>
+            <input type="text" class="form-control" id="dni" th:field="*{dni}" required>
+        </div>
+        <div class="mb-3">
+            <label for="fechaNacimiento" class="form-label">Fecha de nacimiento:</label>
+            <input type="date" class="form-control" id="fechaNacimiento" th:field="*{fechaNacimiento}">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Género:</label>
+            <div>
+                <input type="radio" id="generoM" name="genero" th:field="*{genero}" value="M">
+                <label for="generoM">Masculino</label>
+            </div>
+            <div>
+                <input type="radio" id="generoF" name="genero" th:field="*{genero}" value="F">
+                <label for="generoF">Femenino</label>
+            </div>
+        </div>
+      
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const formRegister = document.querySelector("#studentForm");
+
+    formRegister.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        if (validarFormulario()) {
+            formRegister.submit(); 
+        } else {
+            mostrarError();
+        }
+    });
+
+    function validarFormulario() {
+        const username = document.getElementById('username');
+     
+        
+        const correo = document.getElementById('correo');
+        const fechaNacimiento = document.getElementById('fechaNacimiento');
+
+        const usernameValido = validarCampo(username, /^[a-zA-Z0-9\_\-]{2,16}$/, "El username debe tener entre 2 y 16 caracteres y solo puede contener letras, números, guiones bajos y guiones.");
+      
+        const confirmacionValida = validarConfirmacion(contrasena, confirmarContraseña, "Las contraseñas no coinciden.");
+        const correoValido = validarCorreo(correo, "El correo debe contener un '@'.");
+        const fechaNacimientoValida = validarFechaNacimiento(fechaNacimiento, "La edad mínima es de 18 años.");
+
+        return usernameValido && contrasenaValida && confirmacionValida && correoValido && fechaNacimientoValida;
+    }
+
+    function validarCampo(campo, regex, mensaje) {
+        const esValido = regex.test(campo.value);
+        if (esValido) {
+            campo.classList.remove("is-invalid");
+            campo.classList.add("is-valid");
+            campo.nextElementSibling.style.display = 'none';
+        } else {
+            campo.classList.remove("is-valid");
+            campo.classList.add("is-invalid");
+            campo.nextElementSibling.textContent = mensaje;
+            campo.nextElementSibling.style.display = 'block';
+        }
+        return esValido;
+    }
+
+  
+    function validarCorreo(campo, mensaje) {
+        const esValido = campo.value.includes('@');
+        if (esValido) {
+            campo.classList.remove("is-invalid");
+            campo.classList.add("is-valid");
+            campo.nextElementSibling.style.display = 'none';
+        } else {
+            campo.classList.remove("is-valid");
+            campo.classList.add("is-invalid");
+            campo.nextElementSibling.textContent = mensaje;
+            campo.nextElementSibling.style.display = 'block';
+        }
+        return esValido;
+    }
+
+    function validarFechaNacimiento(campo, mensaje) {
+        const fechaNacimiento = new Date(campo.value);
+        const hoy = new Date();
+        const edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+        const esValido = edad >= 18;
+        if (esValido) {
+            campo.classList.remove("is-invalid");
+            campo.classList.add("is-valid");
+            campo.nextElementSibling.style.display = 'none';
+        } else {
+            campo.classList.add("is-invalid");
+            campo.classList.remove("is-valid");
+            campo.nextElementSibling.textContent = mensaje;
+            campo.nextElementSibling.style.display = 'block';
+        }
+        return esValido;
+    }
+
+    function mostrarError() {
+        const alertaError = document.querySelector(".alerta-error");
+        alertaError.style.display = 'block';
+        setTimeout(() => {
+            alertaError.style.display = 'none';
+        }, 3000);
+    }
+});
+</script>
+
+</body>
+</html>

@@ -4,17 +4,20 @@ package com.salesianostriana.dam.proyectopepesegura.controller;
 
 
 import java.util.List;
-
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.salesianostriana.dam.proyectopepesegura.excepcion.ExcepcionCeroVentas;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Estudiante;
+import com.salesianostriana.dam.proyectopepesegura.modelo.Material;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Venta;
+import com.salesianostriana.dam.proyectopepesegura.servicio.EstudianteServicio;
 import com.salesianostriana.dam.proyectopepesegura.servicio.VentaServicio;
 
 
@@ -25,6 +28,8 @@ public class AdminControlador {
 
 	@Autowired
 	private VentaServicio ventaServicio;
+	@Autowired
+	private EstudianteServicio estudianteServicio;
 	
 	@GetMapping()
 	public String index() {
@@ -50,5 +55,23 @@ public class AdminControlador {
 	        	throw new ExcepcionCeroVentas();
 	        }
 	        
+	        
 	    }
-}
+	 //Borrar
+		@GetMapping("/borrarVenta/{idVenta}")
+		public String borrarVenta(@PathVariable("idVenta") long idVenta) {
+		  Optional<Venta> venta = ventaServicio.findById(idVenta);
+		    if(venta != null) {
+		    	Venta ventaVerdadera = venta.get();
+		        
+		     
+		        ventaServicio.delete(ventaVerdadera);
+		        
+		        Estudiante estudiante = ventaVerdadera.getEstudiante();
+		        estudiante.removeVenta(ventaVerdadera); 
+		        
+	    }
+		    return "/admin/listaVentas";
+
+		}}
+
