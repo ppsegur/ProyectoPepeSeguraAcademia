@@ -60,7 +60,7 @@ public class Estudiante implements UserDetails{
 	private String correo;
 	private String dni;
 	
-
+	
 	private LocalDate fechaNacimiento;
 	private String genero;
 	

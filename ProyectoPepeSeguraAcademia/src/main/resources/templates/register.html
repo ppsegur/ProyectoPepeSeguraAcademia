@@ -5,28 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-	<script src="../js/Registro.js" th:src="@{/js/Registro.js}" defer></script>
-
+    <script src="../js/Registro.js" th:src="@{/js/Registro.js}" defer></script>
 </head>
 <body>
-
 <div class="container">
     <h2>Register</h2>
     <form id="studentForm" action="" th:action="@{/user/nuevoEstudiante/submit}" th:object="${estudiante}" method="POST">
         <div class="form-group">
             <label for="username">UserName:</label>
             <input type="text" class="form-control" id="username" th:field="*{username}" required placeholder="Ingrese el username del estudiante">
-            <div id="usernameFeedback" class="invalid-feedback">El username debe tener mínimo dos caracteres.</div>
+            <div class="invalid-feedback">El username debe tener mínimo dos caracteres.</div>
+            <div id="usernameExistsFeedback" class="invalid-feedback">El username ya existe.</div>
         </div>
         <div class="form-group">
-            <label for="contraseña">Contraseña:</label>
-            <input type="password" class="form-control" id="contrasena" th:field="*{password}" required placeholder="Ingrese la nueva contraseña ">
+            <label for="contrasena">Contraseña:</label>
+            <input type="password" class="form-control" id="contrasena" th:field="*{password}" required placeholder="Ingrese la nueva contraseña">
+            <div class="invalid-feedback">La contraseña debe tener entre 4 y 12 caracteres.</div>
         </div>
-		<div class="form-group">
-		            <label for="confirmarContraseña">Confirmar contraseña:</label>
-		            <input type="password" class="form-control" id="confirmarContraseña" required placeholder="Confirme su contraseña">
-		            <div id="confirmPasswordFeedback" class="invalid-feedback">Las contraseñas no coinciden.</div>
-		        </div>
+        <div class="form-group">
+            <label for="confirmarContraseña">Confirmar contraseña:</label>
+            <input type="password" class="form-control" id="confirmarContraseña" required placeholder="Confirme su contraseña">
+            <div class="invalid-feedback">Las contraseñas no coinciden.</div>
+        </div>
         <div class="form-group">
             <label for="nombre">Nombre:</label>
             <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required placeholder="Ingrese el nombre del estudiante">
@@ -37,124 +37,131 @@
         </div>
         <div class="form-group">
             <label for="correo">Correo:</label>
-            <input type="text" class="form-control" id="correo" th:field="*{correo}" required placeholder="Ingrese la duración del curso">
-            <div id="emailFeedback" class="invalid-feedback">El correo debe contener un '@'.</div>
+            <input type="email" class="form-control" id="correo" th:field="*{correo}" required placeholder="Ingrese el correo del estudiante">
+            <div class="invalid-feedback">El correo debe contener un '@'.</div>
         </div>
         <div class="form-group">
-            <label for="dni">dni:</label>
-            <input type="text" class="form-control" id="dni" th:field="*{dni}" required placeholder="Ingrese el dni del estudiante">
+            <label for="dni">DNI:</label>
+            <input type="text" class="form-control" id="dni" th:field="*{dni}" required placeholder="Ingrese el DNI del estudiante">
         </div>
         <div class="form-group">
             <label for="fechaNacimiento">Fecha de nacimiento:</label>
             <input type="date" class="form-control" id="fechaNacimiento" th:field="*{fechaNacimiento}" required placeholder="Ingrese la fecha de nacimiento del estudiante">
-            <div id="ageFeedback" class="invalid-feedback">La edad mínima es de 18 años.</div>
+            <div class="invalid-feedback">La edad mínima es de 18 años.</div>
         </div>
-		<div class="form-group">
-		    <label>Género:</label>
-		         <div>
-		            <input type="radio" th:field="*{genero}" value="M" /> Masculino
-		             <input type="radio" th:field="*{genero}" value="F" /> Femenino
-		          </div>
-		 </div>
+        <div class="form-group">
+            <label>Género:</label>
+            <div>
+                <input type="radio" th:field="*{genero}" value="M" /> Masculino
+                <input type="radio" th:field="*{genero}" value="F" /> Femenino
+            </div>
+        </div>
         <button type="submit" class="btn btn-primary">Agregar Estudiante</button>
     </form>
 </div>
-<div class="alerta-error">Todos los campos son obligatorios</div>
-
-
+<div class="alert alert-danger alerta-error" style="display: none;">Por favor, completa todos los campos correctamente.</div>
 <script>
-	const formRegister = document.querySelector(".form-register");
-const inputUser = document.querySelector('.form-register input[type="text"]');
-const inputPass = document.querySelector('.form-register input[type="password"]');
-const inputEmail = document.querySelector('.form-register input[type="email"]');
-const alertaError = document.querySelector(".form-register .alerta-error");
-const alertaExito = document.querySelector(".form-register .alerta-exito");
-
-const userNameRegex = /^[a-zA-Z0-9\_\-]{4,16}$/;
-const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-const passwordRegex = /^.{4,12}$/;
-
-const estadoValidacionCampos = {
-  userName: false,
-  userEmail: false,
-  userPassword: false,
-};
-
 document.addEventListener("DOMContentLoaded", () => {
-  formRegister.addEventListener("submit", (e) => {
-    e.preventDefault();
-    enviarFormulario();
-  });
+    const formRegister = document.querySelector("#studentForm");
 
-  inputUser.addEventListener("input", () => {
-    validarCampo(userNameRegex,inputUser,"El usuario tiene que ser de 4 a 16 dígitos y solo puede contener, letras y guión bajo.");
-  });
+    formRegister.addEventListener("submit", (e) => {
+        e.preventDefault(); // Detener el envío predeterminado
 
-  inputEmail.addEventListener("input", () => {
-    validarCampo(emailRegex,inputEmail,"El correo solo puede contener letras, números, puntos, guiones y guíon bajo.");
-  });
+        if (validarFormulario()) {
+            formRegister.submit(); // Envía el formulario si es válido
+        } else {
+            mostrarError();
+        }
+    });
 
-  inputPass.addEventListener("input", () => {
-    validarCampo(passwordRegex,inputPass,"La contraseña tiene que ser de 4 a 12 dígitos");
-  });
+    function validarFormulario() {
+        const username = document.getElementById('username');
+        const contrasena = document.getElementById('contrasena');
+        const confirmarContraseña = document.getElementById('confirmarContraseña');
+        const correo = document.getElementById('correo');
+        const fechaNacimiento = document.getElementById('fechaNacimiento');
+
+        const usernameValido = validarCampo(username, /^[a-zA-Z0-9\_\-]{2,16}$/, "El username debe tener entre 2 y 16 caracteres y solo puede contener letras, números, guiones bajos y guiones.");
+        const contrasenaValida = validarCampo(contrasena, /^.{4,12}$/, "La contraseña debe tener entre 4 y 12 caracteres.");
+        const confirmacionValida = validarConfirmacion(contrasena, confirmarContraseña, "Las contraseñas no coinciden.");
+        const correoValido = validarCorreo(correo, "El correo debe contener un '@'.");
+        const fechaNacimientoValida = validarFechaNacimiento(fechaNacimiento, "La edad mínima es de 18 años.");
+
+        return usernameValido && contrasenaValida && confirmacionValida && correoValido && fechaNacimientoValida;
+    }
+
+    function validarCampo(campo, regex, mensaje) {
+        const esValido = regex.test(campo.value);
+        if (esValido) {
+            campo.classList.remove("is-invalid");
+            campo.classList.add("is-valid");
+            campo.nextElementSibling.style.display = 'none';
+        } else {
+            campo.classList.remove("is-valid");
+            campo.classList.add("is-invalid");
+            campo.nextElementSibling.textContent = mensaje;
+            campo.nextElementSibling.style.display = 'block';
+        }
+        return esValido;
+    }
+
+    function validarConfirmacion(campo1, campo2, mensaje) {
+        const coinciden = campo1.value === campo2.value;
+        if (coinciden) {
+            campo2.classList.remove("is-invalid");
+            campo2.classList.add("is-valid");
+            campo2.nextElementSibling.style.display = 'none';
+        } else {
+            campo2.classList.remove("is-valid");
+            campo2.classList.add("is-invalid");
+            campo2.nextElementSibling.textContent = mensaje;
+            campo2.nextElementSibling.style.display = 'block';
+        }
+        return coinciden;
+    }
+
+    function validarCorreo(campo, mensaje) {
+        const esValido = campo.value.includes('@');
+        if (esValido) {
+            campo.classList.remove("is-invalid");
+            campo.classList.add("is-valid");
+            campo.nextElementSibling.style.display = 'none';
+        } else {
+            campo.classList.remove("is-valid");
+            campo.classList.add("is-invalid");
+            campo.nextElementSibling.textContent = mensaje;
+            campo.nextElementSibling.style.display = 'block';
+        }
+        return esValido;
+    }
+
+    function validarFechaNacimiento(campo, mensaje) {
+        const fechaNacimiento = new Date(campo.value);
+        const hoy = new Date();
+        const edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+        const esValido = edad >= 18;
+        if (esValido) {
+            campo.classList.remove("is-invalid");
+            campo.classList.add("is-valid");
+            campo.nextElementSibling.style.display = 'none';
+        } else {
+            campo.classList.add("is-invalid");
+            campo.classList.remove("is-valid");
+            campo.nextElementSibling.textContent = mensaje;
+            campo.nextElementSibling.style.display = 'block';
+        }
+        return esValido;
+    }
+
+    function mostrarError() {
+        const alertaError = document.querySelector(".alerta-error");
+        alertaError.style.display = 'block';
+        setTimeout(() => {
+            alertaError.style.display = 'none';
+        }, 3000);
+    }
 });
-
-function validarCampo(regularExpresion, campo, mensaje) {
-  const validarCampo= regularExpresion.test(campo.value);
-  if (validarCampo) {
-    eliminarAlerta(campo.parentElement.parentElement);
-    estadoValidacionCampos[campo.name] = true;
-    campo.parentElement.classList.remove("error");
-    return;
-  }
-  estadoValidacionCampos[campo.name] = false;
-  campo.parentElement.classList.add("error");
-  mostrarAlerta(campo.parentElement.parentElement,mensaje);
-}
-
-function mostrarAlerta(referencia,mensaje) {
-  eliminarAlerta(referencia);
-  const alertaDiv = document.createElement("div");
-  alertaDiv.classList.add("alerta");
-  alertaDiv.textContent = mensaje;
-  referencia.appendChild(alertaDiv);
-}
-
-function eliminarAlerta(referencia) {
-  const alerta = referencia.querySelector(".alerta");
-
-  if (alerta) alerta.remove();
-}
-
-function enviarFormulario() {
-  //VALIDAMOS EL ENVIO DE NUESTRO FORMULARIO
-
-  if (estadoValidacionCampos.userName && estadoValidacionCampos.userEmail && estadoValidacionCampos.userPassword) {
-    /*ACTUALIZACION DEL CODIGO - RESETEAMOS A FALSE LAS PROPIEDADES DEL OBJETO*/
-    estadoValidacionCampos.userName = false;
-    estadoValidacionCampos.userEmail = false;
-    estadoValidacionCampos.userPassword = false;
-
-    formRegister.reset();
-    alertaExito.classList.add("alertaExito");
-    alertaError.classList.remove("alertaError");
-    setTimeout(() => {
-      alertaExito.classList.remove("alertaExito");
-    }, 3000); 
-    return;
-  }
-  
-  alertaExito.classList.remove("alertaExito");
-  alertaError.classList.add("alertaError");
-  setTimeout(() => {
-    alertaError.classList.remove("alertaError");
-  }, 3000);
-}</script>
-
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+</script>
 </body>
 </html>
+
