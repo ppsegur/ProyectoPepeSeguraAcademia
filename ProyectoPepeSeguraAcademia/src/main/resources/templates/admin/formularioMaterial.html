@@ -9,19 +9,22 @@
 </head>
 
 <body>
-
+	
 	<div class="container">
 		<h2>Añadir Material</h2>
 		<form action="" th:action="@{/admin/nuevoMaterial/submit}" th:object="${material}" method="POST">
+			<div th:if="${error}" class="alert alert-danger" role="alert">
+					          <span th:text="${error}">Curso ya asociado</span>
+					      </div>
 			<div class="form-group">
 				<label for="nombre">Nombre:</label>
-				<input type="text" class="form-control" id="nombre" th:field="*{nombre}"
+				<input type="text" required class="form-control" id="nombre" th:field="*{nombre}"
 					placeholder="Ingrese el nombre del material">
 			</div>
 			
 			<div class="form-group">
 				<label for="url">URL:</label>
-				<input type="text" class="form-control" id="url" th:field="*{url}"
+				<input type="text" class="form-control" required id="url" th:field="*{url}"
 					placeholder="Ingrese la URL del material">
 			</div>
 			<div class="mb-3">

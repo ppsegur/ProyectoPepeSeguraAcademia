@@ -14,7 +14,16 @@
     <!-- Navbar -->
 	<div 	sec:authorize="hasRole('ROLE_USER')" >
 		 <nav  th:replace="~{/fragmentos/menu::navbar}"></nav>
-
+		 <br>
+		 <br>
+		 <br>
+		 <div class="card my-3" th:unless="${estudiante.suscrito}">
+		       <div class="card-body text-center">
+		           <h5 class="card-title">¡Suscríbete ahora y obtén los cursos gratuitos!</h5>
+		           <p class="card-text">Accede a todos los cursos a un precio especial.</p>
+		           <a th:href="@{/carrito/suscripcion}" class="btn btn-warning text-dark font-weight-bold">Suscríbete</a>
+		       </div>
+		   </div>
 	</div>
 	<div 	sec:authorize="hasRole('ROLE_ADMIN')">
 	 <nav  th:replace="~{/fragmentos/menuAdmin::navbar}"></nav>

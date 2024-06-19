@@ -11,6 +11,9 @@
 <div class="container">
     <h2>Crear Certificado </h2>
     <form action="" th:action="@{/admin/editarCertificado/submit}" th:object="${certificado}" method="post">
+		<div th:if="${error}" class="alert alert-danger" role="alert">
+				          <span th:text="${error}">Curso ya asociado</span>
+				      </div>
 		<input th:if="${certificado.idCertificado != 0}" type="hidden" name="id" th:field="*{idCertificado}">
 		<div class="mb-3">
 		            <label for="nombre" class="form-label">Nombre:</label>

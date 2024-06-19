@@ -66,7 +66,7 @@ public class Estudiante implements UserDetails{
 	
 	private LocalDate fechaNacimiento;
 	private String genero;
-	
+	private boolean suscrito;
 	@Column(name = "no_estudiante")
 	private boolean noEstudiante;
 	

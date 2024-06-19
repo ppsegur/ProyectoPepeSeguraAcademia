@@ -1,9 +1,13 @@
 package com.salesianostriana.dam.proyectopepesegura.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import ch.qos.logback.core.model.Model;
+import com.salesianostriana.dam.proyectopepesegura.modelo.Estudiante;
+
+
 
 
 @Controller
@@ -14,7 +18,8 @@ public class MainController {
         return "login";
     }
 	@GetMapping({"/","/index"})
-	public String mostrarIndice() {
+	public String mostrarIndice(@AuthenticationPrincipal Estudiante e,Model model) {
+		model.addAttribute("estudiante", e);
 		return "index";
 	}
 	@GetMapping("/admin/Index")

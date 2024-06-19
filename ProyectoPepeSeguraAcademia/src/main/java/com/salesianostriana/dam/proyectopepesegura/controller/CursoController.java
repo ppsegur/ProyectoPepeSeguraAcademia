@@ -2,17 +2,18 @@ package com.salesianostriana.dam.proyectopepesegura.controller;
 
 import java.util.List;
 
-
 import java.util.Optional;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 
 import com.salesianostriana.dam.proyectopepesegura.modelo.Curso;
 import com.salesianostriana.dam.proyectopepesegura.repositorio.LineaVentaRepositorio;
@@ -182,11 +183,9 @@ public class CursoController {
 	        model.addAttribute("curso", curso);
 	        return "cursoDetalle";
 	    } else {
-
-	 return null; 
-	   }
- 
-
+	       
+	       return "error.html";
+	    }
 	}
 
 	
@@ -200,7 +199,6 @@ public class CursoController {
 
         return "videoCurso";
     }
-    
 	
 }
 	
