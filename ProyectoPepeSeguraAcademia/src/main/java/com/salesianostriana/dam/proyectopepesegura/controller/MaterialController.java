@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
+import com.salesianostriana.dam.proyectopepesegura.modelo.Curso;
 import com.salesianostriana.dam.proyectopepesegura.modelo.Material;
 import com.salesianostriana.dam.proyectopepesegura.servicio.CursoServicio;
 import com.salesianostriana.dam.proyectopepesegura.servicio.MaterialServicio;
@@ -42,10 +42,19 @@ public class MaterialController {
 	}
 	//
 	@PostMapping("/nuevoMaterial/submit")
-	public String procesarFormularioMaterial(@ModelAttribute("material") Material m) {
-		materialServicio.save(m);		
-		return "redirect:/admin/Material";
+	public String procesarFormularioMaterial(@ModelAttribute("material") Material m, Model model) {
+        Curso curso = m.getCurso();
+        if (curso != null && curso.getMateriales()!=null) {
+            model.addAttribute("material", m);
+            model.addAttribute("listaCurso", cursoServicio.findAll());
+            model.addAttribute("error", "El curso seleccionado ya tiene asociado un material.");
+            return "admin/formularioMaterial";
+        } else {
+            materialServicio.save(m);
+            return "redirect:/admin/Material";
+        }
 	}
+
 	//Borrar
 	@GetMapping("/borrarMaterial/{idMaterial}")
 	public String borrarMaterial(@PathVariable("idMaterial") long idMaterial) {
@@ -71,12 +80,23 @@ public class MaterialController {
 			return "redirect:/admin/Material";
 		}
 	}
-	
+
 	@PostMapping("/editarMaterial/submit")
-	public String editarMaterialSubmit(@ModelAttribute("material") Material material) {
-		materialServicio.edit(material);
-		return "redirect:/admin/Material";
-		
+	public String editarMaterialSubmit(@ModelAttribute("material") Material m,Model model) {
+		Curso c = m.getCurso();
+		if(c != null && c.getMateriales()!=null) {
+			model.addAttribute("material", m);
+            model.addAttribute("listaCurso", cursoServicio.findAll());
+			model.addAttribute("error", "El curso seleccionado ya tiene asociado un material.");
+			return "admin/editarFormularioMaterial";
+		}if(c.getMateriales()==m){
+			materialServicio.edit(m);
+			return "redirect:/admin/Material";
+				
+		}else {
+			materialServicio.edit(m);
+			return "redirect:/admin/Material";
+		}
 	}
 	
 

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Carrito de Suscripción</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="../static/css/" th:href="@{/css/stylosNavbar.css}">
+
+</head>
+
+<body>
+	<nav th:replace="~{/fragmentos/menu::navbar}"></nav>
+	<div class="container my-5">
+		<h2>Suscripcion completada</h2>
+		<div class="card">
+			<div class="card-body">
+				<h5 class="card-title" th:text="'Estudiante: ' + ${estudiante.nombre}"></h5>
+				<p class="card-text">Suscripción VIP por 100 euros Completada</p>
+				<h3>Que disfrute su suscricpión</h3>
+			</div>
+		</div>
+		<br>
+		<br>
+		<br>
+	
+		<div>
+			<a href="cursosEstudiantes.html" th:href="@{/user/curso}" class="btn btn-secondary comprar-mas-link">Seguir
+				Comprando</a>
+		</div>
+	</div>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.salesianostriana.dam.proyectopepesegura.modelo.Certificado;
+import com.salesianostriana.dam.proyectopepesegura.modelo.Curso;
+import com.salesianostriana.dam.proyectopepesegura.modelo.Material;
 import com.salesianostriana.dam.proyectopepesegura.servicio.CertificadoServicio;
 import com.salesianostriana.dam.proyectopepesegura.servicio.CursoServicio;
 
@@ -35,10 +37,20 @@ public class CertificadoController {
 		model.addAttribute("certificado", new Certificado());
 		return "admin/formularioCertificado";
 	}
+	
 	@PostMapping("/admin/nuevoCertificado/submit")
-	public String procesarFormularioCertificado(@ModelAttribute("certificado") Certificado c) {
-		certificadoServicio.save(c);
-		return "redirect:/admin/Certificado";
+	public String procesarFormularioCertificado(@ModelAttribute("certificado") Certificado c, Model model) {
+		Curso crs = c.getCurso();
+		if(crs != null && crs.getCertificado()!=null) {
+			model.addAttribute("certificado", c);
+            model.addAttribute("listaCurso", cursoServicio.findAll());
+			model.addAttribute("error", "El curso ya esta asociado.");
+			return "admin/formularioCertificado";
+		}else {
+			certificadoServicio.save(c);
+			return "redirect:/admin/Certificado";
+		}
+		
 	}
 	@GetMapping("/admin/editarCertificado/{idCertificado}")
 	public String mostrarFormularioEdicion(@PathVariable("idCertificado") long id, Model model) {
@@ -52,9 +64,19 @@ public class CertificadoController {
 		}
 	}
 	@PostMapping("/admin/editarCertificado/submit")
-	public String procesarFormularioEdicionCertificado(@ModelAttribute("certificado") Certificado c) {
-		certificadoServicio.edit(c);
-		return "redirect:/admin/Certificado";
+	public String procesarFormularioEdicionCertificado(@ModelAttribute("certificado") Certificado c, Model model) {
+		Curso crs = c.getCurso();
+		if(crs != null && crs.getCertificado()!=null) {
+			model.addAttribute("certificado", c);
+            model.addAttribute("listaCurso", cursoServicio.findAll());
+			model.addAttribute("error", "El curso ya esta asociado.");
+			return "admin/editarFormularioCertificado";
+		}else {
+			certificadoServicio.edit(c);
+			return "redirect:/admin/Certificado";
+		}
+		
+		
 	}
 	/**
 	 * Método para borrar 

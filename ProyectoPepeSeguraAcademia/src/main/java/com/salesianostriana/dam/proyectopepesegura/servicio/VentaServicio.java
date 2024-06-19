@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.proyectopepesegura.servicio;
 
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,6 +69,16 @@ public class VentaServicio extends BaseServiceImpl<Venta, Long, VentaRepositorio
     public double getTotalVentas() {
         Double totalVentas = ventaRepositorio.findTotalVentas();
         return totalVentas != null ? totalVentas : 0.00;
+    }
+    //Suscripcion 
+    public void comprarSuscripcion(Estudiante estudiante) {
+        Venta venta = new Venta();
+        venta.setEstudiante(estudiante);
+        venta.setFinalizada(true);
+        venta.setFechaPedido(LocalDate.now());
+        venta.setImporteTotal(100.0);
+        estudiante.setSuscrito(true);
+        ventaRepositorio.save(venta);
     }
 }
 

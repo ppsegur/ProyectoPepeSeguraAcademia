@@ -13,10 +13,13 @@
 	<div class="container">
 		<h2>Editar Material</h2>
 		<form action="#" th:action="@{/admin/editarMaterial/submit}" th:object="${material}" method="post">
-			<input th:if="${material.idMaterial != 0}" type="hidden" name="id" th:field="*{idMaterial}">
+			<div th:if="${error}" class="alert alert-danger" role="alert">
+					          <span th:text="${error}">Curso ya asociado</span>
+					      </div>
+			<input th:if="${material.idMaterial != 0}" required type="hidden" name="id" th:field="*{idMaterial}">
 			<div class="mb-3">
 				<label for="nombre" class="form-label">Nombre:</label>
-				<input type="text" class="form-control" id="nombre" th:field="*{nombre}" required>
+				<input type="text"  class="form-control" id="nombre" th:field="*{nombre}" required>
 			</div>
 			<div class="mb-3">
 				<label for="url" class="form-label">url:</label>
