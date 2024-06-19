@@ -1,19 +1,5 @@
-  body {
-            padding-top: 60px; 
-        }
-        .container {
-            margin-top: 40px;
-        }
-        h1 {
-            color: #333;
-        }
-        p {
-            color: #666; 
-        }
-        /*estylos dle navbar*/
-
-	
-   		nav {
+/*Estilos del navbar*/
+    nav {
         background-color: #1a237e; 
 		font-family: Arial,  sans-serif;
         padding: 10px 0;

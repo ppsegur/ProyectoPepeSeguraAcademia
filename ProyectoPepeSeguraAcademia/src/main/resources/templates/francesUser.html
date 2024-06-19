@@ -16,13 +16,7 @@
 	<br>
 	<hr>
 
-	<div class="input-group mb-3">
-		<form th:action="@{/user/cursoBuscar}" method="get" class="form-inline w-100">
-			<input type="search" name="nombre" class="form-control rounded" placeholder="Buscar por nombre"
-				aria-label="Buscar por nombre" aria-describedby="search-addon" />
-			<button type="submit" class="btn btn-outline-primary ml-2">Buscar</button>
-		</form>
-	</div>
+	
 
 	<div class="row">
 		<div class="col-md-4" th:each="curso : ${listaCurso}">

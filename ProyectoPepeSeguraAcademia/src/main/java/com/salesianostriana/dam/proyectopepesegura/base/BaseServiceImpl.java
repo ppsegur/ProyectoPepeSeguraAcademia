@@ -21,7 +21,6 @@ public class BaseServiceImpl<T,ID, R extends JpaRepository<T, ID>> implements Ba
 	    public Optional<T> findById(ID id) {
 	        return repository.findById(id);
 	    }
-
 	    @Override
 	    public T save(T t) {
 	        return repository.save(t);
@@ -42,4 +41,7 @@ public class BaseServiceImpl<T,ID, R extends JpaRepository<T, ID>> implements Ba
 	    public void deleteById(ID id) {
 	        repository.deleteById(id);        
 	    }
+
+
+	
 }

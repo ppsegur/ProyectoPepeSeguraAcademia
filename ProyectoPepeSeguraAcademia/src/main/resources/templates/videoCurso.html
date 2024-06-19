@@ -1,80 +1,50 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video del Curso</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Video del Curso</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="../static/css/" th:href="@{/css/stylosNavbar.css}">
 </head>
+
 <body>
-    <nav th:replace="~{/fragmentos/menu::navbar}"></nav> <!-- Navegación usando un fragmento Thymeleaf -->
+	<nav th:replace="~{/fragmentos/menu::navbar}"></nav>
 
-    <div class="container mt-5">
-        <div th:if="${curso != null}"> <!-- Condicional para mostrar contenido si el curso está presente -->
-            <h1 th:text="'Video del Curso: ' + ${curso.nombre}"></h1> <!-- Mostrar el nombre del curso -->
-            <div th:if="${curso.materiales != null}"> <!-- Condicional para verificar si hay materiales -->
-                <div th:each="material : ${curso.materiales}"> <!-- Iterar sobre los materiales del curso -->
-                    <div th:if="${material.url != null}"> <!-- Condicional para verificar si la URL del material está presente -->
-                        <div>
-                            <!-- Construir la URL del video de YouTube usando JavaScript -->
-                            <div th:attr="data-url=${material.url}" class="youtube-video"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div th:unless="${curso.materiales != null}"> <!-- Mostrar mensaje si no hay materiales -->
-                <p>No hay materiales disponibles para este curso.</p>
-            </div>
-            <div class="mt-3">
-                <a href="@{/user/curso}" class="btn btn-secondary">Volver a la Lista de Cursos</a> <!-- Botón para volver a la lista de cursos -->
-            </div>
-        </div>
-        <div th:unless="${curso != null}"> <!-- Mostrar mensaje si el curso no está presente -->
-            <p>Curso no encontrado.</p>
-        </div>
-    </div>
+	<div class="container mt-5">
+		<div th:if="${curso != null}">
+			<h1 th:text="'Video del Curso: ' + ${curso.nombre}"></h1>
+			<div th:if="${curso.materiales != null}">
+				<div th:each="material : ${curso.materiales}">
+					<div th:if="${material.url != null}">
+						<div>
+							<!-- investigación video de YouTube -->
+																										<!-- Busca la primera barra enn la url extraida y le suma un espacio -->
+							<iframe width="100%" height="480"
+								th:src="'https://www.youtube.com/embed/' + ${#strings.substring(material.url, material.url.lastIndexOf('/') + 1)}"
+								allow="autoplay;  picture-in-picture" allowfullscreen>
+							</iframe>
+						</div>
+					</div>
+				</div>
+			</div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-		
-		//investigacion= YouTube Embedded Players and Player Parameters
-        document.addEventListener("DOMContentLoaded", function() {
-            const videos = document.querySelectorAll(".youtube-video");
-            videos.forEach(function(video) {
-                const url = video.getAttribute("data-url");
-                let videoId = null;
+			<div th:unless="${curso.materiales != null}"> <!-- Mostrar mensaje si no hay materiales -->
+				<p>No hay materiales disponibles para este curso.</p>
+			</div>
+			<div class="mt-3">
+				<a href="@{/user/curso}" class="btn btn-secondary">Volver a la Lista de Cursos</a>
 
-                // Regular expressions to extract video ID from different YouTube URL formats
-                const patterns = [
-                    /youtu\.be\/([a-zA-Z0-9_-]+)/, // short URL (youtu.be)
-                    /youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/, // standard URL (youtube.com/watch?v=)
-                    /youtube\.com\/embed\/([a-zA-Z0-9_-]+)/, // embed URL (youtube.com/embed/)
-                    /youtube\.com\/v\/([a-zA-Z0-9_-]+)/ // alternative embed URL (youtube.com/v/)
-                ];
+			</div>
+		</div>
+		<div th:unless="${curso != null}"> <!-- Mostrar mensaje si el curso no está presente -->
+			<p>Curso no encontrado.</p>
+		</div>
+	</div>
 
-                for (const pattern of patterns) {
-                    const match = url.match(pattern);
-                    if (match && match[1]) {
-                        videoId = match[1];
-                        break;
-                    }
-                }
-
-                if (videoId) {
-                    const iframe = document.createElement("iframe");
-                    iframe.width = "100%";
-                    iframe.height = "480";
-                    iframe.src = `https://www.youtube.com/embed/${videoId}`;
-                    iframe.frameborder = "0";
-                    iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
-                    iframe.allowFullscreen = true;
-                    video.appendChild(iframe);
-                } else {
-                    video.innerHTML = "<p>La URL del material no es válida para incrustar el video.</p>";
-                }
-            });
-        });
-    </script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

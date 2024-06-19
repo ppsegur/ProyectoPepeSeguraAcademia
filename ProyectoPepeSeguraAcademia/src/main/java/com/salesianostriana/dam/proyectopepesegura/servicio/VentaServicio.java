@@ -60,5 +60,17 @@ public class VentaServicio extends BaseServiceImpl<Venta, Long, VentaRepositorio
     public List<Venta> obtenerTodasLasVentas(Estudiante e) {
         return ventaRepositorio.findByEstudiante(e);
     }
+    
+    //Método para obtener el estudainte con más ventas
+    public Estudiante getEstudianteConMasVentas() {
+        return ventaRepositorio.findEstudianteConMasVentas();
+    }
+
+    
+    //Método para obtener el total de ventas 
+    public double getTotalVentas() {
+        Double totalVentas = ventaRepositorio.findTotalVentas();
+        return totalVentas != null ? totalVentas : 0.00;
+    }
 }
 

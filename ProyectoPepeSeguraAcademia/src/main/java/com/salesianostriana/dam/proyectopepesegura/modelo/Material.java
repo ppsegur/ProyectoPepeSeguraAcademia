@@ -30,7 +30,6 @@ public class Material {
 	private long idMaterial;
 	
 	private String nombre;
-	private String tipo;
 	private String url; 
 	
 	@OneToOne

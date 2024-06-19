@@ -67,14 +67,12 @@
    /* Estilo normal del botón de favoritos */
    .btn-favorito-heart {
    	background-color: #ffc107;
-   	/* Color amarillo */
    	border: none;
    	transition: background-color 0.3s ease;
-   	/* Transición de color suave */
    }
 
    /* Estilo de hover para el botón de favoritos */
    .btn-favorito-heart:hover {
    	background-color: darkred;
-   	/* Color más oscuro al pasar el cursor */
+
    }
