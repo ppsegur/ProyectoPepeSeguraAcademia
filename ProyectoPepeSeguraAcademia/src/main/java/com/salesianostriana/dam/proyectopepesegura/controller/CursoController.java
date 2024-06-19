@@ -208,9 +208,8 @@ public class CursoController {
 	        model.addAttribute("curso", curso);
 	        return "cursoDetalle";
 	    } else {
-	        // Manejar el caso donde no se encuentra el curso por el ID
-	        return "error"; // Por ejemplo, podrías redirigir a una página de error
-	    }
+	 return null; // Por ejemplo, podrías redirigir a una página de error
+	   }
 	}
 	//Controlador par ver el curso 
     @GetMapping("/video/{id}")
@@ -223,6 +222,7 @@ public class CursoController {
         }
         return "videoCurso"; 
     }
+    
 	
 }
 	
