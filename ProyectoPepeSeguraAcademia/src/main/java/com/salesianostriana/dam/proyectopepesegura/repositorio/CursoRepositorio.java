@@ -17,11 +17,10 @@ public interface CursoRepositorio extends JpaRepository<Curso, Long>{
 	//Consulta para buscar cursos comprados 
 	List<Curso> findByComprado(boolean comprado);
 	
-<<<<<<< HEAD
-=======
+
 
 	
->>>>>>> 626378a5c6d4602c390213587b76acf093855e0d
+
 	//Una unión de las dos anteriores
 	List<Curso> findByNombreContainsIgnoreCaseAndCompradoFalse(String nombre);
 	List<Curso> findByNombreContainsIgnoreCaseAndCompradoTrue(String nombre);
@@ -30,5 +29,6 @@ public interface CursoRepositorio extends JpaRepository<Curso, Long>{
 	List<Curso> findByCaros();
 
 	Optional<Curso> findById(Long id);
+
 
 }

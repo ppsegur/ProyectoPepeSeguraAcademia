@@ -183,14 +183,11 @@ public class CursoController {
 	        model.addAttribute("curso", curso);
 	        return "cursoDetalle";
 	    } else {
-<<<<<<< HEAD
-	 return null; // Por ejemplo, podrías redirigir a una página de error
+
+	 return null; 
 	   }
-=======
-	       
-	       return "error.html";
-	    }
->>>>>>> 626378a5c6d4602c390213587b76acf093855e0d
+ 
+
 	}
 
 	

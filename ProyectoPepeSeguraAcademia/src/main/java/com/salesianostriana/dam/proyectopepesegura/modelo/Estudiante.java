@@ -28,8 +28,7 @@ import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 
 import jakarta.persistence.Table;
-
-
+import jakarta.persistence.UniqueConstraint;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -55,7 +54,7 @@ public class Estudiante implements UserDetails{
 	@GeneratedValue
 	private Long id;
 	
-	@NonNull
+	@Column(unique = true)
 	private String username;
 	
 	@NonNull

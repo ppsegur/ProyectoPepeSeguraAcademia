@@ -10,6 +10,14 @@
 <body>
 <div class="container">
     <h2>Register</h2>
+	<div class="alert alert-danger alert-dismissible fade show text-center" style="margin: 0 auto; width: 50%; margin-top: 50px;"
+	  			role="alert" th:if="${param.error}">
+	  			<strong>!ERROR</strong> No puedes usar ese nombre de ususario  porque ya esta en uso
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	  				<span aria-hidden="true">&times;</span>
+	  			</button> 
+	  			
+	  		</div>
     <form id="studentForm" action="" th:action="@{/user/nuevoEstudiante/submit}" th:object="${estudiante}" method="POST">
         <div class="form-group">
             <label for="username">UserName:</label>

@@ -2,6 +2,7 @@ package com.salesianostriana.dam.proyectopepesegura.servicio;
 
 
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,8 @@ public class EstudianteServicio extends BaseServiceImpl<Estudiante, Long, Estudi
 
 	public Estudiante buscarPorVenta(Optional<Venta> venta) {
 		return estudianteRepositorio.findByCarrito(venta);
+	}
+	public List<Estudiante> buscarTodosLosEstudaintes(List<Estudiante> listado){
+		return estudianteRepositorio.findAll();
 	}
 	}

@@ -19,4 +19,6 @@ public interface EstudianteRepositorio extends JpaRepository<Estudiante, Long>{
 	Estudiante findByUsername(String username);
 	
 	Estudiante findByCarrito(Optional<Venta> venta);
+	
+	
 }

@@ -59,28 +59,20 @@ public class EstudianteController {
 		return "redirect:/admin/listaEstudiante";
 	}
 	
-	/**
-	 * @deprecated
-	 * @param e
-	 * @param model
-	 * @return
-	 */
+
 	@GetMapping("/user/editarFormularioEstudiante")
 	public String mostrarFormularioEdicionEstudiante(@AuthenticationPrincipal Estudiante e, Model model) {
 			model.addAttribute("estudiante", e);
 	
 			return "editarFormularioEstudiante";
 		}
-	
-	/***
-	 * 
-	 * @deprecated
-	 */@PostMapping("/user/editarFormularioEstudiante/submit")
+	@PostMapping("/user/editarFormularioEstudiante/submit")
 	public String procesarFormularioEdicionEstudiante(@ModelAttribute("estudiante") Estudiante e) {
-
-	e.setPassword(e.getPassword());
-		estudianteServicio.save(e);
-		return "redirect:/indexEstudiante";
+		
+			e.setPassword(e.getPassword());
+			estudianteServicio.save(e);
+			return "redirect:/indexEstudiante";
+		
 	}
 	//Controlador para borra estudiante con modal(y con error)
 	@GetMapping("/admin/borrarEstudiante/{id}")
@@ -98,13 +90,20 @@ public class EstudianteController {
 	//COntrolador para el registro
 	 @GetMapping("/user/nuevoEstudiante")
 	    public String guardarEstudiante(Model model) {
+		 
 	        model.addAttribute("estudiante", new Estudiante());
 	        return "register"; 
 	    }
 	 //controlador para procesar el anterior
 	    @PostMapping("/user/nuevoEstudiante/submit")
 	    public String register(@ModelAttribute("estudiante") Estudiante estudiante) {
-	    	estudianteServicio.save(estudiante).setNoEstudiante(false);
+	    	for (Estudiante e2 : estudianteServicio.findAll()) {
+				if(e2.getUsername().equalsIgnoreCase(estudiante.getUsername())) {
+					return "redirect:/user/nuevoEstudiante?error=true";
+				}
+	    	}
+	    	estudiante.setNoEstudiante(false);
+	    	estudianteServicio.save(estudiante);
 	        return "redirect:/index";
 	    }
 	    

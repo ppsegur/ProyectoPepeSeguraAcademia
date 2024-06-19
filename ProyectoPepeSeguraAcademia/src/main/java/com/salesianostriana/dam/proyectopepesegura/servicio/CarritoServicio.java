@@ -107,14 +107,27 @@ public class CarritoServicio {
 	        return carrito.getLv().stream()
 	            .collect(Collectors.toMap(LineaVenta::getCurso,lv -> 1));
 	    } else {
-	        return Collections.emptyMap(); // O devuelve un mapa vacío o maneja de otra manera los casos nulos
+	        return Collections.emptyMap(); // O devuelve un mapa vacío para  manejar de otra manera los casos nulos
 	    }
 	}
 
-	// Importe Total calcula
+	
 	public double getImporteTotal(Estudiante e) {
+		//intentamos aplicar descuento
+		
 		//lo que hacemos es cojer de los stream de linea venta su precio y despues sumamos todo
 		return getCarrito(e).getLv().stream().mapToDouble(LineaVenta::getPrecioLineaVenta).sum();
+	}
+	
+	//método para aplicar descuento
+	public double descuento(Estudiante e) {
+		int descuentoTotal = 15;
+		int cien = 100;
+		if(getCarrito(e).getImporteTotal()>100) {
+			double precioFinal = (getCarrito(e).getLv().stream().mapToDouble(LineaVenta::getPrecioLineaVenta).sum())*descuentoTotal/cien;
+			return precioFinal;
+		}
+		return  getCarrito(e).getLv().stream().mapToDouble(LineaVenta::getPrecioLineaVenta).sum();
 	}
 	
 }

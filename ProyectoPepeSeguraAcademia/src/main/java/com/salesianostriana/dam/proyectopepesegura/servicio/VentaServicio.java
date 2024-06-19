@@ -52,10 +52,7 @@ public class VentaServicio extends BaseServiceImpl<Venta, Long, VentaRepositorio
         return false;
     }
 
-    // Método para guardar una venta
-    public Venta save(Venta venta) {
-        return ventaRepositorio.save(venta);
-    }
+  
     
     public List<Venta> obtenerTodasLasVentas(Estudiante e) {
         return ventaRepositorio.findByEstudiante(e);

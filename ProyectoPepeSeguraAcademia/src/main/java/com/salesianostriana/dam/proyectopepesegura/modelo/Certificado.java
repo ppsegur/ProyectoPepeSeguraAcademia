@@ -32,7 +32,7 @@ public class Certificado {
 
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue()
 	private long idCertificado;
 	private String nombreC;
 	
