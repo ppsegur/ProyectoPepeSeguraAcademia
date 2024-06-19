@@ -4,11 +4,11 @@ import java.time.LocalDate;
 
 
 
+
 import java.util.Collection;
 
 import java.util.List;
 
-import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,7 +28,6 @@ import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 
 import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

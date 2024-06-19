@@ -26,7 +26,6 @@
                     <th>Apellidos</th>
                     <th>Correo</th>
                     <th>DNI</th>
-                    <th>Certificados</th>
                     <th>ROL</th>
                     <th>Acciones</th>
                 </tr>
@@ -39,7 +38,6 @@
                     <td th:text="${estudiante.apellidos}"></td>
                     <td th:text="${estudiante.correo}"></td>
                     <td th:text="${estudiante.dni}"></td>
-                    <td th:text="${estudiante.Certificado}"></td>
                     <td th:text="${estudiante.noEstudiante} ? 'Admin' : 'Estudiante'"></td>
                     <td>
                         <a class="btn btn-danger btn-sm" href="#" th:onclick="'javascript:confirmDelete(' + ${estudiante.id} + ');'">Eliminar</a>

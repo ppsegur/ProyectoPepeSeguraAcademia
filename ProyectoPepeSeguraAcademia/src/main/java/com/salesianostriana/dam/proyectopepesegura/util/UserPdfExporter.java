@@ -29,7 +29,7 @@ public class UserPdfExporter {
  
     private void writeTableHeader(PdfPTable table) {
         PdfPCell cell = new PdfPCell();
-        cell.setBackgroundColor(Color.BLUE);
+        cell.setBackgroundColor(Color.CYAN);
         cell.setPadding(5);
          
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
@@ -79,9 +79,9 @@ public class UserPdfExporter {
         document.open();
         Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
         font.setSize(18);
-        font.setColor(Color.BLUE);
+        font.setColor(Color.cyan);
          
-        Paragraph p = new Paragraph("List of Users", font);
+        Paragraph p = new Paragraph("Lista de usuarios", font);
         p.setAlignment(Paragraph.ALIGN_CENTER);
          
         document.add(p);

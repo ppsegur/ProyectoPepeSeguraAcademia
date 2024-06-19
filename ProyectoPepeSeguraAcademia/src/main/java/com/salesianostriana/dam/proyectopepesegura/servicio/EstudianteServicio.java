@@ -43,6 +43,6 @@ public class EstudianteServicio extends BaseServiceImpl<Estudiante, Long, Estudi
 	}
 	//listar estudaintes ordenados por email para el pdf
 		public List<Estudiante> listAll() {
-    return estudianteRepositorio.findAll(Sort.by("correo").ascending());
+    return estudianteRepositorio.findAll(Sort.by("id").ascending());
 }
 }
