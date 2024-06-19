@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -40,4 +41,8 @@ public class EstudianteServicio extends BaseServiceImpl<Estudiante, Long, Estudi
 	public List<Estudiante> buscarTodosLosEstudaintes(List<Estudiante> listado){
 		return estudianteRepositorio.findAll();
 	}
-	}
+	//listar estudaintes ordenados por email para el pdf
+		public List<Estudiante> listAll() {
+    return estudianteRepositorio.findAll(Sort.by("correo").ascending());
+}
+}
